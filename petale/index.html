@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petale | Fleuriste Artisanale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Karla:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--blush:#F2E6DF;--rose:#C4907A;--sage:#8FA68A;--deep:#3D2B1F;--white:#FFFCF9;}
+body{font-family:'Karla',sans-serif;background:var(--white);color:var(--deep);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:22px 45px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(255,252,249,.92);backdrop-filter:blur(10px);}
+.logo{font-family:'Playfair Display',serif;font-size:26px;font-style:italic;color:var(--rose);}
+.nav-links{display:flex;gap:30px;}
+.nav-links a{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;font-weight:300;transition:color .3s;}
+.nav-links a:hover{color:var(--rose);}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:20px;height:1.5px;background:var(--deep);}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://plus.unsplash.com/premium_photo-1723802452384-9ad193cd2447?w=1600') center/cover;opacity:.15;}.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(196,144,122,.12),transparent 60%),radial-gradient(ellipse at 70% 80%,rgba(143,166,138,.1),transparent 50%);}
+.hero-content{position:relative;z-index:2;max-width:700px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,7vw,80px);font-weight:400;line-height:1.15;}
+.hero h1 em{color:var(--rose);}
+.hero p{font-size:17px;font-weight:200;margin:30px auto;max-width:450px;line-height:1.8;opacity:.6;}
+.hero-btn{display:inline-block;padding:15px 45px;border:1px solid var(--rose);color:var(--rose);font-size:12px;text-transform:uppercase;letter-spacing:3px;font-weight:300;transition:all .3s;}
+.hero-btn:hover{background:var(--rose);color:white;}
+.petal{position:absolute;font-size:30px;opacity:.15;animation:float 8s ease-in-out infinite;}
+.petal:nth-child(1){top:15%;left:10%;animation-delay:0s;}
+.petal:nth-child(2){top:30%;right:12%;animation-delay:2s;}
+.petal:nth-child(3){bottom:20%;left:20%;animation-delay:4s;}
+.petal:nth-child(4){bottom:35%;right:25%;animation-delay:1s;}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-20px) rotate(15deg);}}
+
+section{padding:100px 45px;}
+.sec-label{font-size:11px;text-transform:uppercase;letter-spacing:4px;color:var(--sage);text-align:center;margin-bottom:12px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,50px);text-align:center;font-weight:400;margin-bottom:60px;}
+.sec-title em{color:var(--rose);}
+
+/* CREATIONS */
+.créations-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;max-width:1100px;margin:0 auto;}
+.création-card{position:relative;overflow:hidden;border-radius:12px;cursor:pointer;}
+.création-card img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .6s;}
+.création-card:hover img{transform:scale(1.08);}
+.création-info{position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent,rgba(61,43,31,.7));color:white;}
+.création-info h3{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;}
+.création-info p{font-size:13px;font-weight:200;margin-top:5px;opacity:.8;}
+
+/* SERVICES */
+.services-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:25px;max-width:1100px;margin:0 auto;}
+.svc{text-align:center;padding:45px 30px;background:var(--blush);border-radius:16px;transition:transform .3s;}
+.svc:hover{transform:translateY(-5px);}
+.svc-icon{font-size:36px;margin-bottom:18px;}
+.svc h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:12px;}
+.svc p{font-weight:200;line-height:1.7;opacity:.6;font-size:14px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;max-width:1000px;margin:0 auto;align-items:center;}
+.about-img{border-radius:200px 200px 20px 20px;overflow:hidden;}
+.about-img img{width:100%;aspect-ratio:3/4;object-fit:cover;}
+.about-text h3{font-family:'Playfair Display',serif;font-size:32px;font-weight:400;margin-bottom:20px;line-height:1.3;}
+.about-text p{font-weight:200;line-height:1.9;opacity:.6;font-size:15px;margin-bottom:15px;}
+
+/* CONTACT */
+.contact-wrap{max-width:550px;margin:0 auto;background:var(--blush);border-radius:24px;padding:60px 50px;}
+.form-group{margin-bottom:22px;}
+.form-group label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;opacity:.5;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 16px;background:var(--white);border:1px solid rgba(196,144,122,.25);border-radius:8px;font-family:'Karla',sans-serif;font-size:15px;font-weight:300;color:var(--deep);outline:none;transition:border-color .3s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--rose);}
+.form-group textarea{height:100px;resize:none;}
+.form-group select option{background:var(--white);}
+.submit-btn{width:100%;padding:15px;background:var(--rose);color:white;border:none;border-radius:8px;font-family:'Karla',sans-serif;font-size:13px;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:all .3s;}
+.submit-btn:hover{background:var(--deep);}
+
+footer{text-align:center;padding:50px;border-top:1px solid var(--blush);}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:65px;left:0;width:100%;background:var(--white);flex-direction:column;padding:25px 45px;gap:18px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  section{padding:70px 20px;}
+  nav{padding:18px 20px;}
+  .contact-wrap{padding:40px 25px;border-radius:16px;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeUp .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Petale</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#créations">Créations</a>
+    <a href="#services">Services</a>
+    <a href="#about">L'atelier</a>
+    <a href="#contact">Commander</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="petal">&#127800;</div><div class="petal">&#127803;</div><div class="petal">&#127801;</div><div class="petal">&#127804;</div>
+  <div class="hero-content">
+    <h1>L'art floral,<br><em>en toute simplicite</em></h1>
+    <p>Bouquets sur mesure, compositions uniques et fleurs de saison. Un atelier artisanal au cœur de Bordeaux.</p>
+    <a href="#créations" class="hero-btn">Découvrir</a>
+  </div>
+</section>
+
+<section id="créations">
+  <div class="sec-label">Créations</div>
+  <h2 class="sec-title">Nos <em>bouquets</em></h2>
+  <div class="créations-grid">
+    <div class="création-card"><img src="https://plus.unsplash.com/premium_photo-1661292066962-48e5815dc7ce?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Rose Eternelle</h3><p>A partir de 35 &#8364;</p></div></div>
+    <div class="création-card"><img src="https://images.unsplash.com/photo-1693360504365-d491796e4102?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Champetre Libre</h3><p>A partir de 40 &#8364;</p></div></div>
+    <div class="création-card"><img src="https://images.unsplash.com/photo-1565695951564-007d8f297e48?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Bridal Dream</h3><p>Sur devis</p></div></div>
+    <div class="création-card"><img src="https://plus.unsplash.com/premium_photo-1676475964992-6404b8db0b53?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Bouquet du Jour</h3><p>A partir de 30 &#8364;</p></div></div>
+    <div class="création-card"><img src="https://plus.unsplash.com/premium_photo-1677005708723-c0dabb815e4b?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Composition Luxe</h3><p>A partir de 65 &#8364;</p></div></div>
+    <div class="création-card"><img src="https://images.unsplash.com/photo-1615488913817-095134dfeb54?w=500&h=650&fit=crop" alt=""><div class="création-info"><h3>Couronne Vegetale</h3><p>Sur devis</p></div></div>
+  </div>
+</section>
+
+<section id="services" style="background:var(--white);">
+  <div class="sec-label">Services</div>
+  <h2 class="sec-title">Ce que nous <em>proposons</em></h2>
+  <div class="services-wrap">
+    <div class="svc"><div class="svc-icon">&#128144;</div><h3>Bouquets</h3><p>Compositions fraiches réalisées chaque matin avec des fleurs de saison. A retirer en boutique ou livraison.</p></div>
+    <div class="svc"><div class="svc-icon">&#128141;</div><h3>Mariages</h3><p>Decoration florale complete pour votre grand jour. Centre de table, arche, bouquet de mariee.</p></div>
+    <div class="svc"><div class="svc-icon">&#127968;</div><h3>Entreprises</h3><p>Abonnements floraux pour vos bureaux, hotels et restaurants. Renouvellement hebdomadaire.</p></div>
+    <div class="svc"><div class="svc-icon">&#127873;</div><h3>Ateliers</h3><p>Apprenez l'art floral lors de nos ateliers en petit groupe. Repartez avec votre création.</p></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1739789360900-1ac7aa120439?w=500&h=670&fit=crop" alt="Fleuriste atelier">
+    </div>
+    <div class="about-text">
+      <h3>Un amour des fleurs depuis toujours</h3>
+      <p><strong style="color:var(--rose);">Petale</strong> est un <strong style="color:var(--rose);">atelier floral artisanal à Bordeaux</strong>, fonde par Camille en 2020 apres 5 ans dans les plus belles maisons parisiennes. Chaque <strong style="color:var(--rose);">bouquet</strong> est compose à la main avec des <strong style="color:var(--rose);">fleurs fraiches, locales et de saison</strong>.</p>
+      <p>Nous proposons des <strong style="color:var(--rose);">compositions sur mesure</strong>, la <strong style="color:var(--rose);">decoration florale pour mariages</strong> et événements, des <strong style="color:var(--rose);">abonnements floraux pour entreprises</strong> et des <strong style="color:var(--rose);">ateliers d'art floral</strong>. Livraison à Bordeaux et sa metropole, retrait en boutique. <strong style="color:var(--rose);">Devis gratuit</strong> pour tout événement.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:var(--white);">
+  <div class="sec-label">Commander</div>
+  <h2 class="sec-title">Votre <em>commande</em></h2>
+  <div class="contact-wrap">
+    <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:30px 0;\'><div style=\'font-family:Playfair Display,serif;font-size:30px;font-style:italic;color:var(--rose);\'>Merci !</div><p style=\'margin-top:10px;opacity:.5;font-weight:200;\'>Nous vous recontactons rapidement.</p></div>';">
+      <div class="form-group"><label>Votre nom</label><input type="text" required></div>
+      <div class="form-group"><label>Email</label><input type="email" required></div>
+      <div class="form-group"><label>Telephone</label><input type="tel" required></div>
+      <div class="form-group"><label>Type de commande</label>
+        <select required><option value="">Choisir</option><option>Bouquet à retirer</option><option>Livraison bouquet</option><option>Mariage</option><option>Decoration événement</option><option>Abonnement entreprise</option><option>Atelier</option></select>
+      </div>
+      <div class="form-group"><label>Votre message</label><textarea placeholder="Precision sur les fleurs, couleurs, date souhaitee..."></textarea></div>
+      <button type="submit" class="submit-btn">Envoyer ma demande</button>
+    </form>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 45px;text-align:center;background:var(--blush);">
+  <div class="sec-label">@petale.bordeaux</div>
+  <h2 class="sec-title">Notre <em>quotidien</em></h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:750px;margin:0 auto;">
+    <img src="https://plus.unsplash.com/premium_photo-1678116565548-2e1b7734588b?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1677005405379-f6fcc2350d9c?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1661292066962-48e5815dc7ce?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1693360504365-d491796e4102?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1676475964992-6404b8db0b53?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1565695951564-007d8f297e48?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+  </div>
+</section>
+
+<!-- INFOS -->
+<section style="padding:60px 45px;">
+  <div class="sec-label">Nous trouver</div>
+  <h2 class="sec-title">Infos <em>pratiques</em></h2>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:800px;margin:0 auto;">
+    <div style="text-align:center;padding:30px 20px;background:var(--blush);border-radius:16px;"><div style="font-size:24px;margin-bottom:10px;">&#128205;</div><h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:6px;">Adresse</h3><p style="font-weight:200;opacity:.5;font-size:14px;">12 rue Sainte-Catherine<br>33000 Bordeaux</p></div>
+    <div style="text-align:center;padding:30px 20px;background:var(--blush);border-radius:16px;"><div style="font-size:24px;margin-bottom:10px;">&#128337;</div><h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:6px;">Horaires</h3><p style="font-weight:200;opacity:.5;font-size:14px;">Mar-Sam : 9h30 - 19h<br>Dim : 10h - 13h</p></div>
+    <div style="text-align:center;padding:30px 20px;background:var(--blush);border-radius:16px;"><div style="font-size:24px;margin-bottom:10px;">&#128222;</div><h3 style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:6px;">Contact</h3><p style="font-weight:200;opacity:.5;font-size:14px;">05 56 12 34 56<br>Livraison Bordeaux</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Petale Fleuriste. Bordeaux.</p></footer>
+</body>
+</html>

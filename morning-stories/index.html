@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Stories | Coffee Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--espresso:#2C1A0E;--latte:#E8D5C4;--caramel:#C08B5C;--oat:#F7F0E8;--mocha:#6B4226;}
+body{font-family:'Outfit',sans-serif;background:var(--oat);color:var(--espresso);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(247,240,232,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(192,139,92,.1);}
+.logo{font-family:'Fraunces',serif;font-size:22px;font-weight:600;}
+.logo span{color:var(--caramel);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:13px;font-weight:300;transition:color .3s;}
+.nav-links a:hover{color:var(--caramel);}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:var(--espresso);}
+
+.hero{height:100vh;display:flex;align-items:center;padding:0 50px;position:relative;}
+.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1200px;margin:0 auto;width:100%;align-items:center;}
+.hero-text h1{font-family:'Fraunces',serif;font-size:clamp(38px,5.5vw,64px);font-weight:600;line-height:1.15;}
+.hero-text h1 span{color:var(--caramel);font-style:italic;font-weight:300;}
+.hero-text p{font-size:17px;font-weight:200;margin:25px 0;max-width:400px;line-height:1.7;opacity:.5;}
+.hero-btn{display:inline-block;padding:14px 38px;background:var(--espresso);color:var(--latte);border-radius:50px;font-size:14px;font-weight:400;transition:all .3s;}
+.hero-btn:hover{background:var(--caramel);color:white;}
+.hero-img{position:relative;}
+.hero-img img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:200px 200px 20px 20px;}
+.hero-badge{position:absolute;bottom:30px;left:-30px;background:var(--caramel);color:white;padding:15px 25px;border-radius:12px;font-family:'Fraunces',serif;font-size:14px;font-style:italic;}
+
+section{padding:90px 40px;}
+.st{text-align:center;margin-bottom:50px;}
+.st h2{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,44px);font-weight:600;}
+.st h2 span{color:var(--caramel);font-style:italic;font-weight:300;}
+.st p{margin-top:10px;font-weight:200;opacity:.5;font-size:14px;}
+
+/* MENU */
+.menu-nav{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.ctab{padding:10px 22px;background:var(--latte);border:none;border-radius:50px;font-family:'Outfit',sans-serif;font-size:13px;cursor:pointer;transition:all .3s;}
+.ctab.active,.ctab:hover{background:var(--espresso);color:var(--latte);}
+
+.cafe-sec{display:none;max-width:750px;margin:0 auto;}
+.cafe-sec.active{display:block;}
+.cafe-item{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:white;border-radius:12px;margin-bottom:10px;transition:transform .2s;}
+.cafe-item:hover{transform:translateX(4px);}
+.cafe-item h3{font-family:'Fraunces',serif;font-size:17px;font-weight:600;}
+.cafe-item .desc{font-size:12px;font-weight:200;opacity:.5;margin-top:3px;}
+.cafe-item .price{font-family:'Fraunces',serif;font-size:18px;color:var(--caramel);font-weight:600;white-space:nowrap;}
+
+/* AMBIANCE */
+.ambiance{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;max-width:900px;margin:0 auto;}
+.ambiance img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;transition:transform .4s;}
+.ambiance img:hover{transform:scale(1.04);}
+.ambiance img:first-child{grid-row:span 2;aspect-ratio:auto;}
+
+/* STORY */
+.story-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1000px;margin:0 auto;align-items:center;}
+.story-img img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;}
+.story-text h3{font-family:'Fraunces',serif;font-size:30px;font-weight:600;margin-bottom:20px;}
+.story-text p{font-weight:200;line-height:1.9;opacity:.6;margin-bottom:15px;}
+
+.infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:800px;margin:0 auto;}
+.info-card{text-align:center;padding:35px 20px;background:white;border-radius:16px;}
+.info-card .icon{font-size:28px;margin-bottom:10px;}
+.info-card h3{font-family:'Fraunces',serif;font-size:18px;margin-bottom:8px;}
+.info-card p{font-size:14px;font-weight:200;opacity:.5;line-height:1.5;}
+
+footer{text-align:center;padding:40px;border-top:1px solid var(--latte);}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:var(--oat);flex-direction:column;padding:25px;gap:18px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .hero-split{grid-template-columns:1fr;text-align:center;}
+  .hero-img{display:none;}
+  .hero{padding:0 20px;}
+  .story-wrap{grid-template-columns:1fr;}
+  .ambiance{grid-template-columns:1fr 1fr;}
+  .ambiance img:first-child{grid-row:auto;}
+  section{padding:60px 20px;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+.hero-text{animation:fadeUp .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Morning <span>Stories</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Carte</a>
+    <a href="#ambiance">Ambiance</a>
+    <a href="#story">Notre histoire</a>
+    <a href="#infos">Infos</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-split">
+    <div class="hero-text">
+      <h1>Chaque matin merite <span>une belle histoire</span></h1>
+      <p>Café de spécialité, brunchs gourmands et pâtisseries maison dans un ecrin chaleureux au cœur de Montmartre.</p>
+      <a href="#menu" class="hero-btn">Découvrir la carte</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&h=670&fit=crop" alt="Coffee">
+      <div class="hero-badge">Café torrefie à Paris</div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="st"><h2>Notre <span>carte</span></h2><p>Torrefaction artisanale, pâtisseries du jour</p></div>
+  <div class="menu-nav">
+    <button class="ctab active" onclick="showC('boissons')">Boissons</button>
+    <button class="ctab" onclick="showC('brunch')">Brunch</button>
+    <button class="ctab" onclick="showC('sucre')">Pâtisseries</button>
+  </div>
+
+  <div class="cafe-sec active" id="cs-boissons">
+    <div class="cafe-item"><div><h3>Espresso</h3><div class="desc">Café de spécialité, origine unique</div></div><div class="price">2,80 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Flat White</h3><div class="desc">Double espresso, mousse de lait veloutée</div></div><div class="price">4,50 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Latte</h3><div class="desc">Espresso, lait chaud vapeur. Lait d'avoine dispo (+0,50 &#8364;)</div></div><div class="price">4,80 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Matcha Latte</h3><div class="desc">Matcha ceremonial Uji, lait vapeur, touche de miel</div></div><div class="price">5,50 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Chai Latte</h3><div class="desc">Melange maison d'épicés, the noir, lait mousse</div></div><div class="price">5,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Cold Brew</h3><div class="desc">Infusion à froid 18h, servi sur glace</div></div><div class="price">5,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Chocolat chaud</h3><div class="desc">Chocolat Valrhona fondu, lait entier, chantilly maison</div></div><div class="price">5,50 &#8364;</div></div>
+  </div>
+  <div class="cafe-sec" id="cs-brunch">
+    <div class="cafe-item"><div><h3>Avocado Toast</h3><div class="desc">Pain au levain, avocat ecrase, oeuf poche, graines</div></div><div class="price">12,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Eggs Benedict</h3><div class="desc">Muffin anglais, jambon, oeuf poche, hollandaise</div></div><div class="price">14,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Pancakes</h3><div class="desc">Stack de 3, sirop d'erable, fruits frais, chantilly</div></div><div class="price">11,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Granola Bowl</h3><div class="desc">Yaourt grec, granola maison, fruits de saison, miel</div></div><div class="price">9,50 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Croque Monsieur</h3><div class="desc">Pain de mie briche, jambon, bechamel, gruyere gratine</div></div><div class="price">10,00 &#8364;</div></div>
+  </div>
+  <div class="cafe-sec" id="cs-sucre">
+    <div class="cafe-item"><div><h3>Cinnamon Roll</h3><div class="desc">Broche cannelle, glaçage cream cheese</div></div><div class="price">5,00 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Banana Bread</h3><div class="desc">Fait maison, noix de pecan, chocolat noir</div></div><div class="price">4,50 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Cookie</h3><div class="desc">Chocolat noir 70%, fleur de sel. Coeur coulant.</div></div><div class="price">3,50 &#8364;</div></div>
+    <div class="cafe-item"><div><h3>Carrot Cake</h3><div class="desc">Part génèreuse, glaçage cream cheese, noix</div></div><div class="price">5,50 &#8364;</div></div>
+  </div>
+</section>
+
+
+<!-- SEO -->
+<section style="padding:60px 40px;background:var(--oat);">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+  <h2 style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;margin-bottom:20px;">Votre pause café préfèree à Montmartre</h2>
+  <p style="font-weight:200;line-height:2;opacity:.5;font-size:.92rem;"><strong style="color:var(--caramel);opacity:1;">Morning Stories</strong> est un <strong style="color:var(--caramel);opacity:1;">coffee shop artisanal</strong> niche au cœur de <strong style="color:var(--caramel);opacity:1;">Montmartre, Paris 18e</strong>. Notre <strong style="color:var(--caramel);opacity:1;">café de spécialité</strong> est torrefie à Paris par un micro-torrefacteur, nos <strong style="color:var(--caramel);opacity:1;">pâtisseries</strong> sont faites maison chaque matin et nos <strong style="color:var(--caramel);opacity:1;">brunchs</strong> sont préparés avec des produits frais et de saison. Wifi gratuit, espace coworking, ambiance cocooning. Ouvert 7j/7, <strong style="color:var(--caramel);opacity:1;">ideal pour travailler, bruncher ou se retrouver</strong>.</p>
+</div>
+</section>
+<section id="ambiance" style="background:var(--latte);">
+  <div class="st"><h2>L'<span>ambiance</span></h2></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:900px;margin:0 auto;">
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1542372147193-a7aca54189cd?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+  </div>
+</section>
+
+<section id="story">
+  <div class="story-wrap">
+    <div class="story-img"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=500&h=500&fit=crop" alt=""></div>
+    <div class="story-text">
+      <h3>Ne d'une passion pour le café</h3>
+      <p>Morning Stories est ne en 2019, quand Claire et Hugo ont decide de creer le lieu qu'ils revaient de trouver chaque matin : un endroit ou le café est exceptionnel, la nourriture est faite maison et l'ambiance donne envie de rester.</p>
+      <p>Notre café est torrefie à Paris par un micro-torrefacteur partenaire. Les grains changent au fil des saisons, toujours sélectionnés pour leur qualité et leur histoire.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 40px;text-align:center;">
+  <div class="st"><h2>@morning.<span>stories</span></h2><p>Nos daily vibes sur Instagram</p></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:800px;margin:0 auto;">
+    <img src="https://images.unsplash.com/photo-1515860734122-e0d771b36d3e?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1508766917616-d22f3f1eea14?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1595928642581-f50f4f3453a5?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+  </div>
+</section>
+<section id="infos" style="background:var(--latte);">
+  <div class="st"><h2>Infos <span>pratiques</span></h2></div>
+  <div class="infos">
+    <div class="info-card"><div class="icon">&#128205;</div><h3>Adresse</h3><p>8 rue Lepic<br>75018 Paris (Montmartre)</p></div>
+    <div class="info-card"><div class="icon">&#128337;</div><h3>Horaires</h3><p>Lun-Ven : 8h-18h<br>Sam-Dim : 9h-19h</p></div>
+    <div class="info-card"><div class="icon">&#128246;</div><h3>Wifi & Co-working</h3><p>Wifi gratuit, prises partout.<br>Ideal pour travailler.</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Morning Stories Paris</p></footer>
+
+<script>
+function showC(id){
+  document.querySelectorAll('.cafe-sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cs-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

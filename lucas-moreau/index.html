@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Moreau | Photographe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--cream:#FAF7F2;--ink:#1a1714;--accent:#8B7355;--mid:#d4ccc0;}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:25px 50px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(250,247,242,.9);backdrop-filter:blur(10px);}
+.logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;letter-spacing:1px;}
+.nav-links{display:flex;gap:35px;}
+.nav-links a{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:300;transition:color .3s;}
+.nav-links a:hover{color:var(--accent);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:1.5px;background:var(--ink);transition:.3s;}
+
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;padding:0 50px;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1300px;margin:0 auto;width:100%;}
+.hero-text h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,80px);font-weight:300;line-height:1.15;font-style:italic;}
+.hero-text h1 strong{font-weight:700;font-style:normal;}
+.hero-text p{font-size:16px;font-weight:200;margin-top:25px;line-height:1.8;max-width:400px;opacity:.6;}
+.hero-img{position:relative;}
+.hero-img img{width:100%;height:80vh;object-fit:cover;}
+.hero-img::after{content:'';position:absolute;top:20px;left:20px;right:-20px;bottom:-20px;border:1px solid var(--accent);z-index:-1;}
+
+/* GALLERY */
+section{padding:120px 50px;}
+.section-label{font-size:11px;text-transform:uppercase;letter-spacing:5px;color:var(--accent);text-align:center;margin-bottom:15px;}
+.section-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,56px);text-align:center;font-weight:300;margin-bottom:70px;}
+
+.gallery-grid{column-count:3;column-gap:20px;max-width:1200px;margin:0 auto;}
+.gallery-item{break-inside:avoid;margin-bottom:20px;position:relative;overflow:hidden;cursor:pointer;}
+.gallery-item img{width:100%;display:block;transition:transform .6s ease;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-item .overlay{position:absolute;inset:0;background:rgba(26,23,20,.4);display:flex;align-items:end;padding:25px;opacity:0;transition:opacity .4s;}
+.gallery-item:hover .overlay{opacity:1;}
+.overlay span{color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px;max-width:1100px;margin:0 auto;}
+.service-card{padding:50px 35px;border:1px solid var(--mid);text-align:center;transition:all .4s;}
+.service-card:hover{border-color:var(--accent);background:white;}
+.service-card h3{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;margin-bottom:15px;}
+.service-card p{font-weight:200;line-height:1.7;opacity:.6;font-size:15px;}
+.service-price{margin-top:20px;font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--accent);}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;max-width:1100px;margin:0 auto;align-items:center;}
+.about-photo{position:relative;}
+.about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(30%);}
+.about-text h3{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:25px;line-height:1.3;}
+.about-text p{font-weight:200;line-height:1.9;opacity:.6;margin-bottom:15px;font-size:15px;}
+.signature{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:28px;color:var(--accent);margin-top:25px;}
+
+/* CONTACT */
+.contact-sec{background:var(--ink);color:var(--cream);margin:0 -50px;padding:120px 50px;}
+.contact-form{max-width:550px;margin:0 auto;}
+.form-group{margin-bottom:25px;}
+.form-group label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;opacity:.5;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 0;background:transparent;border:none;border-bottom:1px solid rgba(250,247,242,.2);color:var(--cream);font-family:'Outfit',sans-serif;font-size:15px;font-weight:200;outline:none;transition:border-color .3s;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);}
+.form-group textarea{height:100px;resize:none;}
+.form-group select{appearance:none;cursor:pointer;}
+.form-group select option{background:var(--ink);color:var(--cream);}
+.submit-btn{margin-top:15px;padding:16px 55px;background:transparent;border:1px solid var(--accent);color:var(--cream);font-size:12px;text-transform:uppercase;letter-spacing:3px;cursor:pointer;transition:all .3s;font-family:'Outfit',sans-serif;}
+.submit-btn:hover{background:var(--accent);color:var(--ink);}
+
+footer{text-align:center;padding:40px 50px;}
+footer p{font-size:12px;opacity:.3;letter-spacing:1px;}
+.ptab{padding:10px 24px;background:transparent;border:1px solid var(--mid);font-family:'Outfit',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:all .3s;color:var(--ink);}.ptab.active,.ptab:hover{background:var(--accent);color:white;border-color:var(--accent);}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:70px;left:0;width:100%;background:var(--cream);flex-direction:column;padding:30px 50px;gap:20px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-img{display:none;}
+  .gallery-grid{column-count:2;}
+  .about-wrap{grid-template-columns:1fr;}
+  section{padding:80px 25px;}
+  nav{padding:20px 25px;}
+  .hero{padding:0 25px;}
+  .contact-sec{margin:0 -25px;padding:80px 25px;}
+}
+@media(max-width:480px){.gallery-grid{column-count:1;}}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-text{animation:fadeIn 1s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Lucas Moreau</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#portfolio">Portfolio</a>
+    <a href="#services">Prestations</a>
+    <a href="#about">A propos</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <h1><strong>Capturer</strong> l'invisible,<br><em>reveler</em> l'essentiel</h1>
+      <p>Photographe base à Lyon. Portraits, mariages et projets editoriaux. Chaque image raconte une histoire unique.</p>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=900&fit=crop" alt="Portrait">
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-label">Portfolio</div>
+  <h2 class="section-heading">Quelques histoires</h2>
+  <div style="display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;">
+    <button class="ptab active" onclick="showP('all')">Tout</button>
+    <button class="ptab" onclick="showP('mariage')">Mariages</button>
+    <button class="ptab" onclick="showP('portrait')">Portraits</button>
+    <button class="ptab" onclick="showP('event')">Evenementiel</button>
+  </div>
+  <div class="gallery-grid" id="portfolio-grid">
+    <div class="gallery-item" data-cat="mariage"><img src="https://plus.unsplash.com/premium_photo-1711132425055-1c289c69b950?w=500&h=600&fit=crop" alt=""><div class="overlay"><span>Ceremonie</span></div></div>
+    <div class="gallery-item" data-cat="portrait"><img src="https://images.unsplash.com/photo-1544124094-8aea0374da93?w=500&h=700&fit=crop" alt=""><div class="overlay"><span>Portrait Studio</span></div></div>
+    <div class="gallery-item" data-cat="mariage"><img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=500&h=400&fit=crop" alt=""><div class="overlay"><span>Couple</span></div></div>
+    <div class="gallery-item" data-cat="portrait"><img src="https://images.unsplash.com/photo-1674932668403-33398b81c92f?w=500&h=600&fit=crop" alt=""><div class="overlay"><span>Portrait Naturel</span></div></div>
+    <div class="gallery-item" data-cat="event"><img src="https://images.unsplash.com/photo-1652949817458-e70d4f30d207?w=500&h=500&fit=crop" alt=""><div class="overlay"><span>Groupe</span></div></div>
+    <div class="gallery-item" data-cat="mariage"><img src="https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?w=500&h=700&fit=crop" alt=""><div class="overlay"><span>Preparatifs</span></div></div>
+    <div class="gallery-item" data-cat="portrait"><img src="https://images.unsplash.com/photo-1568707043650-eb03f2536825?w=500&h=500&fit=crop" alt=""><div class="overlay"><span>Portrait Exterieur</span></div></div>
+    <div class="gallery-item" data-cat="mariage"><img src="https://images.unsplash.com/photo-1519306943444-3e1588e3fd23?w=500&h=400&fit=crop" alt=""><div class="overlay"><span>Reception</span></div></div>
+    <div class="gallery-item" data-cat="portrait"><img src="https://images.unsplash.com/photo-1717478053976-753461612ea2?w=500&h=700&fit=crop" alt=""><div class="overlay"><span>Mode</span></div></div>
+    <div class="gallery-item" data-cat="mariage"><img src="https://plus.unsplash.com/premium_photo-1675851211519-fc13d860e103?w=500&h=600&fit=crop" alt=""><div class="overlay"><span>Details</span></div></div>
+    <div class="gallery-item" data-cat="portrait"><img src="https://images.unsplash.com/photo-1727341557146-4abab94d0812?w=500&h=500&fit=crop" alt=""><div class="overlay"><span>Portrait Artistique</span></div></div>
+    <div class="gallery-item" data-cat="event"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=500&h=400&fit=crop" alt=""><div class="overlay"><span>Soiree</span></div></div>
+  </div>
+</section>
+
+<section id="services" style="background:white;">
+  <div class="section-label">Prestations</div>
+  <h2 class="section-heading">Ce que je propose</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Portrait</h3>
+      <p>Seance de 1h en studio ou en exterieur. Retouche fine de 15 photos livrables haute definition.</p>
+      <div class="service-price">A partir de 180 &#8364;</div>
+    </div>
+    <div class="service-card">
+      <h3>Mariage</h3>
+      <p>Couverture complete de votre journee. Du preparatif à l'ouverture de bal. 300+ photos retouchees.</p>
+      <div class="service-price">A partir de 1 800 &#8364;</div>
+    </div>
+    <div class="service-card">
+      <h3>Evenementiel</h3>
+      <p>Conferences, soirees, lancements produit. Reportage photo professionnel adapté à vos besoins.</p>
+      <div class="service-price">Sur devis</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-photo">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=650&fit=crop" alt="Lucas Moreau">
+    </div>
+    <div class="about-text">
+      <h3>Un regard, une sensibilite</h3>
+      <p>Je m'appelle Lucas, photographe depuis 10 ans. Apres des études aux Beaux-Arts de Lyon, j'ai parcouru la France et l'Europe pour capturer des visages, des moments, des emotions.</p>
+      <p>Mon style ? Naturel, lumineux, intime. Je cherche toujours l'instant ou la personne oublie qu'elle est photographiee. C'est la que la magie opere.</p>
+      <div class="signature">Lucas</div>
+    </div>
+  </div>
+</section>
+
+
+<section style="padding:80px 50px;background:white;text-align:center;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="section-label">Sur mesure</div>
+    <h2 class="section-heading" style="margin-bottom:30px;">Chaque projet est unique</h2>
+    <p style="font-weight:200;line-height:2;opacity:.6;font-size:15px;margin-bottom:20px;">Que ce soit pour un <strong style="color:var(--accent);opacity:1;">portrait</strong>, un <strong style="color:var(--accent);opacity:1;">mariage</strong>, un <strong style="color:var(--accent);opacity:1;">événement professionnel</strong> ou un <strong style="color:var(--accent);opacity:1;">projet editorial</strong>, chaque prestation est adaptée à vos besoins et à votre histoire. <strong style="color:var(--accent);opacity:1;">Devis personnalisé</strong> sur demande, rendez-vous de consultation offert.</p>
+    <p style="font-weight:200;line-height:2;opacity:.4;font-size:14px;"><strong style="color:var(--accent);opacity:.7;">Lucas Moreau</strong>, <strong style="color:var(--accent);opacity:.7;">photographe professionnel à Lyon</strong>. Specialise en <strong style="color:var(--accent);opacity:.7;">photographie de mariage</strong>, <strong style="color:var(--accent);opacity:.7;">portrait photo</strong>, <strong style="color:var(--accent);opacity:.7;">shooting mode</strong> et <strong style="color:var(--accent);opacity:.7;">reportage événementiel</strong>. Disponible en studio ou en exterieur dans toute la region Auvergne-Rhone-Alpes. Galerie en ligne, livraison haute definition.</p>
+  </div>
+</section>
+<div class="contact-sec" id="contact">
+  <div class="section-label" style="color:var(--accent);">Contact</div>
+  <h2 class="section-heading" style="color:var(--cream);">Travaillons ensemble</h2>
+  <form class="contact-form" onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:40px 0;\'><div style=\'font-family:Cormorant Garamond,serif;font-size:36px;font-style:italic;\'>Merci !</div><p style=\'margin-top:12px;opacity:.5;font-weight:200;\'>Je reviens vers vous tres vite.</p></div>';">
+    <div class="form-group"><label>Nom complet</label><input type="text" required></div>
+    <div class="form-group"><label>Email</label><input type="email" required></div>
+    <div class="form-group"><label>Type de projet</label>
+      <select required><option value="">Sélectionnez</option><option>Portrait</option><option>Mariage</option><option>Evenementiel</option><option>Projet editorial</option><option>Autre</option></select>
+    </div>
+    <div class="form-group"><label>Votre message</label><textarea placeholder="Parlez-moi de votre projet, du lieu, de la date souhaitee..."></textarea></div>
+    <button type="submit" class="submit-btn">Envoyer</button>
+  </form>
+</div>
+
+<footer><p>&copy; 2025 Lucas Moreau Photographie</p></footer>
+
+<script>
+function showP(cat){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item=>{
+    if(cat==='all'||item.dataset.cat===cat){item.style.display='';}
+    else{item.style.display='none';}
+  });
+}
+</script>
+</body>
+</html>

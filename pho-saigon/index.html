@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pho Saigon | Restaurant Vietnamien</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@200;300;400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bamboo:#4A6741;--sesame:#F5EDE0;--spice:#C0392B;--dark:#1E1E1E;--warm:#FFF9F0;}
+body{font-family:'Nunito Sans',sans-serif;background:var(--warm);color:var(--dark);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(30,30,30,.95);color:white;}
+.logo{font-family:'Noto Serif',serif;font-size:24px;font-weight:700;}
+.logo span{color:var(--spice);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;font-weight:300;transition:color .3s;color:rgba(255,255,255,.7);}
+.nav-links a:hover{color:var(--spice);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:white;}
+
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:var(--dark);color:white;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=1400&h=800&fit=crop') center/cover;opacity:.35;}
+.hero-content{position:relative;z-index:2;}
+.hero h1{font-family:'Noto Serif',serif;font-size:clamp(40px,7vw,80px);font-weight:700;line-height:1.1;}
+.hero h1 span{color:var(--spice);}
+.vn-text{font-family:'Noto Serif',serif;font-style:italic;font-size:18px;opacity:.5;margin-top:10px;}
+.hero p{font-size:16px;font-weight:200;margin:25px auto;max-width:420px;line-height:1.7;opacity:.6;}
+.hero-btn{display:inline-block;padding:14px 45px;border:1px solid var(--spice);color:white;font-size:13px;text-transform:uppercase;letter-spacing:2px;transition:all .3s;}
+.hero-btn:hover{background:var(--spice);}
+
+section{padding:90px 40px;}
+.st{text-align:center;margin-bottom:50px;}
+.st h2{font-family:'Noto Serif',serif;font-size:clamp(28px,4vw,44px);font-weight:400;}
+.st h2 span{color:var(--bamboo);}
+.st p{margin-top:10px;font-weight:200;opacity:.5;max-width:450px;margin-left:auto;margin-right:auto;}
+
+/* MENU */
+.menu-nav{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.menu-tab{padding:10px 24px;background:transparent;border:1px solid #ddd;font-family:'Nunito Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .3s;text-transform:uppercase;letter-spacing:1px;}
+.menu-tab.active,.menu-tab:hover{background:var(--bamboo);color:white;border-color:var(--bamboo);}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;max-width:900px;margin:0 auto;}
+.menu-item{display:flex;gap:18px;padding:20px;background:var(--sesame);border-radius:10px;transition:transform .2s;}
+.menu-item:hover{transform:translateX(4px);}
+.menu-item img{width:85px;height:85px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.menu-item-info{flex:1;}
+.menu-item-info h3{font-family:'Noto Serif',serif;font-size:17px;margin-bottom:5px;}
+.menu-item-info p{font-size:13px;font-weight:200;opacity:.5;line-height:1.5;}
+.menu-item-info .price{color:var(--spice);font-weight:600;font-size:16px;margin-top:6px;}
+.menu-cat{display:none;}
+.menu-cat.active{display:grid;}
+
+/* STORY */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1000px;margin:0 auto;align-items:center;}
+.story-img img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;}
+.story-text h3{font-family:'Noto Serif',serif;font-size:30px;font-weight:400;margin-bottom:20px;line-height:1.3;}
+.story-text p{font-weight:200;line-height:1.9;opacity:.6;font-size:15px;margin-bottom:15px;}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;max-width:900px;margin:0 auto;}
+.info-card{text-align:center;padding:35px 25px;background:var(--sesame);border-radius:12px;}
+.info-card .icon{font-size:30px;margin-bottom:12px;}
+.info-card h3{font-family:'Noto Serif',serif;font-size:20px;margin-bottom:8px;}
+.info-card p{font-weight:200;opacity:.5;font-size:14px;line-height:1.6;}
+
+footer{background:var(--dark);color:white;text-align:center;padding:40px;}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:var(--dark);flex-direction:column;padding:25px;gap:18px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .story-grid{grid-template-columns:1fr;}
+  section{padding:60px 20px;}
+  .menu-grid{grid-template-columns:1fr;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeUp .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Pho <span>Saigon</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Carte</a>
+    <a href="#story">Notre histoire</a>
+    <a href="#infos">Infos pratiques</a>
+    <a href="#réservation">Réserver</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>PHO <span>SAIGON</span></h1>
+    <div class="vn-text">Huong vi Viet Nam</div>
+    <p>Les saveurs authentiques du Vietnam, préparées chaque jour avec des ingredients frais et des recettes traditionnelles.</p>
+    <a href="#menu" class="hero-btn">Voir la carte</a>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="st"><h2>Notre <span>carte</span></h2><p>Cuisine traditionnelle vietnamienne</p></div>
+  <div class="menu-nav">
+    <button class="menu-tab active" onclick="showCat('pho')">Pho & Soupes</button>
+    <button class="menu-tab" onclick="showCat('plats')">Plats</button>
+    <button class="menu-tab" onclick="showCat('entrees')">Entrees</button>
+    <button class="menu-tab" onclick="showCat('desserts')">Desserts</button>
+  </div>
+
+  <div class="menu-cat active" id="cat-pho">
+    <div class="menu-grid">
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Pho Bo</h3><p>Soupe de nouilles au boeuf, bouillon mijote 12h, herbes fraiches, oignon frit</p><div class="price">13,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1555126634-323283e090fa?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Pho Ga</h3><p>Soupe de nouilles au poulet fermier, gingembre, coriandre, citron vert</p><div class="price">12,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Bun Bo Hue</h3><p>Soupe épicée de Hue, boeuf, citronnelle, pate de crevette</p><div class="price">14,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Pho Vegetarien</h3><p>Bouillon de legumes, tofu grillé, champignons, herbes du jardin</p><div class="price">11,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1745817078506-bfc70df458b5?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Bun Rieu</h3><p>Soupe de crabe et tomate, vermicelles de riz, tofu frit, herbes fraiches</p><div class="price">14,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1635685296916-95acaf58471f?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Hu Tieu Nam Vang</h3><p>Soupe de nouilles à la cambodgienne, porc, crevettes, foie, ciboulette</p><div class="price">13,50 &#8364;</div></div></div>
+    </div>
+  </div>
+  <div class="menu-cat" id="cat-plats">
+    <div class="menu-grid">
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Bo Bun</h3><p>Vermicelles, boeuf mariné, nems, crudites, cacahuetes, sauce nuoc mam</p><div class="price">14,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Com Suon Nuong</h3><p>Riz casse, travers de porc grillé à la citronnelle, oeuf au plat</p><div class="price">15,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Poulet Caramelise</h3><p>Poulet au caramel de coco, gingembre, servi avec riz parfume</p><div class="price">14,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Curry Vert Crevettes</h3><p>Crevettes tigrees, lait de coco, basilic thai, aubergines</p><div class="price">16,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1583316175701-0bc5f25a0a44?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Bun Cha Hanoi</h3><p>Vermicelles, boulettes de porc grillées, herbes, sauce nuoc cham</p><div class="price">14,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://plus.unsplash.com/premium_photo-1695167739750-a1e7c856438b?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Ca Kho To</h3><p>Poisson caramélisé en pot de terre, sauce au caramel de coco, poivre noir</p><div class="price">16,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1583579366799-7106fb626a54?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Banh Xeo</h3><p>Crepe vietnamienne croustillante, crevettes, porc, germes de soja, herbes</p><div class="price">13,00 &#8364;</div></div></div>
+    </div>
+  </div>
+  <div class="menu-cat" id="cat-entrees">
+    <div class="menu-grid">
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Nems (4 pièces)</h3><p>Rouleaux farcis porc et crabe, sauce nuoc mam maison</p><div class="price">6,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Rouleaux de Printemps</h3><p>Crevettes, vermicelles, salade, menthe, sauce cacahuete</p><div class="price">7,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Banh Mi</h3><p>Sandwich baguette, porc laque, do chua, coriandre, piment</p><div class="price">8,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1621926934922-b86e625407fd?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Goi Cuon Thit Nuong</h3><p>Rouleaux de printemps au porc grillé, vermicelles, menthe, sauce hoisin</p><div class="price">8,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://plus.unsplash.com/premium_photo-1664647841177-14c39640ad9f?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Ca Tim Nuong</h3><p>Aubergine grillée, sauce nuoc mam, ail, ciboulette, cacahuetes pilees</p><div class="price">7,50 &#8364;</div></div></div>
+    </div>
+  </div>
+  <div class="menu-cat" id="cat-desserts">
+    <div class="menu-grid">
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Che Ba Mau</h3><p>Dessert tricolore : haricots mungo, coco, tapioca, glace pilees</p><div class="price">5,50 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Flan au Coco</h3><p>Flan vietnamien au lait de coco et caramel doux</p><div class="price">5,00 &#8364;</div></div></div>
+      <div class="menu-item"><img src="https://images.unsplash.com/photo-1751809998955-2d373a0b80d2?w=200&h=200&fit=crop" alt=""><div class="menu-item-info"><h3>Che Chuoi</h3><p>Banane au lait de coco, tapioca, sesame grillé, sucre de palme</p><div class="price">5,50 &#8364;</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 40px;background:var(--sesame);">
+<div style="max-width:900px;margin:0 auto;text-align:center;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:4px;color:var(--bamboo);margin-bottom:12px;">A propos</div>
+  <h2 style="font-family:'Noto Serif',serif;font-size:clamp(28px,4vw,40px);font-weight:700;margin-bottom:25px;">Les vraies saveurs du Vietnam à Lyon</h2>
+  <p style="font-weight:300;line-height:2.2;opacity:.6;font-size:1rem;"><strong style="color:var(--bamboo);opacity:1;">Pho Saigon</strong> est un <strong style="color:var(--bamboo);opacity:1;">restaurant vietnamien authentique à Lyon 2e</strong>. Nos <strong style="color:var(--bamboo);opacity:1;">pho</strong> sont préparés chaque matin avec un bouillon mijote pendant 12 heures, nos <strong style="color:var(--bamboo);opacity:1;">bo bun</strong>, <strong style="color:var(--bamboo);opacity:1;">bun cha</strong> et <strong style="color:var(--bamboo);opacity:1;">banh xeo</strong> sont réalisés à la commande avec des ingredients frais. Cuisine familiale transmise depuis trois generations, de Saigon à Lyon. <strong style="color:var(--bamboo);opacity:1;">A emporter disponible</strong>, réservation recommandée le week-end.</p>
+</div>
+</section>
+
+<section id="story" style="background:var(--sesame);">
+  <div class="story-grid">
+    <div class="story-img"><img src="https://images.unsplash.com/photo-1689951693488-3b63b15da263?w=500&h=670&fit=crop" alt="Restaurant"></div>
+    <div class="story-text">
+      <h3>Un gout de famille depuis 2012</h3>
+      <p>Pho Saigon est ne de la passion de <strong style="color:var(--bamboo);">Linh et Minh</strong>, un couple vietnamien installé à Lyon depuis 20 ans. Leurs recettes ? Celles transmises par la grand-mere de Linh, originaire de Saigon. Du <strong style="color:var(--bamboo);">pho</strong> au <strong style="color:var(--bamboo);">bun cha</strong>, chaque plat raconte une histoire de famille.</p>
+      <p>Chaque bouillon est mijote des l'aube pendant <strong style="color:var(--bamboo);">12 heures</strong>, les herbes sont fraiches du marche, les épicés importees du Vietnam. Ici, pas de raccourci : la <strong style="color:var(--bamboo);">cuisine vietnamienne</strong> merite du temps, de l'amour et des bons ingredients.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 40px;text-align:center;background:var(--sesame);">
+  <div class="st"><h2>@pho.<span>saigon</span></h2><p>Notre quotidien en images</p></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:750px;margin:0 auto;">
+    <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1583316175701-0bc5f25a0a44?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1583579366799-7106fb626a54?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1745817078506-bfc70df458b5?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1695167739750-a1e7c856438b?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1621926934922-b86e625407fd?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section style="padding:0;" id="réservation">
+  <div style="position:relative;overflow:hidden;background:var(--dark);">
+    <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=1400&h=600&fit=crop') center/cover;opacity:.2;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(74,103,65,.15),rgba(30,30,30,.85));"></div>
+    <div style="position:relative;z-index:2;padding:80px 40px;text-align:center;">
+      <div style="font-size:36px;margin-bottom:10px;">&#127834;</div>
+      <h2 style="font-family:'Noto Serif',serif;font-size:clamp(24px,4vw,38px);color:white;margin-bottom:8px;">Réserver une table</h2>
+      <p style="color:rgba(255,255,255,.4);margin-bottom:35px;font-size:.95rem;">Laissez-vous transporter par les saveurs du Vietnam</p>
+      <div style="max-width:550px;margin:0 auto;background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border:1px solid rgba(74,103,65,.25);border-radius:16px;padding:35px 30px;">
+        <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:30px;\' ><div style=\'font-size:36px;margin-bottom:10px;\'>&#127834;</div><div style=\'font-family:Noto Serif,serif;font-size:22px;color:var(--bamboo);\'>Cam on !</div><p style=\'margin-top:10px;color:rgba(255,255,255,.4);\'>Réservation confirmee, à bientot.</p></div>';">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <input type="text" placeholder="Votre nom" required style="width:100%;padding:14px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.9rem;outline:none;">
+            <input type="tel" placeholder="Telephone" required style="width:100%;padding:14px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.9rem;outline:none;">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+            <input type="date" required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;">
+            <select required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;"><option value="" style="background:var(--dark);">Heure</option><option style="background:var(--dark);">12h00</option><option style="background:var(--dark);">12h30</option><option style="background:var(--dark);">13h00</option><option style="background:var(--dark);">19h00</option><option style="background:var(--dark);">19h30</option><option style="background:var(--dark);">20h00</option><option style="background:var(--dark);">20h30</option><option style="background:var(--dark);">21h00</option></select>
+            <select required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;"><option value="" style="background:var(--dark);">Pers.</option><option style="background:var(--dark);">1</option><option style="background:var(--dark);">2</option><option style="background:var(--dark);">3-4</option><option style="background:var(--dark);">5-6</option><option style="background:var(--dark);">7+</option></select>
+          </div>
+          <button type="submit" style="width:100%;padding:16px;background:var(--bamboo);color:white;border:none;border-radius:10px;font-family:inherit;font-weight:600;font-size:1rem;cursor:pointer;letter-spacing:1px;">&#127834; RESERVER</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infos">
+  <div class="st"><h2>Infos <span>pratiques</span></h2></div>
+  <div class="infos-grid">
+    <div class="info-card"><div class="icon">&#128205;</div><h3>Adresse</h3><p>42 rue de la Republique<br>69002 Lyon</p></div>
+    <div class="info-card"><div class="icon">&#128337;</div><h3>Horaires</h3><p>Mar-Sam : 12h-14h30 / 19h-22h30<br>Dim : 12h-15h<br>Lun : ferme</p></div>
+    <div class="info-card"><div class="icon">&#128222;</div><h3>Réservation</h3><p>04 78 12 34 56<br>Ou directement sur place</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Pho Saigon Lyon</p></footer>
+
+<script>
+function showCat(cat){
+  document.querySelectorAll('.menu-cat').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cat-'+cat).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

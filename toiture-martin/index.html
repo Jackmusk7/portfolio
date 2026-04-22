@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Toiture Martin | Couvreur Professionnel</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--navy:#0F2439;--orange:#E8711A;--sky:#EBF2F8;--dark:#0a1929;--white:#fff;}
+body{font-family:'Work Sans',sans-serif;background:var(--white);color:var(--navy);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(15,36,57,.97);backdrop-filter:blur(10px);}
+.logo{font-family:'Archivo Black',sans-serif;font-size:22px;color:white;text-transform:uppercase;letter-spacing:1px;}
+.logo span{color:var(--orange);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:13px;color:white;text-transform:uppercase;letter-spacing:1.5px;font-weight:400;transition:color .3s;}
+.nav-links a:hover{color:var(--orange);}
+.nav-phone{color:var(--orange);font-weight:600;font-size:15px;letter-spacing:1px;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:24px;height:2px;background:var(--orange);}
+
+.hero{height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--navy);color:white;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1726589004565-bedfba94d3a2?w=1400&h=800&fit=crop') center/cover;opacity:.2;}
+.hero-inner{position:relative;z-index:2;padding:0 50px;max-width:700px;}
+.hero h1{font-family:'Archivo Black',sans-serif;font-size:clamp(36px,6vw,64px);line-height:1.1;text-transform:uppercase;}
+.hero h1 span{color:var(--orange);}
+.hero p{font-size:18px;font-weight:300;margin:25px 0;line-height:1.7;opacity:.7;max-width:500px;}
+.hero-btns{display:flex;gap:15px;flex-wrap:wrap;}
+.btn-primary{padding:16px 40px;background:var(--orange);color:white;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;border:none;cursor:pointer;transition:all .3s;}
+.btn-primary:hover{background:#FF8C2A;}
+.btn-secondary{padding:16px 40px;border:2px solid white;color:white;font-weight:400;font-size:14px;text-transform:uppercase;letter-spacing:1px;transition:all .3s;}
+.btn-secondary:hover{background:white;color:var(--navy);}
+
+section{padding:90px 40px;}
+.st{text-align:center;margin-bottom:55px;}
+.st h2{font-family:'Archivo Black',sans-serif;font-size:clamp(26px,4vw,42px);text-transform:uppercase;}
+.st h2 span{color:var(--orange);}
+.st p{margin-top:12px;font-weight:300;opacity:.5;max-width:500px;margin-left:auto;margin-right:auto;}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:25px;max-width:1100px;margin:0 auto;}
+.svc-card{padding:40px 30px;background:var(--sky);border-left:4px solid var(--orange);transition:transform .3s;}
+.svc-card:hover{transform:translateY(-5px);}
+.svc-card .icon{font-size:32px;margin-bottom:15px;}
+.svc-card h3{font-family:'Archivo Black',sans-serif;font-size:18px;margin-bottom:10px;text-transform:uppercase;}
+.svc-card p{font-weight:300;line-height:1.7;opacity:.6;font-size:14px;}
+
+/* REALISATIONS */
+.real-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.real-card{position:relative;overflow:hidden;aspect-ratio:16/10;}
+.real-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.real-card:hover img{transform:scale(1.08);}
+.real-card .info{position:absolute;bottom:0;left:0;right:0;padding:25px;background:linear-gradient(transparent,rgba(15,36,57,.85));color:white;}
+.real-card .info h3{font-family:'Archivo Black',sans-serif;font-size:16px;text-transform:uppercase;}
+.real-card .info p{font-size:13px;font-weight:300;opacity:.7;margin-top:4px;}
+
+/* TRUST */
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--orange);max-width:1100px;margin:0 auto;}
+.trust-item{background:var(--navy);color:white;text-align:center;padding:40px 20px;}
+.trust-item .num{font-family:'Archivo Black',sans-serif;font-size:42px;color:var(--orange);}
+.trust-item .lbl{font-size:12px;text-transform:uppercase;letter-spacing:2px;opacity:.5;margin-top:8px;}
+
+/* DEVIS */
+.devis-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1000px;margin:0 auto;align-items:start;}
+.devis-info{padding:40px 0;}
+.devis-info h3{font-family:'Archivo Black',sans-serif;font-size:24px;text-transform:uppercase;margin-bottom:20px;}
+.devis-info p{font-weight:300;line-height:1.8;opacity:.6;margin-bottom:15px;}
+.devis-info .guarantee{display:flex;align-items:center;gap:12px;padding:15px 20px;background:var(--sky);margin-top:20px;}
+.guarantee .check{color:var(--orange);font-size:20px;}
+.guarantee span{font-size:14px;font-weight:500;}
+
+.devis-form{background:var(--sky);padding:45px 35px;}
+.fg{margin-bottom:18px;}
+.fg label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;font-weight:500;margin-bottom:6px;opacity:.5;}
+.fg input,.fg select,.fg textarea{width:100%;padding:13px;background:white;border:1px solid #dde4eb;font-family:'Work Sans',sans-serif;font-size:14px;font-weight:400;color:var(--navy);outline:none;transition:border .3s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--orange);}
+.fg textarea{height:90px;resize:none;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sub-btn{width:100%;padding:16px;background:var(--orange);color:white;border:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:1px;cursor:pointer;transition:background .3s;}
+.sub-btn:hover{background:#FF8C2A;}
+
+footer{background:var(--navy);color:white;text-align:center;padding:40px;}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links,.nav-phone{display:none;}
+  .nav-links.active{display:flex;position:absolute;top:60px;left:0;width:100%;background:var(--navy);flex-direction:column;padding:25px;gap:18px;}
+  .hamburger{display:flex;}
+  .hero-inner{padding:0 20px;}
+  .devis-wrap{grid-template-columns:1fr;}
+  section{padding:60px 20px;}
+  .devis-form{padding:30px 20px;}
+  .form-row{grid-template-columns:1fr;}
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+.hero-inner{animation:slideIn .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">TOITURE <span>MARTIN</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#services">Services</a>
+    <a href="#réalisations">Réalisations</a>
+    <a href="#devis">Devis gratuit</a>
+  </div>
+  <div class="nav-phone">06 12 34 56 78</div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>VOTRE TOIT,<br><span>NOTRE EXPERTISE</span></h1>
+    <p>Couvreur professionnel depuis 25 ans. Rénovation, réparation, isolation et entretien de toiture en Ile-de-France.</p>
+    <div class="hero-btns">
+      <a href="#devis" class="btn-primary">Devis gratuit</a>
+      <a href="tel:0612345678" class="btn-secondary">Appeler</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trust-item"><div class="num">25</div><div class="lbl">Ans d'expérience</div></div>
+  <div class="trust-item"><div class="num">1 200+</div><div class="lbl">Chantiers réalisés</div></div>
+  <div class="trust-item"><div class="num">10</div><div class="lbl">Ans de garantie</div></div>
+  <div class="trust-item"><div class="num">48h</div><div class="lbl">Intervention urgente</div></div>
+</div>
+
+
+<!-- SEO -->
+<section style="padding:70px 40px;background:var(--white);">
+<div style="max-width:900px;margin:0 auto;text-align:center;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--orange);font-weight:500;margin-bottom:12px;">A propos</div>
+  <h2 style="font-family:'Archivo Black',sans-serif;font-size:clamp(22px,3vw,30px);text-transform:uppercase;margin-bottom:25px;">Couvreur professionnel en Ile-de-France</h2>
+  <p style="font-weight:300;line-height:2.2;opacity:.6;font-size:.95rem;"><strong style="color:var(--navy);opacity:1;">Toiture Martin</strong> est une <strong style="color:var(--navy);opacity:1;">entreprise de couverture</strong> fondée en 1999, spécialisée dans la <strong style="color:var(--navy);opacity:1;">rénovation de toiture</strong>, la <strong style="color:var(--navy);opacity:1;">réparation de fuites</strong>, la <strong style="color:var(--navy);opacity:1;">pose d'ardoises et de tuiles</strong>, la <strong style="color:var(--navy);opacity:1;">couverture zinc</strong>, l'<strong style="color:var(--navy);opacity:1;">isolation thermique</strong> et la <strong style="color:var(--navy);opacity:1;">zinguerie</strong>. Artisan certifié <strong style="color:var(--navy);opacity:1;">RGE</strong> et <strong style="color:var(--navy);opacity:1;">Qualibat</strong>, nous intervenons dans tout le <strong style="color:var(--navy);opacity:1;">78, 92, 91, 95</strong> et Paris.</p>
+  <p style="font-weight:300;line-height:2.2;opacity:.6;font-size:.95rem;margin-top:14px;">Notre équipe de <strong style="color:var(--navy);opacity:1;">15 compagnons couvreurs</strong> qualifiés realise chaque chantier dans le respect des regles de l'art. <strong style="color:var(--navy);opacity:1;">Garantie décennale</strong>, <strong style="color:var(--navy);opacity:1;">assurance dommage-ouvrage</strong>, accompagnement <strong style="color:var(--navy);opacity:1;">MaPrimeRenov'</strong> et CEE. <strong style="color:var(--navy);opacity:1;">Devis gratuit sous 24h</strong>, déplacement et estimation offerts.</p>
+</div>
+</section>
+<section id="services">
+  <div class="st"><h2>NOS <span>SERVICES</span></h2><p>Des solutions completes pour proteger votre habitat</p></div>
+  <div class="svc-grid">
+    <div class="svc-card"><div class="icon">&#127968;</div><h3>Rénovation complete</h3><p>Remplacement integral de couverture : tuiles, ardoises, zinc. Charpente et zinguerie incluses.</p></div>
+    <div class="svc-card"><div class="icon">&#128295;</div><h3>Réparation & fuite</h3><p>Diagnostic rapide et réparation de fuites, tuiles cassees, gouttieres endommagées. Intervention sous 48h.</p></div>
+    <div class="svc-card"><div class="icon">&#127777;</div><h3>Isolation</h3><p>Isolation thermique par l'exterieur (ITE) et par les combles. Economies d'énergie garanties.</p></div>
+    <div class="svc-card"><div class="icon">&#128167;</div><h3>Zinguerie</h3><p>Pose et remplacement de gouttieres, cheneaux, descentes d'eau pluviales en zinc ou aluminium.</p></div>
+    <div class="svc-card"><div class="icon">&#9989;</div><h3>Entretien</h3><p>Nettoyage, démoussage et traitement hydrofuge pour prolonger la durée de vie de votre toiture.</p></div>
+    <div class="svc-card"><div class="icon">&#127793;</div><h3>Toiture végétalisée</h3><p>Installation de toitures vertes pour une isolation naturelle et un habitat écologique.</p></div>
+  </div>
+</section>
+
+<section id="réalisations" style="background:var(--sky);">
+  <div class="st"><h2>NOS <span>REALISATIONS</span></h2><p>Quelques exemples de chantiers recents</p></div>
+  <div class="real-grid">
+    <div class="real-card"><img src="https://images.unsplash.com/photo-1590384141345-417474f64538?w=600&h=400&fit=crop" alt=""><div class="info"><h3>Rénovation ardoise</h3><p>Maison bourgeoise, Versailles</p></div></div>
+    <div class="real-card"><img src="https://images.unsplash.com/photo-1742812267701-22300e487867?w=600&h=400&fit=crop" alt=""><div class="info"><h3>Couverture zinc</h3><p>Villa moderne, Saint-Cloud</p></div></div>
+    <div class="real-card"><img src="https://plus.unsplash.com/premium_photo-1683140940649-71864ae8156e?w=600&h=400&fit=crop" alt=""><div class="info"><h3>Couverture tuiles</h3><p>Maison traditionnelle, Meudon</p></div></div>
+  </div>
+</section>
+
+<section id="devis">
+  <div class="st"><h2>DEVIS <span>GRATUIT</span></h2><p>Reponse sous 24h, déplacement et estimation offerts</p></div>
+  <div class="devis-wrap">
+    <div class="devis-info">
+      <h3>Pourquoi nous choisir ?</h3>
+      <p>L'entreprise Martin, c'est <strong style="color:var(--orange);">25 ans d'expérience</strong> en couverture, une équipe de <strong style="color:var(--orange);">15 compagnons qualifiés</strong> et plus de <strong style="color:var(--orange);">1 200 chantiers réalisés</strong> en Ile-de-France.</p>
+      <p>Artisan <strong style="color:var(--orange);">RGE et Qualibat</strong>, nous vous accompagnons dans les demarches d'aides : <strong style="color:var(--orange);">MaPrimeRenov'</strong>, CEE, eco-PTZ. Intervention urgente sous 48h pour les fuites et dégâts.</p>
+      <div class="guarantee"><div class="check">&#10003;</div><span>Devis gratuit sous 24h</span></div>
+      <div class="guarantee"><div class="check">&#10003;</div><span>Garantie décennale</span></div>
+      <div class="guarantee"><div class="check">&#10003;</div><span>Artisan certifié RGE</span></div>
+      <div class="guarantee"><div class="check">&#10003;</div><span>Assurance dommage-ouvrage</span></div>
+    </div>
+    <div class="devis-form">
+      <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:40px 0;\'><div style=\'font-family:Archivo Black;font-size:28px;color:var(--orange);\'>DEMANDE ENVOYEE !</div><p style=\'margin-top:10px;opacity:.5;font-weight:300;\'>Nous vous recontactons sous 24h.</p></div>';">
+        <div class="form-row">
+          <div class="fg"><label>Nom</label><input type="text" required></div>
+          <div class="fg"><label>Telephone</label><input type="tel" required></div>
+        </div>
+        <div class="fg"><label>Email</label><input type="email" required></div>
+        <div class="fg"><label>Ville</label><input type="text" placeholder="Ex: Versailles, 78000" required></div>
+        <div class="fg"><label>Type de travaux</label>
+          <select required><option value="">Sélectionnez</option><option>Rénovation complete</option><option>Réparation / fuite</option><option>Isolation</option><option>Zinguerie</option><option>Entretien / démoussage</option><option>Autre</option></select>
+        </div>
+        <div class="fg"><label>Details</label><textarea placeholder="Decrivez votre projet, type de toiture, surface estimee..."></textarea></div>
+        <button type="submit" class="sub-btn">DEMANDER MON DEVIS</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Toiture Martin. Couvreur professionnel Ile-de-France.</p></footer>
+</body>
+</html>

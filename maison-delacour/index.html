@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Delacour | Pâtisserie Fine</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lato:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--champagne:#F8F3ED;--gold:#B8860B;--chocolate:#2C1810;--caramel:#A0784C;--ivory:#FFFDF8;}
+body{font-family:'Lato',sans-serif;background:var(--ivory);color:var(--chocolate);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:22px 45px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(255,253,248,.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(184,134,11,.1);}
+.logo{font-family:'Marcellus',serif;font-size:24px;letter-spacing:3px;text-transform:uppercase;}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:30px;}
+.nav-links a{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:300;transition:color .3s;}
+.nav-links a:hover{color:var(--gold);}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:1.5px;background:var(--chocolate);}
+
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1764486601113-a6856cdce5fd?w=1600') center/cover;opacity:.15;}.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(184,134,11,.06),transparent 60%);}
+.hero-content{position:relative;z-index:2;}
+.decor{position:absolute;font-size:80px;opacity:.06;}
+.decor:nth-child(1){top:10%;left:8%;}
+.decor:nth-child(2){bottom:15%;right:10%;}
+.decor:nth-child(3){top:50%;left:80%;}
+.hero h1{font-family:'Marcellus',serif;font-size:clamp(36px,6vw,72px);line-height:1.2;letter-spacing:2px;}
+.hero h1 span{color:var(--gold);}
+.gold-line{width:60px;height:1px;background:var(--gold);margin:25px auto;}
+.hero p{font-size:16px;font-weight:200;max-width:420px;margin:0 auto;line-height:1.8;opacity:.6;}
+.hero-btn{display:inline-block;margin-top:35px;padding:14px 45px;background:var(--gold);color:white;font-size:12px;text-transform:uppercase;letter-spacing:3px;transition:all .3s;}
+.hero-btn:hover{background:var(--chocolate);}
+
+section{padding:100px 45px;}
+.st{text-align:center;margin-bottom:60px;}
+.st-label{font-size:11px;text-transform:uppercase;letter-spacing:4px;color:var(--gold);margin-bottom:10px;}
+.st h2{font-family:'Marcellus',serif;font-size:clamp(28px,4vw,48px);letter-spacing:1px;}
+
+/* PATISSERIES */
+.pastry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px;max-width:1100px;margin:0 auto;}
+.pastry{text-align:center;padding:30px;background:var(--champagne);transition:transform .3s;}
+.pastry:hover{transform:translateY(-6px);}
+.pastry img{width:100%;aspect-ratio:1;object-fit:cover;margin-bottom:20px;}
+.pastry h3{font-family:'Marcellus',serif;font-size:22px;margin-bottom:8px;}
+.pastry p{font-weight:200;opacity:.5;font-size:14px;line-height:1.6;margin-bottom:12px;}
+.pastry .price{font-family:'Marcellus',serif;color:var(--gold);font-size:20px;}
+
+/* SAVOIR FAIRE */
+.sf-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1000px;margin:0 auto;align-items:center;}
+.sf-img img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.sf-text h3{font-family:'Marcellus',serif;font-size:30px;margin-bottom:20px;line-height:1.3;}
+.sf-text p{font-weight:200;line-height:1.9;opacity:.6;font-size:15px;margin-bottom:15px;}
+.sf-values{display:flex;gap:30px;margin-top:25px;}
+.sf-val{text-align:center;}
+.sf-val .num{font-family:'Marcellus',serif;font-size:36px;color:var(--gold);}
+.sf-val .lbl{font-size:11px;text-transform:uppercase;letter-spacing:2px;opacity:.4;margin-top:5px;}
+
+/* COMMANDE */
+.order-form{max-width:550px;margin:0 auto;padding:55px 45px;background:var(--champagne);border:1px solid rgba(184,134,11,.15);}
+.fg{margin-bottom:20px;}
+.fg label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;opacity:.4;}
+.fg input,.fg select,.fg textarea{width:100%;padding:13px;background:var(--ivory);border:1px solid rgba(184,134,11,.15);font-family:'Lato',sans-serif;font-size:15px;font-weight:300;color:var(--chocolate);outline:none;transition:border .3s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold);}
+.fg textarea{height:100px;resize:none;}
+.fg select option{background:var(--ivory);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.submit{width:100%;padding:16px;background:var(--gold);color:white;border:none;font-family:'Marcellus',serif;font-size:16px;letter-spacing:2px;cursor:pointer;transition:background .3s;}
+.submit:hover{background:var(--chocolate);}
+
+footer{text-align:center;padding:50px;border-top:1px solid rgba(184,134,11,.1);}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:65px;left:0;width:100%;background:var(--ivory);flex-direction:column;padding:25px 45px;gap:18px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .sf-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  section{padding:70px 20px;}
+  nav{padding:18px 20px;}
+  .order-form{padding:35px 20px;}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeIn .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">MAISON <span>DELACOUR</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#créations">Créations</a>
+    <a href="#savoir">Savoir-faire</a>
+    <a href="#commande">Commander</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="decor">&#127856;</div><div class="decor">&#127846;</div><div class="decor">&#127870;</div>
+  <div class="hero-content">
+    <h1>L'excellence de la<br><span>pâtisserie française</span></h1>
+    <div class="gold-line"></div>
+    <p>Depuis 1987, la Maison Delacour perpétue l'art de la pâtisserie fine au cœur de Paris.</p>
+    <a href="#créations" class="hero-btn">Nos créations</a>
+  </div>
+</section>
+
+<section id="créations">
+  <div class="st"><div class="st-label">Nos créations</div><h2>Pâtisseries & Viennoiseries</h2></div>
+  <div class="pastry-grid">
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1761637604739-790197a32073?w=400&h=400&fit=crop" alt=""><h3>Paris-Brest</h3><p>Pâte à choux croustillante, crème pralinée noisette, éclats de pralin</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1616534900864-45d0da88d9bd?w=400&h=400&fit=crop" alt=""><h3>Éclair au Chocolat</h3><p>Crème pâtissière au chocolat Guanaja 70%, glaçage miroir</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400&h=400&fit=crop" alt=""><h3>Tarte Citron Meringuee</h3><p>Crème citron acidulee, meringue italienne torcheee, pate sablee</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1593424731252-a846f98af7e6?w=400&h=400&fit=crop" alt=""><h3>Millefeuille</h3><p>Feuilletage caramélisé, crème légère vanille de Madagascar</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1763161692978-1932b2b86e18?w=400&h=400&fit=crop" alt=""><h3>Tarte Fruits Rouges</h3><p>Pâte sablée, crème diplomate, framboises, myrtilles, groseilles de saison</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1578601163666-47c726ce64fb?w=400&h=400&fit=crop" alt=""><h3>Coffret Macarons</h3><p>12 macarons artisanaux, 6 parfums de saison, coffret cadeau</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1601557030026-c608b229d364?w=400&h=400&fit=crop" alt=""><h3>Opéra</h3><p>Biscuit joconde, crème au beurre café, ganache chocolat noir</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1759277513188-267bed8d54fc?w=400&h=400&fit=crop" alt=""><h3>Chou à la Crème</h3><p>Pâte à choux dorée, crème vanille onctueuse, sucre glacé</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1694735278437-fced5270f290?w=400&h=400&fit=crop" alt=""><h3>Pain au Chocolat</h3><p>Feuilletage pur beurre, deux barres de chocolat noir Valrhona</p></div>
+    <div class="pastry"><img src="https://plus.unsplash.com/premium_photo-1661351637185-162e386528a8?w=400&h=400&fit=crop" alt=""><h3>Croissant Pur Beurre</h3><p>Beurre AOP Charentes-Poitou, feuilletage 3 jours, dore et croustillant</p></div>
+    <div class="pastry"><img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?w=400&h=400&fit=crop" alt=""><h3>Roulés au Chocolat</h3><p>Pâte briochée, crème pâtissière, pépites de chocolat, glaçage vanille</p></div>
+  </div>
+</section>
+
+<section id="savoir" style="background:var(--champagne);">
+  <div class="sf-grid">
+    <div class="sf-img">
+      <img src="https://images.unsplash.com/photo-1775210515449-ddecf56ca6eb?w=600&h=450&fit=crop" alt="Maison Delacour">
+    </div>
+    <div class="sf-text">
+      <h3>Notre savoir-faire</h3>
+      <p>La <strong style="color:var(--gold);">Maison Delacour</strong> est une <strong style="color:var(--gold);">pâtisserie artisanale parisienne</strong> fondée en 1987. Dirigée par Éloïse Delacour, formée chez les plus grands noms de la <strong style="color:var(--gold);">pâtisserie française</strong>, la maison perpétue un savoir-faire exigeant où chaque création est réalisée à la main.</p>
+      <p>Nos ingredients sont rigoureusement sélectionnés : <strong style="color:var(--gold);">beurre AOP Charentes-Poitou</strong>, <strong style="color:var(--gold);">chocolat Valrhona</strong>, fruits de producteurs locaux, farines de moulin artisanal. <strong style="color:var(--gold);">Commande en ligne</strong> disponible, livraison et retrait en boutique. <strong style="color:var(--gold);">Gâteau sur mesure</strong> pour mariages et événements.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 45px;text-align:center;">
+  <div class="st"><div class="st-label">@maison.delacour</div><h2>Notre Vitrine</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;max-width:1000px;margin:0 auto;">
+    <img src="https://images.unsplash.com/photo-1603408208616-8851bdc59bcb?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1618591646018-7fa30c56fab1?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1664790560468-a23c76d92651?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1517399611216-ff2f851a4ef1?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1616534900864-45d0da88d9bd?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1761637604739-790197a32073?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+  </div>
+</section>
+
+<section id="commande">
+  <div class="st"><div class="st-label">Commander</div><h2>Commande speciale</h2></div>
+  <div class="order-form">
+    <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:35px 0;\'><div style=\'font-family:Marcellus,serif;font-size:30px;color:var(--gold);\'>Merci !</div><p style=\'margin-top:10px;opacity:.5;font-weight:200;\'>Nous confirmons votre commande sous 24h.</p></div>';">
+      <div class="form-row">
+        <div class="fg"><label>Nom</label><input type="text" required></div>
+        <div class="fg"><label>Telephone</label><input type="tel" required></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" required></div>
+      <div class="fg"><label>Type de commande</label>
+        <select required><option value="">Sélectionnez</option><option>Gâteau sur mesure</option><option>Pièce montée mariage</option><option>Coffret cadeaux</option><option>Buffet événement</option><option>Commande boutique</option></select>
+      </div>
+      <div class="fg"><label>Date souhaitee</label><input type="date" required></div>
+      <div class="fg"><label>Details</label><textarea placeholder="Nombre de personnes, parfums, allergies, theme..."></textarea></div>
+      <button type="submit" class="submit">Envoyer ma commande</button>
+    </form>
+  </div>
+</section>
+
+<section style="padding:60px 45px;background:var(--champagne);">
+  <div class="st"><div class="st-label">Nous trouver</div><h2>Infos pratiques</h2></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:900px;margin:0 auto;">
+    <div style="text-align:center;padding:30px 20px;background:var(--ivory);border:1px solid rgba(184,134,11,.1);"><div style="font-size:24px;margin-bottom:10px;">&#128205;</div><h3 style="font-family:Marcellus,serif;font-size:18px;margin-bottom:6px;">Adresse</h3><p style="font-weight:200;opacity:.5;font-size:14px;">8 rue du Bac<br>75007 Paris</p></div>
+    <div style="text-align:center;padding:30px 20px;background:var(--ivory);border:1px solid rgba(184,134,11,.1);"><div style="font-size:24px;margin-bottom:10px;">&#128337;</div><h3 style="font-family:Marcellus,serif;font-size:18px;margin-bottom:6px;">Horaires</h3><p style="font-weight:200;opacity:.5;font-size:14px;">Mar-Sam : 7h30 - 19h30<br>Dim : 7h30 - 13h</p></div>
+    <div style="text-align:center;padding:30px 20px;background:var(--ivory);border:1px solid rgba(184,134,11,.1);"><div style="font-size:24px;margin-bottom:10px;">&#128222;</div><h3 style="font-family:Marcellus,serif;font-size:18px;margin-bottom:6px;">Contact</h3><p style="font-weight:200;opacity:.5;font-size:14px;">01 42 22 33 44<br>Commande en ligne</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Maison Delacour Paris. Tous droits reserves.</p></footer>
+</body>
+</html>

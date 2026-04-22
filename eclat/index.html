@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Éclat</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Raleway',sans-serif;background:#fdf2f8;color:#1a1a1a;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
+nav.scrolled{background:rgba(253,242,248,.96);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 2px 20px rgba(0,0,0,.04)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#9f1239;font-style:italic}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:.82rem;color:#999;transition:color .2s}
+.nav-links a:hover{color:#9f1239}
+.nav-cta{background:#9f1239;color:#fff !important;padding:10px 24px;border-radius:8px;font-weight:600}
+
+.hero-wrap{position:relative;overflow:hidden;}.hero-wrap::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=1600') center/cover;opacity:.1;z-index:0;}.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1100px;margin:0 auto;padding:100px 28px 80px;gap:48px;position:relative;z-index:1}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,7vw,5.5rem);line-height:1;color:#500724;margin-bottom:12px;font-style:italic}
+.hero .sub{color:#9f1239;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;margin-bottom:20px}
+.hero p{color:#888;font-size:.92rem;line-height:1.7;margin-bottom:28px;max-width:420px}
+.btn-rose{background:#9f1239;color:#fff;padding:14px 32px;border-radius:10px;font-weight:600;font-size:.88rem;transition:all .3s;display:inline-block}
+.btn-rose:hover{background:#881337;transform:translateY(-2px)}
+.hero-visual{position:relative}
+.hero-visual .img-wrap{width:100%;aspect-ratio:3/4;border-radius:200px 200px 20px 20px;overflow:hidden;background:linear-gradient(135deg,#fce7f3,#fdf2f8)}
+.hero-visual .img-wrap img{width:100%;height:100%;object-fit:cover}
+.hero-badge2{position:absolute;bottom:40px;left:-20px;background:#fff;border-radius:14px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,.08);font-size:.85rem;font-weight:600;color:#9f1239;display:flex;align-items:center;gap:8px}
+
+.stag{color:#9f1239;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);color:#500724;margin-bottom:14px}
+
+/* TREATMENTS */
+.treatments{padding:80px 28px;max-width:1100px;margin:0 auto}
+.treat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.treat{background:#fff;border:1px solid #fce7f3;border-radius:16px;padding:28px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;transition:all .3s}
+.treat:hover{box-shadow:0 8px 30px rgba(159,18,57,.06);transform:translateY(-3px)}
+.treat-left{flex:1}
+.treat h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:6px;color:#500724}
+.treat p{color:#999;font-size:.82rem;line-height:1.5}
+.treat .dur{display:inline-block;margin-top:8px;font-size:.72rem;background:#fce7f3;color:#9f1239;padding:4px 12px;border-radius:20px;font-weight:600}
+.treat-right{text-align:right;flex-shrink:0}
+.treat .price{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#9f1239;font-weight:700}
+
+/* RITUALS */
+.rituals{padding:80px 28px;background:#fff}
+.rituals-inner{max-width:1100px;margin:0 auto}
+.ritual-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.ritual{border-radius:16px;overflow:hidden;border:1px solid #fce7f3;transition:all .4s}
+.ritual:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(159,18,57,.08)}
+.ritual .visual{height:200px;background:linear-gradient(135deg,#fce7f3,#fdf2f8);display:flex;align-items:center;justify-content:center;font-size:3rem}
+.ritual .info{padding:24px}
+.ritual h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:6px;color:#500724}
+.ritual p{color:#999;font-size:.82rem;line-height:1.5;margin-bottom:12px}
+.ritual .bottom{display:flex;justify-content:space-between;align-items:center}
+.ritual .rdur{font-size:.75rem;color:#9f1239;font-weight:600}
+.ritual .rprice{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#9f1239;font-weight:700}
+
+/* BOOKING */
+.booking{padding:80px 28px}
+.booking-inner{max-width:600px;margin:0 auto;background:#fff;border:1px solid #fce7f3;border-radius:20px;padding:48px 40px}
+.booking-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#500724;margin-bottom:8px;text-align:center}
+.booking-inner>p{color:#999;text-align:center;margin-bottom:28px;font-size:.9rem}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.78rem;color:#888;font-weight:600;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:14px 16px;border-radius:8px;border:1px solid #fce7f3;background:#fdf2f8;font-family:inherit;font-size:.9rem;color:#333}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:#9f1239}
+.fg textarea{resize:vertical;min-height:70px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fbtn{width:100%;background:#9f1239;color:#fff;padding:16px;border-radius:8px;border:none;font-weight:700;font-size:.92rem;cursor:pointer;margin-top:8px;transition:all .3s}
+.fbtn:hover{background:#881337}
+
+/* COMMITMENT */
+.commitment{padding:80px 28px;background:#fff}
+.commit-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.commit{text-align:center;padding:24px}
+.commit .icon{font-size:2rem;margin-bottom:12px}
+.commit h3{font-family:'Cormorant Garamond',serif;font-size:1rem;color:#500724;margin-bottom:6px}
+.commit p{color:#999;font-size:.78rem;line-height:1.5}
+
+/* REVIEWS */
+.reviews{padding:80px 28px;max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.review{background:#fff;border:1px solid #fce7f3;border-radius:14px;padding:24px}
+.review .stars{color:#f59e0b;margin-bottom:10px}
+.review p{color:#777;font-size:.85rem;line-height:1.7;font-style:italic;margin-bottom:12px}
+.review .author{font-weight:700;font-size:.82rem;color:#9f1239}
+
+/* CONTACT */
+.contact{padding:48px 28px;background:#9f1239;color:#fff;text-align:center}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:16px}
+.contact-grid{display:flex;justify-content:center;gap:48px;margin-top:16px;flex-wrap:wrap}
+.contact-grid .item h3{font-size:.9rem;margin-bottom:4px}
+.contact-grid .item span{font-size:.82rem;opacity:.7}
+
+footer{padding:32px 28px;text-align:center;background:#500724;color:rgba(255,255,255,.4);font-size:.75rem}
+
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:100px}
+  .hero p{margin:0 auto 28px}
+  .hero-visual{max-width:350px;margin:0 auto;order:-1}
+  .hero-badge2{display:none}
+  .treat-grid,.ritual-cards,.reviews-grid{grid-template-columns:1fr}
+  .commit-inner{grid-template-columns:1fr 1fr}
+  .fr{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">Éclat</div>
+<div class="nav-links">
+<a href="#soins">Soins</a>
+<a href="#rituels">Rituels</a>
+<a href="#avis">Avis</a>
+<a href="#rdv" class="nav-cta">Réserver</a>
+</div>
+</div></nav>
+
+<div class="hero-wrap"><section class="hero">
+<div>
+  <div class="stag">✨ Institut de beauté</div>
+  <h1>Éclat</h1>
+  <div class="sub">Soins visage, épilations, onglerie, massages</div>
+  <p>Un institut pensé pour vous offrir un moment de sérénité. Produits bio et cruelty-free, soins personnalisés, résultats visibles.</p>
+  <a href="#rdv" class="btn-rose">Réserver un soin</a>
+</div>
+<div class="hero-visual">
+  <div class="img-wrap"><img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?w=800" alt="Éclat"></div>
+  <div class="hero-badge2">🌿 100% bio & cruelty-free</div>
+</div>
+</section>
+
+<!-- TREATMENTS -->
+<section class="treatments" id="soins">
+<div style="text-align:center"><div class="stag">Nos soins</div><div class="stitle">Carte des soins</div></div>
+<div class="treat-grid">
+  <div class="treat reveal"><div class="treat-left"><h3>Soin visage éclat</h3><p>Nettoyage en profondeur, gommage, masque éclat, sérum, hydratation. Peau lumineuse garantie.</p><span class="dur">1h</span></div><div class="treat-right"><div class="price">65€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Soin anti-âge premium</h3><p>Acide hyaluronique, collagène, massage lifting, masque tenseur. Résultats visibles immédiatement.</p><span class="dur">1h15</span></div><div class="treat-right"><div class="price">89€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Épilation demi-jambes</h3><p>Cire tiède haute qualité, sans colophane, idéale peaux sensibles. Résultat 3 à 4 semaines.</p><span class="dur">30 min</span></div><div class="treat-right"><div class="price">25€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Épilation maillot intégral</h3><p>Cire chaude, technique douce, crème apaisanté post-soin. Confort maximal.</p><span class="dur">30 min</span></div><div class="treat-right"><div class="price">35€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Manucure semi-permanent</h3><p>Limage, cuticules, pose vernis semi-permanent longue tenue. Choix parmi 120 teintes.</p><span class="dur">45 min</span></div><div class="treat-right"><div class="price">38€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Pédicure complète</h3><p>Bain de pieds, gommage, soin des ongles, massage, vernis. Pieds parfaits pour l'été.</p><span class="dur">50 min</span></div><div class="treat-right"><div class="price">42€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Massage relaxant</h3><p>Huiles essentielles bio, pressions douces, dos, nuque, épaules. Déconnexion totale.</p><span class="dur">45 min</span></div><div class="treat-right"><div class="price">55€</div></div></div>
+  <div class="treat reveal"><div class="treat-left"><h3>Massage pierres chaudes</h3><p>Pierres de basalte chauffées, pressions profondes, circulation améliorée. Détente absolue.</p><span class="dur">1h</span></div><div class="treat-right"><div class="price">75€</div></div></div>
+</div>
+</section>
+
+<!-- COMMITMENT -->
+<section class="commitment">
+<div class="commit-inner">
+  <div class="commit reveal"><div class="icon">🌿</div><h3>100% Bio</h3><p>Produits certifiés bio et naturels, sans parabènes ni silicones</p></div>
+  <div class="commit reveal"><div class="icon">🐰</div><h3>Cruelty-free</h3><p>Aucun de nos produits n'est testé sur les animaux, jamais</p></div>
+  <div class="commit reveal"><div class="icon">💆</div><h3>Sur mesure</h3><p>Chaque soin est adapté à votre type de peau et vos besoins</p></div>
+  <div class="commit reveal"><div class="icon">🏆</div><h3>Diplômées</h3><p>Esthéticiennes certifiées avec 10+ ans d'expérience</p></div>
+</div>
+</section>
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 28px;background:#fdf2f8;text-align:center;">
+<div style="max-width:1100px;margin:0 auto;">
+  <div style="color:#9f1239;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">@eclat.paris</div>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#500724;margin-bottom:30px;font-style:italic;">Notre univers</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=400&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;" alt="">
+  </div>
+</div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="rdv">
+<div class="booking-inner reveal">
+  <div class="stag" style="text-align:center">Réservation</div>
+  <h2>Prendre rendez-vous</h2>
+  <p>Choisissez votre soin et votre créneau. Confirmation par SMS dans l'heure.</p>
+  <div class="fr">
+    <div class="fg"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
+    <div class="fg"><label>Téléphone</label><input type="tel" placeholder="06 00 00 00 00"></div>
+  </div>
+  <div class="fg"><label>Soin souhaité</label>
+    <select><option>Soin visage éclat (65€, 1h)</option><option>Soin anti-âge premium (89€, 1h15)</option><option>Épilation demi-jambes (25€, 30min)</option><option>Manucure semi-permanent (38€, 45min)</option><option>Massage relaxant (55€, 45min)</option><option>Massage pierres chaudes (75€, 1h)</option><option>Rituel Sérénité (130€, 2h)</option><option>Rituel Future Mariée (195€, 3h)</option><option>Duo Complicité (170€, 1h30)</option></select>
+  </div>
+  <div class="fr">
+    <div class="fg"><label>Date souhaitée</label><input type="date"></div>
+    <div class="fg"><label>Créneau préféré</label>
+      <select><option>Matin (10h-12h)</option><option>Début d'après-midi (12h-15h)</option><option>Fin d'après-midi (15h-19h)</option></select>
+    </div>
+  </div>
+  <div class="fg"><label>Remarques (allergies, préférences...)</label><textarea placeholder="Dites-nous si vous avez des besoins particuliers"></textarea></div>
+  <button class="fbtn">RÉSERVER MON CRÉNEAU</button>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="avis">
+<div style="text-align:center"><div class="stag">Avis clients</div><div class="stitle">Elles recommandént Éclat</div></div>
+<div class="reviews-grid">
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Le soin visage était divin. Ma peau n'a jamais été aussi belle. L'institut est magnifique et l'ambiance apaisanté."</p><div class="author">Audrey P.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Épilation parfaite, zéro douleur, accueil chaleureux. Mon institut préféré depuis 3 ans maintenant."</p><div class="author">Stéphanie G.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Le massage pierres chaudes est une merveille. On en ressort transformée. Merci Éclat, à très vite !"</p><div class="author">Nadia R.</div></div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact">
+<h2>Nous trouver</h2>
+<div class="contact-grid">
+  <div class="item"><h3>📍 Adresse</h3><span>18 rue du Bac, 75007 Paris</span></div>
+  <div class="item"><h3>🕐 Horaires</h3><span>Mar-Sam, 10h-19h</span></div>
+  <div class="item"><h3>📞 Téléphone</h3><span>01 42 33 44 55</span></div>
+</div>
+</div>
+
+<footer>© 2026 Éclat, Institut de beauté. Site créé par Studio Elyo.</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

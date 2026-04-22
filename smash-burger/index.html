@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger Addict | Burgers Artisanaux</title>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--mustard:#F4A700;--ketchup:#E53935;--bun:#FFF3E0;--coal:#1A1A1A;--white:#FFFDF9;}
+body{font-family:'Rubik',sans-serif;background:var(--white);color:var(--coal);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:16px 35px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:var(--coal);color:white;}
+.logo{font-family:'Bowlby One',sans-serif;font-size:24px;text-transform:uppercase;color:var(--mustard);}
+.nav-links{display:flex;gap:25px;}
+.nav-links a{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;font-weight:400;opacity:.7;transition:all .3s;}
+.nav-links a:hover{opacity:1;color:var(--mustard);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:24px;height:3px;background:var(--mustard);border-radius:2px;}
+
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--coal);color:white;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1505826759037-406b40feb4cd?w=1600') center/cover;opacity:.2;}.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 30px,rgba(244,167,0,.03) 30px,rgba(244,167,0,.03) 60px);}
+.hero-content{position:relative;z-index:2;}
+.hero h1{font-family:'Bowlby One',sans-serif;font-size:clamp(48px,10vw,120px);text-transform:uppercase;line-height:.95;letter-spacing:2px;}
+.hero h1 span{color:var(--mustard);display:block;}
+.hero p{font-size:18px;font-weight:300;margin:20px auto;max-width:400px;opacity:.5;}
+.hero-cta{display:inline-block;padding:16px 45px;background:var(--ketchup);color:white;font-family:'Bowlby One',sans-serif;font-size:18px;text-transform:uppercase;border-radius:6px;transition:all .3s;}
+.hero-cta:hover{background:#FF5252;transform:scale(1.08) rotate(-1deg);}
+
+section{padding:80px 35px;}
+.st{text-align:center;margin-bottom:50px;}
+.st h2{font-family:'Bowlby One',sans-serif;font-size:clamp(28px,5vw,48px);text-transform:uppercase;}
+.st h2 span{color:var(--ketchup);}
+.st p{margin-top:8px;font-weight:300;opacity:.5;}
+
+/* MENU */
+.menu-nav{display:flex;justify-content:center;gap:8px;margin-bottom:35px;flex-wrap:wrap;}
+.btab{padding:12px 25px;background:var(--bun);border:none;border-radius:6px;font-family:'Rubik',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .3s;text-transform:uppercase;}
+.btab.active,.btab:hover{background:var(--ketchup);color:white;}
+
+.burger-sec{display:none;max-width:900px;margin:0 auto;}
+.burger-sec.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:15px;}
+.bi{display:flex;gap:16px;padding:18px;background:var(--bun);border-radius:12px;transition:all .2s;border-left:5px solid var(--mustard);}
+.bi:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.08);}
+.bi img{width:90px;height:90px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.bi-info h3{font-family:'Bowlby One',sans-serif;font-size:16px;text-transform:uppercase;margin-bottom:4px;}
+.bi-info p{font-size:12px;font-weight:300;opacity:.5;line-height:1.5;}
+.bi-info .price{color:var(--ketchup);font-weight:600;font-size:17px;margin-top:6px;}
+
+/* ABOUT */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1000px;margin:0 auto;align-items:center;}
+.about-img img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;}
+.about-text h3{font-family:'Bowlby One',sans-serif;font-size:28px;text-transform:uppercase;margin-bottom:18px;line-height:1.2;}
+.about-text p{font-weight:300;line-height:1.8;opacity:.6;margin-bottom:15px;}
+
+.infos{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1000px;margin:0 auto;}
+.ibox{text-align:center;padding:30px 20px;background:var(--bun);border-radius:12px;}
+.ibox .icon{font-size:30px;margin-bottom:8px;}
+.ibox h3{font-family:'Bowlby One',sans-serif;font-size:16px;text-transform:uppercase;margin-bottom:6px;}
+.ibox p{font-size:13px;font-weight:300;opacity:.5;line-height:1.5;}
+
+footer{background:var(--coal);color:white;text-align:center;padding:35px;}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:58px;left:0;width:100%;background:var(--coal);flex-direction:column;padding:20px;gap:15px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .about-wrap{grid-template-columns:1fr;}
+  .burger-sec.active{grid-template-columns:1fr;}
+  section{padding:60px 20px;}
+}
+@keyframes bounce{from{opacity:0;transform:translateY(30px) rotate(-2deg);}to{opacity:1;transform:translateY(0) rotate(0);}}
+.hero-content{animation:bounce .6s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">BURGER ADDICT</div>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Menu</a>
+    <a href="#about">Notre histoire</a>
+    <a href="#infos">Infos</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>BURGER<span>ADDICT</span></h1>
+    <p>Burgers artisanaux, boeuf français, pain briche maison. L'addiction commence ici.</p>
+    <a href="#menu" class="hero-cta">Commander</a>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="st"><h2>LE <span>MENU</span></h2><p>100% boeuf français, pain briche maison</p></div>
+  <div class="menu-nav">
+    <button class="btab active" onclick="showB('burgers')">Burgers</button>
+    <button class="btab" onclick="showB('sides')">Sides</button>
+    <button class="btab" onclick="showB('boissons')">Boissons</button>
+    <button class="btab" onclick="showB('desserts')">Desserts</button>
+  </div>
+
+  <div class="burger-sec active" id="bs-burgers">
+    <div class="bi"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Classique</h3><p>Double smash patty, cheddar fondu, pickles, oignon, sauce speciale</p><div class="price">11,90 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Bacon</h3><p>Double smash, bacon croustillant, cheddar, oignon caramélisé</p><div class="price">13,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Truffe</h3><p>Double smash, comte afine, champignons, mayo truffe noire</p><div class="price">15,90 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Raclette</h3><p>Double smash, raclette fondue, oignons caramélisés, cornichons, sauce moutarde</p><div class="price">12,90 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le BBQ</h3><p>Triple smash, oignons rings, sauce BBQ fumée, jalapenos</p><div class="price">16,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Chicken</h3><p>Poulet pane croustillant, coleslaw, sauce miel-moutarde</p><div class="price">12,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Montagnard</h3><p>Double smash, reblochon fondu, lardons, oignons confits, sauce poivre</p><div class="price">15,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1550317138-10000687a72b?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Le Mexicain</h3><p>Double smash, guacamole, pico de gallo, jalapenos, cheddar, sauce chipotle</p><div class="price">14,90 &#8364;</div></div></div>
+  </div>
+  <div class="burger-sec" id="bs-sides">
+    <div class="bi"><img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Frites Maison</h3><p>Coupe fraiche, assaisonnement secret</p><div class="price">4,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Onion Rings</h3><p>Panure croustillante, sauce ketchup maison</p><div class="price">5,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Coleslaw</h3><p>Chou, carotte, sauce crèmeuse maison</p><div class="price">3,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1623653387945-2fd25214f8fc?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Nuggets (6 pcs)</h3><p>Poulet 100%, panure maison, sauces au choix</p><div class="price">6,00 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1598679253544-2c97992403ea?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Frites de Patate Douce</h3><p>Croustillantes, sauce mayo sriracha</p><div class="price">5,50 &#8364;</div></div></div>
+  </div>
+  <div class="burger-sec" id="bs-boissons">
+    <div class="bi"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Milkshake</h3><p>Vanille, chocolat ou fraise. Crème fouettee maison</p><div class="price">6,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Coca-Cola</h3><p>Coca classique, Zero ou Cherry. 33cl</p><div class="price">3,00 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1603394151492-616418223b62?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Eau Minerale</h3><p>Perrier, San Pellegrino ou eau plate</p><div class="price">2,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Oasis / Fanta</h3><p>Tropical, orange ou citron. 33cl</p><div class="price">3,00 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Ice Tea</h3><p>Peche ou citron vert. 33cl</p><div class="price">3,00 &#8364;</div></div></div>
+  </div>
+  <div class="burger-sec" id="bs-desserts">
+    <div class="bi"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Cookie Geant</h3><p>Chocolat noir 70%, coeur coulant, fleur de sel</p><div class="price">4,50 &#8364;</div></div></div>
+    <div class="bi"><img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=200&h=200&fit=crop" alt=""><div class="bi-info"><h3>Sundae</h3><p>Glace vanille, sauce caramel, chantilly, cacahuetes</p><div class="price">5,50 &#8364;</div></div></div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--bun);">
+  <div class="about-wrap">
+    <div class="about-img"><img src="https://plus.unsplash.com/premium_photo-1674670904769-544b31893a15?w=500&h=500&fit=crop" alt=""></div>
+    <div class="about-text">
+      <h3>Le smash, c'est tout un art</h3>
+      <p>Chez Burger Addict, on ne fait pas de burger classique. On ecrase la boulette de boeuf directement sur la plancha brulante pour creer cette croute croustillante et caramélisée qui fait toute la difference.</p>
+      <p>Notre pain est briche, fait par un boulanger du quartier. Nos sauces sont maison. Notre boeuf est 100% français, de race à viande. Pas de compromis.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 35px;text-align:center;background:var(--bun);">
+  <div class="st"><h2>@burger.<span>addict</span></h2><p>Notre feed qui donne faim</p></div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:900px;margin:0 auto;">
+    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1549611016-3a70d82b5040?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1695822019254-29dbf739474d?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1598679253544-2c97992403ea?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1623945359666-8f855090ee81?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=250&h=250&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+  </div>
+</section>
+<section id="infos">
+  <div class="st"><h2>NOUS <span>TROUVER</span></h2></div>
+  <div class="infos">
+    <div class="ibox"><div class="icon">&#128205;</div><h3>Adresse</h3><p>12 rue Oberkampf<br>75011 Paris</p></div>
+    <div class="ibox"><div class="icon">&#128337;</div><h3>Horaires</h3><p>Mar-Dim<br>12h-14h30 / 19h-23h</p></div>
+    <div class="ibox"><div class="icon">&#128666;</div><h3>Livraison</h3><p>Uber Eats & Deliveroo<br>7j/7</p></div>
+    <div class="ibox"><div class="icon">&#128222;</div><h3>Commander</h3><p>01 43 57 12 34<br>A emporter dispo</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Burger Addict Paris</p></footer>
+
+<script>
+function showB(id){
+  document.querySelectorAll('.burger-sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.btab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('bs-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volta & Fils</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#111;color:#e5e5e5;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(17,17,17,.9);backdrop-filter:blur(20px);transition:padding .3s}
+nav.scrolled{padding:10px 0;box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'DM Serif Display',serif;font-size:1.4rem;color:#fff}
+.logo span{color:#eab308}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:.85rem;color:rgba(255,255,255,.5);transition:color .2s}
+.nav-links a:hover{color:#eab308}
+.nav-cta{background:#eab308;color:#111 !important;padding:10px 24px;border-radius:8px;font-weight:700}
+
+.hero{min-height:100vh;position:relative;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;background:#111 url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600') center/cover}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(17,17,17,.92) 50%,rgba(17,17,17,.4) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:0 28px;width:100%}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(234,179,8,.1);border:1px solid rgba(234,179,8,.2);color:#eab308;padding:8px 18px;border-radius:6px;font-size:.75rem;font-weight:700;letter-spacing:1px;margin-bottom:20px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,5vw,3.8rem);line-height:1.1;margin-bottom:16px;max-width:550px}
+.hero h1 span{color:#eab308}
+.hero p{color:rgba(255,255,255,.5);font-size:1rem;line-height:1.7;margin-bottom:28px;max-width:480px}
+.hero-certs{display:flex;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.cert{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);font-size:.8rem;font-weight:600}
+.cert .badge{background:#eab308;color:#111;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:800}
+.hero-btns{display:flex;gap:14px}
+.btn-gold{background:#eab308;color:#111;padding:14px 32px;border-radius:8px;font-weight:700;font-size:.9rem;transition:all .3s}
+.btn-gold:hover{background:#ca8a04;transform:translateY(-2px)}
+.btn-outline{border:2px solid rgba(234,179,8,.3);color:#eab308;padding:12px 32px;border-radius:8px;font-weight:600;font-size:.9rem;transition:all .3s}
+.btn-outline:hover{border-color:#eab308;background:rgba(234,179,8,.1)}
+
+.stag{color:#eab308;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:14px}
+
+/* SERVICES */
+.services{padding:80px 28px;max-width:1100px;margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.svc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:28px 20px;text-align:center;transition:all .4s}
+.svc:hover{border-color:rgba(234,179,8,.3);transform:translateY(-4px)}
+.svc .icon{font-size:2rem;margin-bottom:14px}
+.svc h3{font-size:.95rem;margin-bottom:8px}
+.svc p{color:rgba(255,255,255,.4);font-size:.8rem;line-height:1.5}
+
+/* BEFORE/AFTER */
+.gallery{padding:80px 28px;background:rgba(255,255,255,.02)}
+.gallery-inner{max-width:1100px;margin:0 auto}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.gallery-card{border-radius:14px;overflow:hidden;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.gallery-card img{width:100%;height:200px;object-fit:cover}
+.gallery-card .info{padding:16px}
+.gallery-card h4{font-size:.9rem;margin-bottom:4px}
+.gallery-card p{color:rgba(255,255,255,.35);font-size:.78rem}
+.gallery-card .result{color:#22c55e;font-size:.78rem;font-weight:700;margin-top:6px}
+
+/* PROCESS */
+.process{padding:80px 28px;max-width:1100px;margin:0 auto}
+.process-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:40px;position:relative}
+.process-timeline::before{content:'';position:absolute;top:30px;left:60px;right:60px;height:2px;background:rgba(234,179,8,.15)}
+.step{text-align:center;position:relative}
+.step .num{width:60px;height:60px;border-radius:50%;background:rgba(234,179,8,.1);border:2px solid #eab308;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:700;color:#eab308;margin:0 auto 16px;position:relative;z-index:2}
+.step h4{font-size:.9rem;margin-bottom:4px}
+.step p{color:rgba(255,255,255,.35);font-size:.78rem}
+
+/* QUOTE */
+.quote{padding:80px 28px}
+.quote-inner{max-width:700px;margin:0 auto;background:rgba(255,255,255,.03);border:1px solid rgba(234,179,8,.15);border-radius:20px;padding:48px 40px}
+.quote-inner h2{font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:8px;text-align:center}
+.quote-inner>p{color:rgba(255,255,255,.4);text-align:center;margin-bottom:28px;font-size:.9rem}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:.78rem;color:rgba(255,255,255,.5);font-weight:600;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-family:inherit;font-size:.9rem}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#eab308}
+.form-group select option{background:#1a1a1a}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-btn{width:100%;background:#eab308;color:#111;padding:16px;border-radius:8px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:8px;transition:all .3s}
+.form-btn:hover{background:#ca8a04}
+
+/* REVIEWS */
+.reviews{padding:80px 28px;max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.review{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:24px}
+.review .stars{color:#eab308;margin-bottom:10px}
+.review p{color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.7;font-style:italic;margin-bottom:12px}
+.review .author{font-weight:700;font-size:.82rem;color:#eab308}
+
+/* CONTACT */
+.contact{padding:40px 28px;background:rgba(234,179,8,.06);border-top:1px solid rgba(234,179,8,.1)}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center}
+.contact-inner h3{font-size:.9rem;margin-bottom:4px}
+.contact-inner span{color:rgba(255,255,255,.4);font-size:.85rem}
+
+footer{padding:32px 28px;text-align:center}
+footer p{color:rgba(255,255,255,.2);font-size:.75rem}
+
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  .services-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid,.reviews-grid,.contact-inner{grid-template-columns:1fr}
+  .process-timeline{grid-template-columns:1fr 1fr}
+  .process-timeline::before{display:none}
+  .form-row{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">Volta <span>& Fils</span></div>
+<div class="nav-links">
+<a href="#services">Services</a>
+<a href="#réalisations">Réalisations</a>
+<a href="#devis" class="nav-cta">Devis gratuit</a>
+</div>
+</div></nav>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+  <div class="hero-tag">⚡ Électricien certifié</div>
+  <h1>L'électricité en toute <span>confiance</span></h1>
+  <p>Installation, rénovation, mise aux normes, domotique. Entreprise familiale depuis 2005, certifiée Qualifelec et RGE. Paris et petite couronne.</p>
+  <div class="hero-certs">
+    <div class="cert"><span class="badge">QUALIFELEC</span> Certifié</div>
+    <div class="cert"><span class="badge">RGE</span> Reconnu garant</div>
+    <div class="cert">⭐ 4.8/5 sur Google</div>
+  </div>
+  <div class="hero-btns">
+    <a href="#devis" class="btn-gold">Devis gratuit</a>
+    <a href="tel:0698765432" class="btn-outline">📞 06 98 76 54 32</a>
+  </div>
+</div>
+</section>
+
+
+<!-- URGENCY -->
+<div style="background:#eab308;padding:14px 28px;text-align:center;">
+  <p style="font-size:.95rem;font-weight:700;color:#111;">⚡ PANNE ELECTRIQUE ? Intervention rapide 7j/7 &nbsp; <a href="tel:0698765432" style="color:#111;text-decoration:underline;">Appelez le 06 98 76 54 32</a></p>
+</div>
+
+<!-- SEO -->
+<section style="padding:60px 28px;background:rgba(255,255,255,.02);">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+  <p style="color:rgba(255,255,255,.4);font-size:.92rem;line-height:2;"><strong style="color:#eab308;">Volta & Fils</strong>, <strong style="color:#eab308;">électricien certifié à Paris</strong> et petite couronne depuis 2005. Entreprise familiale spécialisée en <strong style="color:#eab308;">installation electrique</strong>, <strong style="color:#eab308;">rénovation et mise aux normes NF C 15-100</strong>, <strong style="color:#eab308;">domotique</strong> et <strong style="color:#eab308;">diagnostic electrique Consuel</strong>. Certifies <strong style="color:#eab308;">Qualifelec</strong> et <strong style="color:#eab308;">RGE</strong>, nous intervenons pour les particuliers et les professionnels. <strong style="color:#eab308;">Devis gratuit sous 48h</strong>, garantie décennale sur tous les travaux.</p>
+</div>
+</section>
+<!-- SERVICES -->
+<section class="services" id="services">
+<div style="text-align:center"><div class="stag">Nos prestations</div><div class="stitle">Un électricien pour chaque besoin</div></div>
+<div class="services-grid">
+  <div class="svc reveal"><div class="icon">⚡</div><h3>Installation</h3><p>Tableau, prises, éclairage, câblage. Neuf et rénovation, normes NF C 15-100.</p></div>
+  <div class="svc reveal"><div class="icon">🏠</div><h3>Rénovation</h3><p>Mise aux normes, remplacement tableau, reprise complète. Appartements et maisons.</p></div>
+  <div class="svc reveal"><div class="icon">🔌</div><h3>Domotique</h3><p>Éclairage connecté, volets, thermostat intelligent. Un habitat plus smart et économe.</p></div>
+  <div class="svc reveal"><div class="icon">🔍</div><h3>Diagnostic</h3><p>Diagnostic obligatoire, mise en conformité, certificat Consuel. Rapide et fiable.</p></div>
+</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="réalisations">
+<div class="gallery-inner">
+<div style="text-align:center"><div class="stag">Nos réalisations</div><div class="stitle">Quelques chantiers récents</div></div>
+<div class="gallery-grid">
+  <div class="gallery-card reveal">
+    <div style="height:200px;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;font-size:3rem">🏠</div>
+    <div class="info"><h4>Rénovation complète T3</h4><p>Paris 11e, appartement haussmannien. Tableau, prises, éclairage LED.</p><div class="result">✓ Aux normes NF C 15-100</div></div>
+  </div>
+  <div class="gallery-card reveal">
+    <div style="height:200px;background:linear-gradient(135deg,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center;font-size:3rem">🔌</div>
+    <div class="info"><h4>Installation domotique villa</h4><p>Neuilly, maison 180m2. Éclairage connecté, volets, thermostat Nest.</p><div class="result">✓ Pilotage smartphone</div></div>
+  </div>
+  <div class="gallery-card reveal">
+    <div style="height:200px;background:linear-gradient(135deg,#16213e,#1a1a2e);display:flex;align-items:center;justify-content:center;font-size:3rem">🔍</div>
+    <div class="info"><h4>Mise aux normes commerce</h4><p>Boulangerie Paris 9e. Diagnostic, remplacement tableau, conformité ERP.</p><div class="result">✓ Certificat Consuel obtenu</div></div>
+  </div>
+</div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process">
+<div style="text-align:center"><div class="stag">Comment on travaille</div><div class="stitle">4 étapes simples</div></div>
+<div class="process-timeline">
+  <div class="step reveal"><div class="num">1</div><h4>Contact</h4><p>Décrivez votre besoin par téléphone ou formulaire</p></div>
+  <div class="step reveal"><div class="num">2</div><h4>Visite</h4><p>On se déplace gratuitement pour évaluer le chantier</p></div>
+  <div class="step reveal"><div class="num">3</div><h4>Devis</h4><p>Devis détaillé sous 48h, transparent et sans surprise</p></div>
+  <div class="step reveal"><div class="num">4</div><h4>Travaux</h4><p>Intervention propre, dans les délais, garantie décennale</p></div>
+</div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote" id="devis">
+<div class="quote-inner reveal">
+  <div class="stag" style="text-align:center">Devis gratuit</div>
+  <h2>Demander un devis</h2>
+  <p>On vous recontacte sous 24h pour planifier une visite gratuite et établir un devis détaillé.</p>
+  <div class="form-row">
+    <div class="form-group"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
+    <div class="form-group"><label>Téléphone</label><input type="tel" placeholder="06 00 00 00 00"></div>
+  </div>
+  <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+  <div class="form-group"><label>Type de prestation</label>
+    <select><option>Installation électrique</option><option>Rénovation / mise aux normes</option><option>Domotique</option><option>Diagnostic / Consuel</option><option>Dépannage</option><option>Autre</option></select>
+  </div>
+  <div class="form-group"><label>Adresse du chantier</label><input type="text" placeholder="Adresse ou ville"></div>
+  <div class="form-group"><label>Description du projet</label><textarea placeholder="Décrivez votre besoin..."></textarea></div>
+  <button class="form-btn">ENVOYER MA DEMANDE</button>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="avis">
+<div style="text-align:center"><div class="stag">Avis clients</div><div class="stitle">La confiance se mérite</div></div>
+<div class="reviews-grid">
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Rénovation complète de mon appart. Travail impeccable, propre et dans les délais. Très professionnel, je recommandé vivement."</p><div class="author">Jean-Pierre R.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Installation domotique parfaite. Patient pour expliquer le fonctionnement de chaque équipement. Résultat bluffant."</p><div class="author">Sandrine B.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Diagnostic rapide, devis clair, intervention efficace. Mon électricien pour toutes mes propriétés maintenant."</p><div class="author">Olivier D.</div></div>
+</div>
+</section>
+
+<div class="contact">
+<div class="contact-inner">
+  <div><h3>📍 Zone</h3><span>Paris & petite couronne</span></div>
+  <div><h3>📞 Téléphone</h3><span>06 98 76 54 32</span></div>
+  <div><h3>🕐 Horaires</h3><span>Lun-Sam, 8h-19h</span></div>
+</div>
+</div>
+
+<footer><p>© 2026 Volta & Fils. Électricien certifié Qualifelec & RGE. Site créé par Studio Elyo.</p></footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

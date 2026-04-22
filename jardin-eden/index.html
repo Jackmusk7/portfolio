@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jardin d'Éden</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#f0fdf4;color:#1a1a1a;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
+nav.scrolled{background:rgba(240,253,244,.96);backdrop-filter:blur(20px);padding:10px 0;box-shadow:0 2px 20px rgba(0,0,0,.05)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;color:#064e3b}
+.logo span{color:#34d399}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:.85rem;color:#777;transition:color .2s}
+.nav-links a:hover{color:#059669}
+.nav-cta{background:#059669;color:#fff !important;padding:10px 24px;border-radius:8px;font-weight:700}
+
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1600') center/cover}
+.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(240,253,244,.45)}
+.hero-content{position:relative;z-index:2;padding:0 28px}
+.hero-content h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5rem);color:#064e3b;line-height:1.05;margin-bottom:8px}
+.hero-content h1 em{color:#34d399;font-style:italic}
+.hero-content .tagline{font-family:'Playfair Display',serif;font-style:italic;color:#059669;font-size:1.1rem;margin-bottom:24px}
+.hero-sub{color:#666;font-size:.95rem;max-width:500px;margin:0 auto 32px}
+.btn-green2{background:#059669;color:#fff;padding:16px 36px;border-radius:10px;font-weight:700;font-size:.9rem;transition:all .3s;display:inline-block}
+.btn-green2:hover{background:#047857;transform:translateY(-2px)}
+
+.stag{color:#059669;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);color:#064e3b;margin-bottom:14px}
+
+/* SERVICES */
+.services{padding:100px 28px;max-width:1100px;margin:0 auto}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:40px}
+.svc{background:#fff;border:1px solid #d1fae5;border-radius:16px;padding:32px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;transition:all .3s}
+.svc:hover{box-shadow:0 12px 40px rgba(5,150,105,.08);transform:translateY(-3px)}
+.svc .icon{width:56px;height:56px;border-radius:14px;background:#ecfdf5;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.svc h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:6px;color:#064e3b}
+.svc p{color:#777;font-size:.85rem;line-height:1.6}
+
+/* PORTFOLIO */
+.portfolio{padding:80px 28px;background:#fff}
+.portfolio-inner{max-width:1100px;margin:0 auto}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,280px);gap:12px;margin-top:40px}
+.portfolio-grid .p{border-radius:14px;background-size:cover;background-position:center;position:relative;overflow:hidden;cursor:pointer;transition:all .4s}
+.portfolio-grid .p:hover{transform:scale(1.02)}
+.portfolio-grid .p.big{grid-column:span 2}
+.portfolio-grid .p .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;transform:translateY(100%);transition:transform .4s}
+.portfolio-grid .p:hover .overlay{transform:translateY(0)}
+.overlay h4{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:4px}
+.overlay span{font-size:.78rem;opacity:.7}
+
+/* SEASONS */
+.seasons{padding:80px 28px;max-width:1100px;margin:0 auto}
+.seasons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.season{background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:28px 20px;text-align:center;transition:all .3s}
+.season:hover{border-color:#34d399;transform:translateY(-4px)}
+.season .emoji{font-size:2.5rem;margin-bottom:12px}
+.season h3{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:6px;color:#064e3b}
+.season p{color:#999;font-size:.78rem;line-height:1.5}
+
+/* ABOUT */
+.about{padding:80px 28px}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about img{width:100%;border-radius:20px;aspect-ratio:4/5;object-fit:cover}
+.about h2{font-family:'Playfair Display',serif;font-size:2rem;color:#064e3b;margin-bottom:16px}
+.about p{color:#666;line-height:1.8;font-size:.92rem;margin-bottom:12px}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.astat{text-align:center;background:#ecfdf5;border-radius:12px;padding:16px}
+.astat .num{font-family:'Playfair Display',serif;font-size:1.8rem;color:#059669}
+.astat .label{font-size:.75rem;color:#888;margin-top:2px}
+
+/* QUOTE */
+.quote{padding:80px 28px;background:#fff}
+.quote-inner{max-width:700px;margin:0 auto;background:#f0fdf4;border:1px solid #d1fae5;border-radius:20px;padding:48px 40px}
+.quote-inner h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:#064e3b;margin-bottom:8px;text-align:center}
+.quote-inner>p{color:#888;text-align:center;margin-bottom:28px;font-size:.9rem}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.78rem;color:#666;font-weight:700;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:14px 16px;border-radius:8px;border:1px solid #d1fae5;background:#fff;font-family:inherit;font-size:.9rem;transition:border .3s;color:#333}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:#34d399}
+.fg textarea{resize:vertical;min-height:80px}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fbtn{width:100%;background:#059669;color:#fff;padding:16px;border-radius:8px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:8px;transition:all .3s}
+.fbtn:hover{background:#047857}
+
+/* REVIEWS */
+.reviews{padding:80px 28px;max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.review{background:#fff;border:1px solid #d1fae5;border-radius:14px;padding:24px}
+.review .stars{color:#f59e0b;margin-bottom:10px}
+.review p{color:#777;font-size:.85rem;line-height:1.7;font-style:italic;margin-bottom:12px}
+.review .author{font-weight:700;font-size:.82rem;color:#059669}
+
+footer{background:#064e3b;color:#fff;padding:36px 28px;text-align:center}
+footer .logo{color:#34d399;margin-bottom:8px;display:block;font-family:'Playfair Display',serif;font-size:1.3rem}
+footer p{color:rgba(255,255,255,.4);font-size:.75rem}
+
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  .services-grid,.about-inner{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .portfolio-grid .p.big{grid-column:span 1}
+  .portfolio-grid .p{min-height:220px}
+  .seasons-grid,.reviews-grid{grid-template-columns:1fr 1fr}
+  .fr{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">Jardin <span>d'Éden</span></div>
+<div class="nav-links">
+<a href="#services">Services</a>
+<a href="#réalisations">Réalisations</a>
+<a href="#avis">Avis</a>
+<a href="#devis" class="nav-cta">Devis gratuit</a>
+</div>
+</div></nav>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+  <h1>Jardin<br><em>d'Éden</em></h1>
+  <div class="tagline">Paysagiste en Île-de-France</div>
+  <p class="hero-sub">Création de jardins, entretien, aménagement paysager. On transforme vos espaces extérieurs en havres de paix depuis 2010.</p>
+  <a href="#devis" class="btn-green2">Demander un devis gratuit</a>
+</div>
+</section>
+
+
+<!-- SEO -->
+<section style="padding:70px 28px;background:#f0f7f0;">
+<div style="max-width:900px;margin:0 auto;">
+  <div style="text-align:center;margin-bottom:28px;">
+    <div style="color:#166534;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">A propos</div>
+    <h2 style="font-family:'DM Serif Display',serif;font-size:2rem;color:#1a1a1a;">Votre paysagiste de confiance en Ile-de-France</h2>
+  </div>
+  <p style="color:#555;font-size:.95rem;line-height:2;margin-bottom:16px;text-align:center;"><strong style="color:#166534;">Jardin d'Eden</strong> est une entreprise de <strong style="color:#166534;">paysagisme</strong> fondée en 2010 par Laurent Mercier, passionne de nature et d'amenagement exterieur. Depuis plus de 14 ans, notre équipe de 8 paysagistes qualifiés transforme vos espaces verts en lieux de vie uniques, à votre image.</p>
+  <p style="color:#555;font-size:.95rem;line-height:2;margin-bottom:16px;text-align:center;">Nous intervenons à chaque etape de votre projet : <strong style="color:#166534;">conception paysagere avec plan 3D</strong>, <strong style="color:#166534;">création de jardin</strong>, <strong style="color:#166534;">amenagement de terrasse en bois</strong>, <strong style="color:#166534;">pose de gazon</strong>, <strong style="color:#166534;">plantation d'arbres et de haies</strong>, <strong style="color:#166534;">installation d'arrosage automatique</strong>, <strong style="color:#166534;">eclairage exterieur</strong> et <strong style="color:#166534;">entretien regulier</strong> de vos espaces verts.</p>
+  <p style="color:#555;font-size:.95rem;line-height:2;text-align:center;">Nous travaillons avec des <strong style="color:#166534;">vegetaux adaptes au climat francilien</strong>, sélectionnés chez des pepinieristes locaux. Chaque projet est unique, chaque jardin raconte une histoire. <strong style="color:#166534;">Devis gratuit</strong>, déplacement offert. Intervention dans les Yvelines (78), les Hauts-de-Seine (92), le Val-d'Oise (95) et Paris.</p>
+</div>
+</section>
+<!-- SERVICES -->
+<section class="services" id="services">
+<div style="text-align:center"><div class="stag">Nos services</div><div class="stitle">Tout pour votre extérieur</div></div>
+<div class="services-grid">
+  <div class="svc reveal"><div class="icon">🌳</div><div><h3>Création de jardins</h3><p>Conception sur mesure, plantation, engazonnement. Du petit jardin de ville au grand parc paysager, chaque projet est unique.</p></div></div>
+  <div class="svc reveal"><div class="icon">✂️</div><div><h3>Entretien régulier</h3><p>Tonte, taille de haies, désherbage, traitement phytosanitaire. Contrats annuels ou interventions ponctuelles selon vos besoins.</p></div></div>
+  <div class="svc reveal"><div class="icon">🪴</div><div><h3>Terrasses et balcons</h3><p>Jardinières sur mesure, treillages, éclairage d'ambiance. Transformez votre terrasse en véritable jardin suspendu.</p></div></div>
+  <div class="svc reveal"><div class="icon">💧</div><div><h3>Arrosage automatique</h3><p>Installation, programmation et maintenance. Systèmes goutte-a-goutte, asperseurs, économes en eau et adaptés à votre terrain.</p></div></div>
+</div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="réalisations">
+<div class="portfolio-inner">
+<div style="text-align:center"><div class="stag">Nos réalisations</div><div class="stitle">Des jardins qui racontent une histoire</div></div>
+<div class="portfolio-grid">
+  <div class="p big reveal" style="background-image:url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=900')"><div class="overlay"><h4>Jardin contemporain</h4><span>Neuilly-sur-Seine, 400m2</span></div></div>
+  <div class="p reveal" style="background-image:url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600')"><div class="overlay"><h4>Terrasse parisienne</h4><span>Paris 16e, 35m2</span></div></div>
+  <div class="p reveal" style="background-image:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600')"><div class="overlay"><h4>Jardin anglais</h4><span>Versailles, 800m2</span></div></div>
+  <div class="p big reveal" style="background-image:url('https://images.unsplash.com/photo-1770234848941-8bd67b57d700?w=900')"><div class="overlay"><h4>Aménagement paysager complet</h4><span>Saint-Germain-en-Laye, 600m2</span></div></div>
+  <div class="p reveal" style="background-image:url('https://images.unsplash.com/photo-1594498653385-d5172c532c00?w=600')"><div class="overlay"><h4>Potager paysager</h4><span>Rueil-Malmaison, 120m2</span></div></div>
+  <div class="p big reveal" style="background-image:url('https://images.unsplash.com/photo-1740924771376-7396a0c0c8ca?w=900')"><div class="overlay"><h4>Entretien saisonnier</h4><span>Boulogne, contrat annuel</span></div></div>
+  <div class="p reveal" style="background-image:url('https://images.unsplash.com/photo-1668189777890-495c36095340?w=600')"><div class="overlay"><h4>Taille et elagage</h4><span>Le Vesinet, jardin 500m2</span></div></div>
+</div>
+</div>
+</section>
+
+<!-- SEASONS -->
+<section class="seasons">
+<div style="text-align:center"><div class="stag">Conseils saisonniers</div><div class="stitle">Chaque saison à son jardin</div></div>
+<div class="seasons-grid">
+  <div class="season reveal"><div class="emoji">🌸</div><h3>Printemps</h3><p>Plantation des annuelles, taille des rosiers, traitement préventif, fertilisation</p></div>
+  <div class="season reveal"><div class="emoji">☀️</div><h3>Été</h3><p>Arrosage optimisé, tonte régulière, taille de haies, entretien des massifs</p></div>
+  <div class="season reveal"><div class="emoji">🍂</div><h3>Automne</h3><p>Ramassage des feuilles, plantation de bulbes, protection hivernale, élagage</p></div>
+  <div class="season reveal"><div class="emoji">❄️</div><h3>Hiver</h3><p>Taille de formation, protection du gel, planification du printemps, nettoyage</p></div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+<div class="about-inner">
+  <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800" alt="Notre équipe" class="reveal">
+  <div class="reveal">
+    <div class="stag">A propos</div>
+    <h2>Votre jardin, notre passion</h2>
+    <p>Jardin d'Éden transforme vos espaces extérieurs depuis 2010. Paysagiste diplômé, notre équipe conçoit et réalise des jardins sur mesure qui reflètent votre personnalité.</p>
+    <p>De la terrasse parisienne de 15m2 au parc de campagne de 2 hectares, chaque projet reçoit la même attention, le même soin et le même amour du travail bien fait.</p>
+    <div class="about-stats">
+      <div class="astat"><div class="num">15</div><div class="label">Ans d'expérience</div></div>
+      <div class="astat"><div class="num">200+</div><div class="label">Jardins créés</div></div>
+      <div class="astat"><div class="num">98%</div><div class="label">Clients satisfaits</div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote" id="devis">
+<div class="quote-inner reveal">
+  <div class="stag" style="text-align:center">Devis gratuit</div>
+  <h2>Parlez-nous de votre projet</h2>
+  <p>Décrivez votre espace et vos envies, on vous recontacte sous 48h avec une proposition sur mesure.</p>
+  <div class="fr">
+    <div class="fg"><label>Nom</label><input type="text" placeholder="Votre nom"></div>
+    <div class="fg"><label>Téléphone</label><input type="tel" placeholder="06 00 00 00 00"></div>
+  </div>
+  <div class="fg"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+  <div class="fg"><label>Type de projet</label>
+    <select><option>Création de jardin</option><option>Aménagement terrasse/balcon</option><option>Entretien régulier</option><option>Arrosage automatique</option><option>Élagage / abattage</option><option>Autre</option></select>
+  </div>
+  <div class="fr">
+    <div class="fg"><label>Surface approximative</label><input type="text" placeholder="ex: 200m2"></div>
+    <div class="fg"><label>Ville</label><input type="text" placeholder="Votre ville"></div>
+  </div>
+  <div class="fg"><label>Décrivez votre projet</label><textarea placeholder="Vos envies, votre terrain, vos contraintes..."></textarea></div>
+  <button class="fbtn">ENVOYER MA DEMANDE</button>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="avis">
+<div style="text-align:center"><div class="stag">Témoignages</div><div class="stitle">Ce qu'en disent nos clients</div></div>
+<div class="reviews-grid">
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Ils ont transformé notre jardin en véritable havre de paix. Créatif, soigné et respectueux de nos envies. Le résultat dépasse nos attentes."</p><div class="author">Martine F.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Entretien impeccable depuis 3 ans. Ponctuels, professionnels, et toujours de bon conseil pour faire évoluer le jardin au fil des saisons."</p><div class="author">Pascal L.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Notre terrasse parisienne est méconnaissable. Un vrai coin de nature en plein Paris. Les voisins sont jaloux, c'est bon signe !"</p><div class="author">Céline H.</div></div>
+</div>
+</section>
+
+<footer>
+<div class="logo">Jardin <span>d'Éden</span></div>
+<p>© 2026 Jardin d'Éden. Paysagiste en Île-de-France. Site créé par Studio Elyo.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

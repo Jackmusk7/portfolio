@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gentleman Barbershop</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#0d0b09;color:#e5ddd0;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(13,11,9,.9);backdrop-filter:blur(20px);transition:padding .3s}
+nav.scrolled{padding:10px 0}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem}
+.logo span{font-style:italic;color:#d4a843}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{font-size:.82rem;color:rgba(255,255,255,.4);transition:color .2s;letter-spacing:.5px}
+.nav-links a:hover{color:#d4a843}
+.nav-cta{background:transparent;border:1px solid #d4a843;color:#d4a843 !important;padding:10px 24px;border-radius:4px;font-weight:600;transition:all .3s}
+.nav-cta:hover{background:#d4a843;color:#0d0b09 !important}
+
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center}
+.hero-bg{position:absolute;inset:0;background:#1a1612 url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600') center/cover}
+.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(13,11,9,.6)}
+.hero-content{position:relative;z-index:2;padding:0 28px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5rem);line-height:1.05;margin-bottom:8px}
+.hero .tagline{font-family:'Playfair Display',serif;font-style:italic;color:#d4a843;font-size:clamp(1.2rem,2.5vw,1.6rem);margin-bottom:24px}
+.hero-sub{color:rgba(255,255,255,.5);font-size:.92rem;max-width:450px;margin:0 auto 32px}
+.hero-info{display:inline-flex;gap:32px;background:rgba(0,0,0,.5);backdrop-filter:blur(10px);padding:16px 32px;border-radius:8px;border:1px solid rgba(212,168,67,.15);margin-bottom:28px}
+.hero-info .item{text-align:center}
+.hero-info .item strong{display:block;color:#d4a843;font-size:.85rem}
+.hero-info .item span{font-size:.75rem;color:rgba(255,255,255,.4)}
+.btn-gold{background:#d4a843;color:#0d0b09;padding:16px 36px;border-radius:6px;font-weight:700;font-size:.9rem;letter-spacing:1px;display:inline-block;transition:all .3s}
+.btn-gold:hover{background:#c09830;transform:translateY(-2px)}
+
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(212,168,67,.2),transparent);max-width:400px;margin:0 auto}
+.stag{color:#d4a843;font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:14px}
+
+/* SERVICES & PRICES */
+.prices{padding:100px 28px;max-width:900px;margin:0 auto}
+.price-category{margin-bottom:48px}
+.price-category h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:#d4a843;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(212,168,67,.15);display:flex;align-items:center;gap:10px}
+.price-list{display:flex;flex-direction:column;gap:10px}
+.price-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:16px 20px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);transition:all .3s;align-items:center}
+.price-row:hover{background:rgba(212,168,67,.06);border-color:rgba(212,168,67,.15)}
+.price-row h4{font-size:.92rem}
+.price-row .desc{color:rgba(255,255,255,.35);font-size:.78rem;margin-top:2px}
+.price-row .duration{color:rgba(255,255,255,.35);font-size:.78rem;white-space:nowrap}
+.price-row .amount{font-family:'Playfair Display',serif;font-size:1.3rem;color:#d4a843;white-space:nowrap}
+
+/* BOOKING */
+.booking{padding:80px 28px;background:rgba(212,168,67,.04);border-top:1px solid rgba(212,168,67,.08);border-bottom:1px solid rgba(212,168,67,.08)}
+.booking-inner{max-width:700px;margin:0 auto}
+.booking-inner h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:8px;text-align:center}
+.booking-inner>p{color:rgba(255,255,255,.4);text-align:center;margin-bottom:32px;font-size:.9rem}
+.booking-form{display:grid;gap:14px}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bf{display:flex;flex-direction:column;gap:6px}
+.bf label{font-size:.78rem;color:rgba(255,255,255,.5);font-weight:600}
+.bf input,.bf select{padding:14px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;font-family:inherit;font-size:.9rem}
+.bf input:focus,.bf select:focus{outline:none;border-color:#d4a843}
+.bf select option{background:#1a1a1a}
+.bbtn{background:#d4a843;color:#0d0b09;padding:16px;border-radius:6px;border:none;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:8px;transition:all .3s;letter-spacing:.5px}
+.bbtn:hover{background:#c09830}
+
+/* ATMOSPHERE */
+.atmosphere{padding:80px 28px;max-width:1100px;margin:0 auto}
+.atm-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:10px;margin-top:40px;max-width:900px;margin-left:auto;margin-right:auto}
+.atm-grid .a{border-radius:12px;background-size:cover;background-position:center}
+
+/* PRODUCTS */
+.products{padding:80px 28px}
+.products-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.products-img{border-radius:20px;width:100%;aspect-ratio:1;object-fit:cover}
+.product-list{display:flex;flex-direction:column;gap:14px}
+.product{display:flex;gap:16px;padding:14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.product .icon2{width:48px;height:48px;border-radius:10px;background:rgba(212,168,67,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.product h4{font-size:.9rem;margin-bottom:2px}
+.product p{color:rgba(255,255,255,.35);font-size:.78rem}
+
+/* REVIEWS */
+.reviews{padding:80px 28px;max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.review{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:24px}
+.review .stars{color:#d4a843;margin-bottom:10px}
+.review p{color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.7;font-style:italic;margin-bottom:12px}
+.review .author{font-weight:700;font-size:.82rem;color:#d4a843}
+
+footer{padding:32px 28px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+footer p{color:rgba(255,255,255,.2);font-size:.75rem}
+
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  .hero-info{flex-direction:column;gap:12px}
+  .price-row{grid-template-columns:1fr}
+  .price-row .duration,.price-row .amount{text-align:left;margin-top:4px}
+  .brow{grid-template-columns:1fr}
+  .atm-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+  .products-inner{grid-template-columns:1fr}
+  .reviews-grid{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">The Gentleman <span>Barbershop</span></div>
+<div class="nav-links">
+<a href="#tarifs">Tarifs</a>
+<a href="#rdv">Rendez-vous</a>
+<a href="#avis">Avis</a>
+<a href="#rdv" class="nav-cta">Prendre RDV</a>
+</div>
+</div></nav>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+  <h1>The Gentleman</h1>
+  <div class="tagline">Barbershop</div>
+  <p class="hero-sub">Coupes, barbes et soins. L'art du grooming depuis 2016, au cœur du Marais.</p>
+  <div class="hero-info">
+    <div class="item"><strong>Sans RDV</strong><span>Mar-Sam 10h-20h</span></div>
+    <div class="item"><strong>Adresse</strong><span>42 rue de Rivoli</span></div>
+    <div class="item"><strong>Depuis</strong><span>2016</span></div>
+  </div>
+  <br>
+  <a href="#rdv" class="btn-gold">PRENDRE RENDEZ-VOUS</a>
+</div>
+</section>
+<div class="divider"></div>
+
+<!-- PRICES -->
+<section class="prices" id="tarifs">
+<div style="text-align:center"><div class="stag">Nos prestations</div><div class="stitle">Tarifs et services</div></div>
+
+<div class="price-category">
+  <h3>✂️ Coupes</h3>
+  <div class="price-list">
+    <div class="price-row"><div><h4>Coupe classique</h4><div class="desc">Shampoing, coupe ciseaux ou tondeuse, coiffage</div></div><div class="duration">30 min</div><div class="amount">28€</div></div>
+    <div class="price-row"><div><h4>Coupe + barbe</h4><div class="desc">Coupe complète + taille de barbe sculptée</div></div><div class="duration">45 min</div><div class="amount">42€</div></div>
+    <div class="price-row"><div><h4>Coupe enfant</h4><div class="desc">Moins de 12 ans, coupe adaptée</div></div><div class="duration">20 min</div><div class="amount">18€</div></div>
+    <div class="price-row"><div><h4>Coupe + soin complet</h4><div class="desc">Coupe, barbe, soin visage, serviette chaude</div></div><div class="duration">1h15</div><div class="amount">65€</div></div>
+  </div>
+</div>
+
+<div class="price-category">
+  <h3>🧔 Barbe</h3>
+  <div class="price-list">
+    <div class="price-row"><div><h4>Taille de barbe</h4><div class="desc">Taille, sculpture des contours, huile nourrissanté</div></div><div class="duration">20 min</div><div class="amount">18€</div></div>
+    <div class="price-row"><div><h4>Rasage traditionnel</h4><div class="desc">Serviette chaude, mousse, rasage au coupe-chou, baume</div></div><div class="duration">30 min</div><div class="amount">25€</div></div>
+    <div class="price-row"><div><h4>Soin barbe premium</h4><div class="desc">Gommage, modelage, masque, huile et baume artisanaux</div></div><div class="duration">40 min</div><div class="amount">35€</div></div>
+  </div>
+</div>
+
+<div class="price-category">
+  <h3>💆 Soins</h3>
+  <div class="price-list">
+    <div class="price-row"><div><h4>Soin visage express</h4><div class="desc">Nettoyage, gommage, serviette chaude, crème hydratante</div></div><div class="duration">20 min</div><div class="amount">22€</div></div>
+    <div class="price-row"><div><h4>Coloration barbe</h4><div class="desc">Couverture des poils blancs, résultat naturel</div></div><div class="duration">30 min</div><div class="amount">20€</div></div>
+    <div class="price-row"><div><h4>Pack père & fils</h4><div class="desc">2 coupes, moment de partage, prix duo avantageux</div></div><div class="duration">1h</div><div class="amount">40€</div></div>
+  </div>
+</div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="rdv">
+<div class="booking-inner reveal">
+  <div class="stag" style="text-align:center">Réservation</div>
+  <h2>Prendre rendez-vous</h2>
+  <p>Choisissez votre prestation et votre créneau. On vous confirme par SMS dans l'heure.</p>
+  <div class="booking-form">
+    <div class="brow">
+      <div class="bf"><label>Prénom</label><input type="text" placeholder="Votre prénom"></div>
+      <div class="bf"><label>Téléphone</label><input type="tel" placeholder="06 00 00 00 00"></div>
+    </div>
+    <div class="bf"><label>Prestation</label>
+      <select><option>Coupe classique (28€, 30min)</option><option>Coupe + barbe (42€, 45min)</option><option>Coupe + soin complet (65€, 1h15)</option><option>Taille de barbe (18€, 20min)</option><option>Rasage traditionnel (25€, 30min)</option><option>Pack père & fils (40€, 1h)</option></select>
+    </div>
+    <div class="brow">
+      <div class="bf"><label>Date souhaitée</label><input type="date"></div>
+      <div class="bf"><label>Créneau préféré</label>
+        <select><option>Matin (10h-12h)</option><option>Midi (12h-14h)</option><option>Après-midi (14h-17h)</option><option>Fin de journée (17h-20h)</option></select>
+      </div>
+    </div>
+    <button class="bbtn">RÉSERVER MON CRÉNEAU</button>
+  </div>
+</div>
+</section>
+
+<!-- ATMOSPHERE -->
+<section class="atmosphere">
+<div style="text-align:center"><div class="stag">L'ambiance</div><div class="stitle">Un barbershop, un état d'esprit</div></div>
+<div class="atm-grid">
+  <div class="a" style="background-image:url('https://plus.unsplash.com/premium_photo-1661645818605-61e1ef1f14e0?w=600')"></div>
+  <div class="a" style="background-image:url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=500')"></div>
+  <div class="a" style="background-image:url('https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=500')"></div>
+  <div class="a" style="background-image:url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=500')"></div>
+  <div class="a" style="background-image:url('https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=500')"></div>
+  <div class="a" style="background-image:url('https://plus.unsplash.com/premium_photo-1661380558859-40df8dd91dfd?w=500')"></div>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+<div class="products-inner">
+  <img src="https://images.unsplash.com/photo-1599351431613-18ef1fdd27e1?w=800" alt="Nos produits" style="width:100%;aspect-ratio:1;border-radius:20px;object-fit:cover" class="reveal">
+  <div class="reveal">
+    <div class="stag">Nos produits</div>
+    <div class="stitle">La sélection du Gentleman</div>
+    <div class="product-list">
+      <div class="product"><div class="icon2">🧴</div><div><h4>Huile à barbe artisanale</h4><p>Argan, jojoba, vitamine E. Nourrit et assouplit. 30ml.</p></div></div>
+      <div class="product"><div class="icon2">💈</div><div><h4>Baume coiffant</h4><p>Fixation naturelle, fini mat. A base de cire d'abeille.</p></div></div>
+      <div class="product"><div class="icon2">🪒</div><div><h4>Savon de rasage</h4><p>Mousse onctueuse, aloe vera, beurre de karité.</p></div></div>
+      <div class="product"><div class="icon2">✨</div><div><h4>Après-rasage</h4><p>Apaisant, anti-irritation, parfum boisé subtil.</p></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="avis">
+<div style="text-align:center"><div class="stag">Avis</div><div class="stitle">Ce qu'ils disent du Gentleman</div></div>
+<div class="reviews-grid">
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Le meilleur barbershop de Paris. Coupe parfaite, ambiance géniale, prix raisonnables. Mon adresse incontournable."</p><div class="author">Hugo B.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"Ma barbe n'a jamais été aussi bien taillée. Le rasage au coupe-chou avec serviette chaude, c'est l'expérience ultime."</p><div class="author">Romain A.</div></div>
+  <div class="review reveal"><div class="stars">★★★★★</div><p>"J'y vais avec mon fils tous les mois. Le pack père & fils c'est notre rituel. Merci les gars, vous assurez !"</p><div class="author">Yann T.</div></div>
+</div>
+</section>
+
+
+<!-- SEO -->
+<section style="padding:60px 28px;background:rgba(255,255,255,.03);">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+  <p style="color:rgba(255,255,255,.4);font-size:.9rem;line-height:2;"><strong style="color:#c9a050;">The Gentleman</strong>, <strong style="color:#c9a050;">barbershop haut de gamme à Paris</strong>. Nos <strong style="color:#c9a050;">barbiers professionnels</strong> vous accueillent pour des <strong style="color:#c9a050;">coupes homme</strong>, <strong style="color:#c9a050;">tailles de barbe</strong>, <strong style="color:#c9a050;">rasages traditionnels</strong> et <strong style="color:#c9a050;">soins visage</strong> dans un cadre raffine et masculin. Produits premium, ambiance feutree, service sur rendez-vous. <strong style="color:#c9a050;">Rendez-vous en ligne</strong> ou par telephone.</p>
+</div>
+</section>
+<footer>
+<div class="logo" style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:8px">The Gentleman <span style="color:#d4a843;font-style:italic">Barbershop</span></div>
+<p>42 rue de Rivoli, 75004 Paris. Mar-Sam 10h-20h. © 2026. Site créé par Studio Elyo.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

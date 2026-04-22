@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baan Thai | Restaurant Thailandais</title>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--saffron:#E8A317;--jade:#1B5E20;--lotus:#E91E63;--cream:#FFF9F0;--dark:#1C1C1C;--gold:#F5E6C8;}
+body{font-family:'Quicksand',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(28,28,28,.95);color:white;}
+.logo{font-family:'Tenor Sans',serif;font-size:26px;letter-spacing:3px;}
+.logo span{color:var(--saffron);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:400;opacity:.7;transition:all .3s;}
+.nav-links a:hover{opacity:1;color:var(--saffron);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:var(--saffron);}
+
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--dark);color:white;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?w=1400&h=800&fit=crop') center/cover;opacity:.3;}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(28,28,28,.3),rgba(28,28,28,.7));}
+.hero-content{position:relative;z-index:3;}
+.thai-ornament{color:var(--saffron);font-size:50px;opacity:.6;margin-bottom:10px;}
+.hero h1{font-family:'Tenor Sans',serif;font-size:clamp(42px,8vw,90px);letter-spacing:6px;line-height:1;}
+.hero h1 span{display:block;font-size:.35em;letter-spacing:8px;color:var(--saffron);margin-top:12px;}
+.hero p{font-size:16px;font-weight:300;margin:25px auto;max-width:420px;line-height:1.7;opacity:.5;}
+.hero-btn{display:inline-block;padding:14px 40px;background:var(--saffron);color:var(--dark);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:2px;transition:all .3s;}
+.hero-btn:hover{background:#FFB929;transform:scale(1.05);}
+
+section{padding:90px 40px;}
+.st{text-align:center;margin-bottom:55px;}
+.st h2{font-family:'Tenor Sans',serif;font-size:clamp(28px,4vw,42px);letter-spacing:2px;}
+.st h2 span{color:var(--saffron);}
+.st p{margin-top:10px;font-weight:300;opacity:.5;font-size:14px;}
+
+/* MENU */
+.menu-nav{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.ttab{padding:10px 22px;background:var(--gold);border:none;font-family:'Quicksand',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .3s;}
+.ttab.active,.ttab:hover{background:var(--saffron);color:white;}
+
+.thai-sec{display:none;max-width:900px;margin:0 auto;}
+.thai-sec.active{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:15px;}
+.ti{display:flex;gap:16px;padding:16px;background:white;border-radius:10px;border-left:4px solid var(--saffron);transition:transform .2s;}
+.ti:hover{transform:translateX(4px);}
+.ti img{width:75px;height:75px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.ti-info h3{font-family:'Tenor Sans',serif;font-size:16px;margin-bottom:3px;}
+.ti-info p{font-size:12px;font-weight:300;opacity:.5;line-height:1.4;}
+.ti-info .price{color:var(--lotus);font-weight:600;font-size:15px;margin-top:5px;}
+.ti-info .spicy{color:var(--lotus);font-size:11px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1000px;margin:0 auto;align-items:center;}
+.about-img img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:10px;}
+.about-text h3{font-family:'Tenor Sans',serif;font-size:28px;margin-bottom:20px;letter-spacing:1px;}
+.about-text p{font-weight:300;line-height:1.9;opacity:.6;margin-bottom:15px;}
+
+.infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:900px;margin:0 auto;}
+.ibox{text-align:center;padding:35px 20px;background:var(--gold);border-radius:10px;}
+.ibox .icon{font-size:28px;margin-bottom:10px;}
+.ibox h3{font-family:'Tenor Sans',serif;font-size:18px;margin-bottom:8px;}
+.ibox p{font-size:14px;font-weight:300;opacity:.5;line-height:1.5;}
+
+footer{background:var(--dark);color:white;text-align:center;padding:40px;}
+footer p{font-size:12px;opacity:.3;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:var(--dark);flex-direction:column;padding:25px;gap:18px;}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  .thai-sec.active{grid-template-columns:1fr;}
+  section{padding:60px 20px;}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeIn .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">BAAN <span>THAI</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Carte</a>
+    <a href="#about">Notre histoire</a>
+    <a href="#infos">Infos</a>
+    <a href="#réservation">Réserver</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="thai-ornament">&#3588;</div>
+    <h1>BAAN THAI<span>La Maison Thailandaise</span></h1>
+    <p>Cuisine thailandaise authentique et parfumée. Recettes familiales du nord au sud de la Thailande.</p>
+    <a href="#menu" class="hero-btn">Voir la carte</a>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="st"><h2>Notre <span>Carte</span></h2><p>Fraicheur, piment et equilibre des saveurs</p></div>
+  <div class="menu-nav">
+    <button class="ttab active" onclick="showT('entrees')">Entrees</button>
+    <button class="ttab" onclick="showT('curry')">Currys</button>
+    <button class="ttab" onclick="showT('wok')">Wok & Nouilles</button>
+    <button class="ttab" onclick="showT('desserts')">Desserts</button>
+  </div>
+
+  <div class="thai-sec active" id="ts-entrees">
+    <div class="ti"><img src="https://images.unsplash.com/photo-1553163147-622ab57be1c7?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Rouleaux Thai</h3><p>Crevettes, menthe, vermicelles, sauce cacahuete</p><div class="price">7,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Tom Yum Goong</h3><p>Soupe épicée aux crevettes, citronnelle, galanga</p><div class="spicy">&#127798;&#127798;</div><div class="price">9,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Satay Poulet (4 pcs)</h3><p>Brochettes marinée curcuma, sauce cacahuete</p><div class="price">8,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Som Tam</h3><p>Salade de papaye verte, tomates, cacahuetes, piment</p><div class="spicy">&#127798;&#127798;&#127798;</div><div class="price">8,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://plus.unsplash.com/premium_photo-1674601032998-d9982816d2d6?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Ravioles Crevettes</h3><p>Ravioles vapeur aux crevettes entieres, sauce coco, galanga et basilic</p><div class="price">9,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Beignets Poulet Croustillants</h3><p>Poulet mariné citronnelle, sauce acidulee coriandre et ail</p><div class="price">9,00 &#8364;</div></div></div>
+  </div>
+  <div class="thai-sec" id="ts-curry">
+    <div class="ti"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Green Curry</h3><p>Poulet, lait de coco, aubergines thai, basilic. Riz jasmin</p><div class="spicy">&#127798;&#127798;</div><div class="price">14,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Massaman Curry</h3><p>Boeuf braise, pommes de terre, cacahuetes, doux et parfume</p><div class="spicy">&#127798;</div><div class="price">15,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Red Curry Crevettes</h3><p>Crevettes tigrees, lait de coco, bambou, feuilles de lime</p><div class="spicy">&#127798;&#127798;&#127798;</div><div class="price">16,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Panang Curry Tofu</h3><p>Tofu frit, lait de coco, cacahuetes, kaffir. Vegetarien</p><div class="spicy">&#127798;</div><div class="price">13,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Curry Rouge Saumon</h3><p>Pave de saumon, tomates cerises, poivrons, ananas et litchis</p><div class="spicy">&#127798;&#127798;</div><div class="price">19,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://plus.unsplash.com/premium_photo-1669130744959-53fdf266d621?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Curry Vert Gambas</h3><p>Gambas, poivrons, courgette, champignons, chair de coco et pousses de bambou</p><div class="spicy">&#127798;&#127798;&#127798;</div><div class="price">22,00 &#8364;</div></div></div>
+  </div>
+  <div class="thai-sec" id="ts-wok">
+    <div class="ti"><img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Pad Thai</h3><p>Nouilles de riz sautees, crevettes, oeuf, cacahuetes, citron vert</p><div class="price">14,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Khao Pad</h3><p>Riz saute au wok, poulet, oeuf, legumes croquants</p><div class="price">13,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Pad See Ew</h3><p>Larges nouilles de riz, boeuf, brocoli chinois, sauce soja</p><div class="price">14,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1628404452899-04f27b032fc6?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Canard Tamarin</h3><p>Magret de canard fume au wok, sauce sucree-acidulee au tamarin, litchis et ananas</p><div class="price">21,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1766566959672-257837bc6c76?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Crevettes Tamarin</h3><p>Crevettes sautees sauce tamarin, ail, carotte, oignon et soja</p><div class="price">15,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://plus.unsplash.com/premium_photo-1695151833232-12e69b3a0be5?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Tofu au Basilic</h3><p>Tofu frit saute au basilic thai, poivrons et oignons. Vegetarien</p><div class="price">14,00 &#8364;</div></div></div>
+  </div>
+  <div class="thai-sec" id="ts-desserts">
+    <div class="ti"><img src="https://images.unsplash.com/photo-1711161988375-da7eff032e45?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Mango Sticky Rice</h3><p>Riz gluant au lait de coco, mangue fraiche</p><div class="price">7,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Glace Coco Maison</h3><p>Deux boules, coco frais rape, cacahuetes</p><div class="price">5,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://plus.unsplash.com/premium_photo-1668998196280-6cff10dbeba6?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Tapioca Mangue</h3><p>Perles de tapioca au lait de coco, mangue fraiche, grenade et sesame</p><div class="price">7,50 &#8364;</div></div></div>
+    <div class="ti"><img src="https://plus.unsplash.com/premium_photo-1673793534900-ccb261519126?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Rouleaux Banane Chocolat</h3><p>Nems banane et chocolat coco, servis avec glace coco maison</p><div class="price">8,00 &#8364;</div></div></div>
+    <div class="ti"><img src="https://images.unsplash.com/photo-1707735507507-a69371111541?w=200&h=200&fit=crop" alt=""><div class="ti-info"><h3>Flan Thai</h3><p>Flan au lait de coco sur lit de riz gluant noir, sesame</p><div class="price">7,50 &#8364;</div></div></div>
+  </div>
+</section>
+
+<section style="padding:60px 40px;background:var(--cream);">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+  <h2 style="font-family:'Tenor Sans',serif;font-size:1.6rem;letter-spacing:1px;margin-bottom:20px;color:var(--dark);">L'authenticite thailandaise au cœur de Paris</h2>
+  <p style="font-weight:300;line-height:2;opacity:.6;font-size:.92rem;">Chez <strong style="color:var(--saffron);opacity:1;">Baan Thai</strong>, chaque plat est prepare selon les <strong style="color:var(--saffron);opacity:1;">recettes traditionnelles thailandaises</strong> transmises de generation en generation. Nos <strong style="color:var(--saffron);opacity:1;">pates de curry</strong> sont pilees chaque matin au mortier, nos herbes sont fraiches et nos épicés importees directement de Thailande. Du <strong style="color:var(--saffron);opacity:1;">Pad Thai</strong> aux <strong style="color:var(--saffron);opacity:1;">currys verts</strong>, en passant par le <strong style="color:var(--saffron);opacity:1;">Mango Sticky Rice</strong>, chaque bouchee est un voyage entre Bangkok et Chiang Mai. <strong style="color:var(--saffron);opacity:1;">Restaurant thailandais à Paris 20e</strong>, ouvert du mardi au dimanche, à emporter disponible.</p>
+</div>
+</section>
+
+<section id="about" style="background:var(--gold);">
+  <div class="about-grid">
+    <div class="about-img"><img src="https://plus.unsplash.com/premium_photo-1669150848559-3f2a0cc4f1a6?w=500&h=650&fit=crop" alt=""></div>
+    <div class="about-text">
+      <h3>Les saveurs de Bangkok à votre table</h3>
+      <p>Baan Thai, c'est "la maison" en thai. Fonde par Nattaya et Pierre en 2017, notre restaurant est un hommage à la cuisine de la mere de Nattaya, originaire de Chiang Mai.</p>
+      <p>Ici, les pates de curry sont préparées chaque matin au mortier. Les herbes sont fraiches, les épicés sont authentiques, et chaque plat est un voyage au cœur de la Thailande.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 40px;background:var(--gold);">
+  <div class="st"><h2>Notre <span>univers</span></h2><p>@baanthai.paris</p></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:900px;margin:0 auto;">
+    <img src="https://plus.unsplash.com/premium_photo-1669150848559-3f2a0cc4f1a6?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1628404452899-04f27b032fc6?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1711161988375-da7eff032e45?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1674601032998-d9982816d2d6?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1668998196280-6cff10dbeba6?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;" alt="">
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section style="padding:0;" id="réservation">
+  <div style="position:relative;overflow:hidden;background:var(--dark);">
+    <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1562565652-a0d8f0c59eb4?w=1400&h=600&fit=crop') center/cover;opacity:.25;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(232,163,23,.2),rgba(28,28,28,.8));"></div>
+    <div style="position:relative;z-index:2;padding:80px 40px;max-width:600px;margin:0 auto;text-align:center;">
+      <div style="font-size:40px;margin-bottom:10px;">&#127798;</div>
+      <h2 style="font-family:'Tenor Sans',serif;font-size:clamp(28px,4vw,40px);color:white;letter-spacing:3px;margin-bottom:8px;">RESERVER UNE TABLE</h2>
+      <p style="color:rgba(255,255,255,.5);margin-bottom:35px;font-size:.95rem;">Laissez-vous transporter par les saveurs de Bangkok</p>
+      <div style="background:rgba(255,255,255,.08);backdrop-filter:blur(20px);border:1px solid rgba(232,163,23,.2);border-radius:16px;padding:35px 30px;">
+        <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:30px;\' ><div style=\'font-size:40px;margin-bottom:10px;\'>&#127798;</div><div style=\'font-family:Tenor Sans,serif;font-size:24px;color:var(--saffron);\'>Sawasdee !</div><p style=\'margin-top:10px;color:rgba(255,255,255,.5);\'>Réservation confirmee, à bientot !</p></div>';">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+            <input type="text" placeholder="Votre nom" required style="width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.9rem;outline:none;">
+            <input type="tel" placeholder="Telephone" required style="width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.9rem;outline:none;">
+          </div>
+          <div style="margin-bottom:12px;">
+            <input type="email" placeholder="Email" required style="width:100%;padding:14px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.9rem;outline:none;">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+            <input type="date" required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;">
+            <select required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;"><option value="" style="background:#1C1C1C;">Heure</option><option style="background:#1C1C1C;">12h00</option><option style="background:#1C1C1C;">12h30</option><option style="background:#1C1C1C;">13h00</option><option style="background:#1C1C1C;">19h00</option><option style="background:#1C1C1C;">19h30</option><option style="background:#1C1C1C;">20h00</option><option style="background:#1C1C1C;">20h30</option><option style="background:#1C1C1C;">21h00</option></select>
+            <select required style="width:100%;padding:14px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:white;font-family:inherit;font-size:.85rem;outline:none;"><option value="" style="background:#1C1C1C;">Pers.</option><option style="background:#1C1C1C;">1</option><option style="background:#1C1C1C;">2</option><option style="background:#1C1C1C;">3</option><option style="background:#1C1C1C;">4</option><option style="background:#1C1C1C;">5-6</option><option style="background:#1C1C1C;">7+</option></select>
+          </div>
+          <button type="submit" style="width:100%;padding:16px;background:var(--saffron);color:var(--dark);border:none;border-radius:10px;font-family:inherit;font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:1px;transition:all .3s;">&#127798; RESERVER MA TABLE</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infos">
+  <div class="st"><h2>Infos <span>pratiques</span></h2></div>
+  <div class="infos">
+    <div class="ibox"><div class="icon">&#128205;</div><h3>Adresse</h3><p>31 rue de Belleville<br>75020 Paris</p></div>
+    <div class="ibox"><div class="icon">&#128337;</div><h3>Horaires</h3><p>Mar-Sam : 12h-14h30 / 19h-22h30<br>Dim : 12h-15h</p></div>
+    <div class="ibox"><div class="icon">&#128222;</div><h3>Réservation</h3><p>01 43 58 12 34<br>A emporter disponible</p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 Baan Thai Paris</p></footer>
+
+<script>
+function showT(id){
+  document.querySelectorAll('.thai-sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ttab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ts-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

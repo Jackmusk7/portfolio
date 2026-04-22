@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PressClean | Pressing & Nettoyage</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--mint:#00B894;--dark:#1B2A3D;--light:#F7FAFA;--white:#fff;--gray:#94A3B8;}
+body{font-family:'Sora',sans-serif;background:var(--white);color:var(--dark);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:18px 40px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(0,0,0,.05);}
+.logo{font-size:22px;font-weight:700;letter-spacing:-.5px;}
+.logo span{color:var(--mint);}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:13px;font-weight:400;transition:color .3s;}
+.nav-links a:hover{color:var(--mint);}
+.nav-cta{padding:10px 24px;background:var(--mint);color:white;border-radius:8px;font-size:13px;font-weight:600;transition:all .3s;}
+.nav-cta:hover{background:#00D2A4;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:2px;background:var(--dark);}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 30px;position:relative;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1604335398941-8d7108a9e8e9?w=1600') center/cover;opacity:.1;z-index:0;}
+.hero-content{position:relative;z-index:2;max-width:650px;}
+.badge{display:inline-block;padding:8px 20px;background:rgba(0,184,148,.1);color:var(--mint);border-radius:50px;font-size:12px;font-weight:600;margin-bottom:25px;letter-spacing:1px;}
+.hero h1{font-size:clamp(34px,5.5vw,60px);font-weight:700;line-height:1.15;letter-spacing:-.5px;}
+.hero h1 span{color:var(--mint);}
+.hero p{font-size:17px;font-weight:300;margin:25px auto;max-width:450px;line-height:1.7;color:var(--gray);}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-fill{padding:15px 35px;background:var(--mint);color:white;border-radius:10px;font-weight:600;font-size:14px;transition:all .3s;border:none;cursor:pointer;}
+.btn-fill:hover{background:#00D2A4;transform:translateY(-2px);}
+.btn-outline{padding:15px 35px;border:2px solid var(--dark);border-radius:10px;font-weight:400;font-size:14px;transition:all .3s;}
+.btn-outline:hover{background:var(--dark);color:white;}
+
+section{padding:90px 40px;}
+.st{text-align:center;margin-bottom:50px;}
+.st h2{font-size:clamp(26px,4vw,40px);font-weight:700;letter-spacing:-.3px;}
+.st h2 span{color:var(--mint);}
+.st p{margin-top:10px;font-weight:300;color:var(--gray);max-width:450px;margin-left:auto;margin-right:auto;}
+
+/* HOW IT WORKS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;max-width:1000px;margin:0 auto;}
+.step{text-align:center;padding:40px 25px;background:var(--light);border-radius:16px;transition:transform .3s;}
+.step:hover{transform:translateY(-5px);}
+.step-num{width:50px;height:50px;border-radius:50%;background:var(--mint);color:white;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-weight:700;font-size:20px;}
+.step h3{font-size:18px;font-weight:600;margin-bottom:10px;}
+.step p{font-size:14px;font-weight:300;color:var(--gray);line-height:1.6;}
+
+/* TARIFS */
+.tarifs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;max-width:1000px;margin:0 auto;}
+.tarif-card{padding:35px 30px;border:1px solid #e8edf2;border-radius:16px;transition:all .3s;}
+.tarif-card:hover{border-color:var(--mint);box-shadow:0 8px 30px rgba(0,184,148,.08);}
+.tarif-card h3{font-size:18px;font-weight:600;margin-bottom:15px;}
+.tarif-list{list-style:none;}
+.tarif-list li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f3f6;font-size:14px;}
+.tarif-list li:last-child{border:none;}
+.tarif-list .price{font-weight:600;color:var(--mint);}
+
+/* RDV */
+.rdv-wrap{max-width:600px;margin:0 auto;background:var(--light);border-radius:20px;padding:50px 40px;}
+.fg{margin-bottom:18px;}
+.fg label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--gray);}
+.fg input,.fg select,.fg textarea{width:100%;padding:13px 16px;background:white;border:1px solid #dde4eb;border-radius:10px;font-family:'Sora',sans-serif;font-size:14px;color:var(--dark);outline:none;transition:border .3s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--mint);}
+.fg textarea{height:80px;resize:none;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sub-btn{width:100%;padding:16px;background:var(--mint);color:white;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:all .3s;}
+.sub-btn:hover{background:#00D2A4;}
+
+footer{text-align:center;padding:40px;border-top:1px solid #f0f3f6;}
+footer p{font-size:12px;color:var(--gray);}
+
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none;}
+  .nav-links.active{display:flex;position:absolute;top:60px;left:0;width:100%;background:white;flex-direction:column;padding:25px;gap:18px;box-shadow:0 10px 30px rgba(0,0,0,.05);}
+  .hamburger{display:flex;}
+  .hero::before{display:none;}
+  section{padding:60px 20px;}
+  .rdv-wrap{padding:30px 20px;}
+  .form-row{grid-template-columns:1fr;}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeUp .8s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">Press<span>Clean</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#how">Comment ca marche</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#rdv">Rendez-vous</a>
+  </div>
+  <a href="#rdv" class="nav-cta">Prendre RDV</a>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="badge">Collecte & livraison gratuites</div>
+    <h1>Le pressing<br><span>qui vient à vous</span></h1>
+    <p>Pressing professionnel avec collecte et livraison à domicile. Vetements impeccables, zero contrainte.</p>
+    <div class="hero-btns">
+      <a href="#rdv" class="btn-fill">Prendre rendez-vous</a>
+      <a href="#tarifs" class="btn-outline">Voir les tarifs</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- SEO -->
+<section style="padding:60px 40px;background:var(--light);">
+<div style="max-width:800px;margin:0 auto;text-align:center;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--mint);font-weight:600;margin-bottom:12px;">A propos</div>
+  <h2 style="font-size:clamp(22px,3vw,30px);font-weight:700;margin-bottom:20px;">Votre pressing à domicile, simple et rapide</h2>
+  <p style="font-weight:300;line-height:2.2;color:var(--gray);font-size:.95rem;"><strong style="color:var(--dark);">PressClean</strong> est un <strong style="color:var(--dark);">pressing professionnel avec collecte et livraison à domicile</strong>. Nous prenons en charge le <strong style="color:var(--dark);">nettoyage à sec</strong>, le <strong style="color:var(--dark);">repassage</strong>, l'<strong style="color:var(--dark);">entretien du linge de maison</strong>, les <strong style="color:var(--dark);">retouches</strong> et le <strong style="color:var(--dark);">détachage expert</strong>. Collecte gratuite à partir de 25 &#8364;, <strong style="color:var(--dark);">livraison sous 48h</strong>, service <strong style="color:var(--dark);">express 24h</strong> disponible. Tarifs transparents, qualité professionnelle, zero contrainte.</p>
+</div>
+</section>
+<section id="how">
+  <div class="st"><h2>Comment ca <span>marche</span> ?</h2><p>Un service simple en 3 etapes</p></div>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><h3>Réservez</h3><p>Choisissez un creneau de collecte qui vous arrange. Matin, midi ou soir.</p></div>
+    <div class="step"><div class="step-num">2</div><h3>On collecte</h3><p>Notre livreur récupère vos vetements à votre porte. Comptage sur place.</p></div>
+    <div class="step"><div class="step-num">3</div><h3>On livre</h3><p>Vetements nettoyes, repasses, livres sous 48h sur cintre ou plies.</p></div>
+  </div>
+</section>
+
+<section id="tarifs" style="background:var(--light);">
+  <div class="st"><h2>Nos <span>tarifs</span></h2><p>Tarification claire, sans surprise</p></div>
+  <div class="tarifs">
+    <div class="tarif-card">
+      <h3>Vetements courants</h3>
+      <ul class="tarif-list">
+        <li><span>Chemise / chemisier</span><span class="price">4,50 &#8364;</span></li>
+        <li><span>Pantalon</span><span class="price">6,00 &#8364;</span></li>
+        <li><span>Robe simple</span><span class="price">9,00 &#8364;</span></li>
+        <li><span>Costume 2 pièces</span><span class="price">14,00 &#8364;</span></li>
+        <li><span>Manteau / doudoune</span><span class="price">15,00 &#8364;</span></li>
+      </ul>
+    </div>
+    <div class="tarif-card">
+      <h3>Linge de maison</h3>
+      <ul class="tarif-list">
+        <li><span>Couette 1 personne</span><span class="price">18,00 &#8364;</span></li>
+        <li><span>Couette 2 personnes</span><span class="price">22,00 &#8364;</span></li>
+        <li><span>Drap housse</span><span class="price">8,00 &#8364;</span></li>
+        <li><span>Nappe</span><span class="price">10,00 &#8364;</span></li>
+        <li><span>Rideau (le m&#178;)</span><span class="price">7,00 &#8364;</span></li>
+      </ul>
+    </div>
+    <div class="tarif-card">
+      <h3>Services speciaux</h3>
+      <ul class="tarif-list">
+        <li><span>Robe de mariee</span><span class="price">Sur devis</span></li>
+        <li><span>Cuir / daim</span><span class="price">Sur devis</span></li>
+        <li><span>Retouche (ourlet)</span><span class="price">8,00 &#8364;</span></li>
+        <li><span>Detachage expert</span><span class="price">5,00 &#8364;</span></li>
+        <li><span>Express 24h</span><span class="price">+50%</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="rdv">
+  <div class="st"><h2>Prendre <span>rendez-vous</span></h2><p>Collecte gratuite à partir de 25 &#8364;</p></div>
+  <div class="rdv-wrap">
+    <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:30px 0;\'><div style=\'font-size:28px;font-weight:700;color:var(--mint);\'>C\'est note !</div><p style=\'margin-top:10px;color:var(--gray);font-weight:300;\'>Confirmation envoyee par SMS.</p></div>';">
+      <div class="form-row">
+        <div class="fg"><label>Nom</label><input type="text" required></div>
+        <div class="fg"><label>Telephone</label><input type="tel" required></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" required></div>
+      <div class="fg"><label>Adresse de collecte</label><input type="text" placeholder="Numero, rue, code postal, ville" required></div>
+      <div class="form-row">
+        <div class="fg"><label>Date souhaitee</label><input type="date" required></div>
+        <div class="fg"><label>Creneau</label>
+          <select required><option value="">Choisir</option><option>8h - 10h</option><option>10h - 12h</option><option>12h - 14h</option><option>14h - 16h</option><option>16h - 18h</option><option>18h - 20h</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Type de service</label>
+        <select required><option value="">Choisir</option><option>Pressing classique</option><option>Linge de maison</option><option>Service express (24h)</option><option>Retouche</option><option>Autre</option></select>
+      </div>
+      <button type="submit" class="sub-btn">Confirmer la collecte</button>
+    </form>
+  </div>
+</section>
+
+
+<!-- INFOS -->
+<section style="padding:60px 40px;background:var(--light);">
+  <div class="st"><h2>Infos <span>pratiques</span></h2></div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:25px;max-width:800px;margin:0 auto;">
+    <div style="text-align:center;padding:30px 20px;background:white;border-radius:16px;border:1px solid #e8edf2;"><div style="font-size:24px;margin-bottom:10px;">&#128205;</div><h3 style="font-size:16px;font-weight:600;margin-bottom:6px;">Zone de service</h3><p style="font-weight:300;color:var(--gray);font-size:14px;">Paris et petite couronne<br>92, 93, 94</p></div>
+    <div style="text-align:center;padding:30px 20px;background:white;border-radius:16px;border:1px solid #e8edf2;"><div style="font-size:24px;margin-bottom:10px;">&#128337;</div><h3 style="font-size:16px;font-weight:600;margin-bottom:6px;">Creneaux</h3><p style="font-weight:300;color:var(--gray);font-size:14px;">Lun-Sam : 8h - 20h<br>Collecte & livraison</p></div>
+    <div style="text-align:center;padding:30px 20px;background:white;border-radius:16px;border:1px solid #e8edf2;"><div style="font-size:24px;margin-bottom:10px;">&#128222;</div><h3 style="font-size:16px;font-weight:600;margin-bottom:6px;">Contact</h3><p style="font-weight:300;color:var(--gray);font-size:14px;">01 85 12 34 56<br>contact@pressclean.fr</p></div>
+  </div>
+</section>
+<footer><p>&copy; 2025 PressClean. Pressing à domicile.</p></footer>
+</body>
+</html>

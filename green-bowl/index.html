@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Bowl</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f7faf5;color:#1a1a1a;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:all .3s}
+nav.scrolled{background:rgba(255,255,255,.95);backdrop-filter:blur(20px);padding:12px 0;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#2d6a4f}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:.85rem;font-weight:500;color:#555;transition:color .2s}
+.nav-links a:hover{color:#2d6a4f}
+.nav-cta{background:#2d6a4f;color:#fff !important;padding:10px 24px;border-radius:8px}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 28px 80px;max-width:1140px;margin:0 auto;gap:60px}
+.hero-text .tag{display:inline-flex;align-items:center;gap:8px;background:#e8f5e9;color:#2d6a4f;padding:8px 18px;border-radius:30px;font-size:.78rem;font-weight:600;margin-bottom:24px}
+.hero-text h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.08;margin-bottom:20px;color:#1b4332}
+.hero-text h1 em{color:#52b788;font-style:normal}
+.hero-text p{color:#6b7280;font-size:1.05rem;line-height:1.7;margin-bottom:32px;max-width:440px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-primary{background:#2d6a4f;color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:.9rem;transition:all .3s;display:inline-block}
+.btn-primary:hover{background:#1b4332;transform:translateY(-2px)}
+.btn-outline{border:2px solid #2d6a4f;color:#2d6a4f;padding:12px 32px;border-radius:10px;font-weight:600;font-size:.9rem;transition:all .3s}
+.btn-outline:hover{background:#2d6a4f;color:#fff}
+.hero-visual{position:relative}
+.hero-img{width:100%;border-radius:24px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 30px 60px rgba(0,0,0,.12)}
+.hero-badge{position:absolute;bottom:24px;left:-20px;background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 10px 40px rgba(0,0,0,.1);display:flex;align-items:center;gap:12px}
+.hero-badge .stars{color:#f59e0b;font-size:1rem}
+.hero-badge .rating{font-weight:700;font-size:1.1rem}
+.hero-badge .count{font-size:.78rem;color:#888}
+.hero-float{position:absolute;top:40px;right:-16px;background:#fff;border-radius:14px;padding:14px 18px;box-shadow:0 10px 40px rgba(0,0,0,.1);font-size:.82rem;font-weight:600;color:#2d6a4f}
+
+/* MARQUEE */
+.marquee{overflow:hidden;background:#2d6a4f;padding:14px 0;white-space:nowrap}
+.marquee-inner{display:inline-block;animation:scroll 20s linear infinite}
+.marquee-inner span{color:#fff;font-size:.85rem;font-weight:500;margin-right:48px;letter-spacing:1px}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* MENU */
+.menu-section{padding:100px 28px;max-width:1140px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:56px}
+.section-tag{color:#52b788;font-size:.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.6rem);margin-bottom:14px}
+.section-sub{color:#888;max-width:500px;margin:0 auto;font-size:.95rem}
+.menu-tabs{display:flex;justify-content:center;gap:8px;margin-bottom:48px;flex-wrap:wrap}
+.menu-tab{padding:10px 24px;border-radius:30px;border:2px solid #e5e7eb;font-weight:600;font-size:.85rem;cursor:pointer;transition:all .25s;background:transparent;color:#555}
+.menu-tab.active,.menu-tab:hover{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.menu-item{background:#fff;border-radius:16px;overflow:hidden;transition:all .3s;border:1px solid #eee}
+.menu-item:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08)}
+.menu-item-img{height:180px;background-size:cover;background-position:center;position:relative}
+.menu-item-img .badge{position:absolute;top:12px;left:12px;background:#2d6a4f;color:#fff;padding:4px 12px;border-radius:20px;font-size:.7rem;font-weight:700}
+.menu-item-info{padding:20px}
+.menu-item-info h3{font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:6px}
+.menu-item-info p{color:#888;font-size:.82rem;line-height:1.5;margin-bottom:10px}
+.menu-item-info .price{color:#2d6a4f;font-weight:700;font-size:1.1rem}
+.menu-item-info .tags{display:flex;gap:6px;margin-top:8px}
+.menu-item-info .tags span{background:#e8f5e9;color:#2d6a4f;padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:600}
+
+/* INSTAGRAM */
+.insta-section{padding:80px 28px;background:#fff}
+.insta-grid{max-width:1140px;margin:0 auto}
+.insta-photos{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:40px}
+.insta-photo{aspect-ratio:1;border-radius:8px;background-size:cover;background-position:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.insta-photo:hover{transform:scale(1.03)}
+.insta-photo::after{content:'@greenbowl.paris';position:absolute;inset:0;background:rgba(45,106,79,.8);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;opacity:0;transition:opacity .3s}
+.insta-photo:hover::after{opacity:1}
+
+/* STORY */
+.story-section{padding:100px 28px;max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-img{border-radius:20px;width:100%;aspect-ratio:3/4;object-fit:cover}
+.story-content .section-tag{text-align:left}
+.story-content h2{font-family:'Playfair Display',serif;font-size:2rem;margin-bottom:20px}
+.story-content p{color:#666;line-height:1.8;margin-bottom:16px}
+.story-values{display:flex;gap:24px;margin-top:24px}
+.story-value{text-align:center}
+.story-value .icon{width:48px;height:48px;border-radius:12px;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin:0 auto 8px}
+.story-value span{font-size:.78rem;font-weight:600;color:#555}
+
+/* REVIEWS */
+.reviews-section{padding:80px 28px;background:#f0faf4}
+.reviews-grid{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:48px}
+.review-card{background:#fff;border-radius:16px;padding:28px;border:1px solid #e5e7eb}
+.review-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;font-weight:700;color:#2d6a4f;font-size:.9rem}
+.review-meta .name{font-weight:700;font-size:.9rem}
+.review-meta .date{font-size:.75rem;color:#999}
+.review-stars{color:#f59e0b;font-size:.85rem;margin-bottom:12px}
+.review-text{color:#666;font-size:.88rem;line-height:1.6}
+
+/* INFO BAR */
+.info-bar{background:#2d6a4f;padding:60px 28px;color:#fff}
+.info-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+.info-item .icon{font-size:1.8rem;margin-bottom:10px}
+.info-item h3{font-size:.95rem;margin-bottom:4px}
+.info-item p{font-size:.8rem;opacity:.7}
+
+/* CTA */
+.cta-section{padding:100px 28px;text-align:center}
+.cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:16px}
+.cta-section p{color:#888;margin-bottom:32px;font-size:1rem}
+
+/* FOOTER */
+footer{background:#1b4332;color:#fff;padding:48px 28px}
+.footer-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.footer-brand .logo{color:#52b788;margin-bottom:12px;display:block;font-family:'Playfair Display',serif;font-size:1.4rem}
+.footer-brand p{color:rgba(255,255,255,.5);font-size:.82rem;line-height:1.6}
+.footer-col h4{font-size:.85rem;margin-bottom:16px;color:#52b788}
+.footer-col a{display:block;color:rgba(255,255,255,.6);font-size:.82rem;margin-bottom:8px;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1140px;margin:24px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.4)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:100px;text-align:center}
+  .hero-text p{margin:0 auto 32px}
+  .hero-btns{justify-content:center}
+  .hero-visual{order:-1;max-width:400px;margin:0 auto}
+  .hero-badge,.hero-float{display:none}
+  .story-section{grid-template-columns:1fr;gap:40px}
+  .insta-photos{grid-template-columns:repeat(3,1fr)}
+  .info-inner{grid-template-columns:1fr 1fr;gap:24px}
+  .footer-inner{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+  .menu-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">Green Bowl</div>
+<div class="nav-links">
+<a href="#menu">La Carte</a>
+<a href="#story">Notre histoire</a>
+<a href="#avis">Avis</a>
+<a href="#contact" class="nav-cta">Commander</a>
+</div>
+</div></nav>
+
+<!-- HERO SPLIT -->
+<section class="hero">
+<div class="hero-text">
+  <div class="tag">🌿 Plant-based friendly</div>
+  <h1>Mangez <em>frais</em>,<br>mangez <em>bien</em>.</h1>
+  <p>Poké bowls, salades et smoothies preparés chaque jour avec des produits frais et locaux. 100% fait maison, 0% culpabilité.</p>
+  <div class="hero-btns">
+    <a href="#menu" class="btn-primary">Voir la carte</a>
+    <a href="#story" class="btn-outline">Notre histoire</a>
+  </div>
+</div>
+<div class="hero-visual">
+  <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800" alt="Green Bowl" class="hero-img">
+  <div class="hero-badge">
+    <div><div class="stars">★★★★★</div><div><span class="rating">4.9</span> <span class="count">sur Google (340 avis)</span></div></div>
+  </div>
+  <div class="hero-float">🕐 Prêt en 10 min</div>
+</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee"><div class="marquee-inner">
+<span>🥗 POKÉ BOWLS</span><span>🥤 SMOOTHIES</span><span>🥙 WRAPS</span><span>🌿 VEGAN FRIENDLY</span><span>🚴 LIVRAISON</span><span>📍 PARIS 15e</span>
+<span>🥗 POKÉ BOWLS</span><span>🥤 SMOOTHIES</span><span>🥙 WRAPS</span><span>🌿 VEGAN FRIENDLY</span><span>🚴 LIVRAISON</span><span>📍 PARIS 15e</span>
+</div></div>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+<div class="section-header">
+  <div class="section-tag">La carte</div>
+  <div class="section-title">Nos créations du moment</div>
+  <p class="section-sub">Tous nos plats sont préparés chaque matin avec des produits frais et de saison.</p>
+</div>
+<div class="menu-tabs">
+  <button class="menu-tab active" onclick="filterMenu('all')">Tout</button>
+  <button class="menu-tab" onclick="filterMenu('bowl')">Poké Bowls</button>
+  <button class="menu-tab" onclick="filterMenu('salade')">Salades</button>
+  <button class="menu-tab" onclick="filterMenu('smoothie')">Smoothies</button>
+  <button class="menu-tab" onclick="filterMenu('dessert')">Desserts</button>
+</div>
+<div class="menu-grid" id="menuGrid">
+  <div class="menu-item" data-cat="bowl">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600')"><span class="badge">BEST-SELLER</span></div>
+    <div class="menu-item-info"><h3>Le Green Classic</h3><p>Base riz vinaigré, saumon frais, avocat, edamame, mangue, sauce sésame</p><span class="price">14,90€</span><div class="tags"><span>Poisson</span><span>Sans gluten</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="bowl">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600')"></div>
+    <div class="menu-item-info"><h3>Le Veggie Power</h3><p>Base quinoa, tofu croustillant, patate douce, kale, grenade, sauce miso</p><span class="price">13,50€</span><div class="tags"><span>Vegan</span><span>Protéiné</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="bowl">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600')"></div>
+    <div class="menu-item-info"><h3>Le Tropical</h3><p>Base riz complet, poulet grillé, ananas, concombre, cacahuètes, sauce coco-citron vert</p><span class="price">14,50€</span><div class="tags"><span>Volaille</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="salade">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600')"></div>
+    <div class="menu-item-info"><h3>Salade Caesar Revisitée</h3><p>Poulet mariné, romaine, parmesan, croûtons maison, sauce caesar légère au yaourt</p><span class="price">12,90€</span><div class="tags"><span>Volaille</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="salade">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=600')"></div>
+    <div class="menu-item-info"><h3>Super Green</h3><p>Kale, épinards, avocat, graines de courge, cranberries, vinaigrette pomme-gingembre</p><span class="price">11,90€</span><div class="tags"><span>Vegan</span><span>Detox</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="smoothie">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=600')"><span class="badge">NOUVEAU</span></div>
+    <div class="menu-item-info"><h3>Green Detox</h3><p>Épinards, concombre, pomme verte, gingembre, citron, menthe fraîche</p><span class="price">6,90€</span><div class="tags"><span>Vegan</span><span>Cold pressed</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="smoothie">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=600')"></div>
+    <div class="menu-item-info"><h3>Energy Boost</h3><p>Banane, beurre de cacahuète, lait d'amande, protéine végétale, cacao cru</p><span class="price">7,50€</span><div class="tags"><span>Protéiné</span><span>Post-workout</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="dessert">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600')"></div>
+    <div class="menu-item-info"><h3>Açaí Bowl</h3><p>Açaí bio, banane, granola maison, fruits frais de saison, miel, noix de coco</p><span class="price">9,90€</span><div class="tags"><span>Sans gluten</span><span>Antioxydant</span></div></div>
+  </div>
+  <div class="menu-item" data-cat="dessert">
+    <div class="menu-item-img" style="background-image:url('https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?w=600')"></div>
+    <div class="menu-item-info"><h3>Energy Balls x4</h3><p>Dattes, amandes, cacao cru, flocons d'avoine, graines de chia. Faites maison chaque jour.</p><span class="price">4,90€</span><div class="tags"><span>Vegan</span><span>Snack</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- STORY -->
+<section class="story-section" id="story">
+<img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800" alt="Notre cuisine" class="story-img reveal">
+<div class="story-content reveal">
+  <div class="section-tag">Notre histoire</div>
+  <h2>Né d'une envie simple : bien manger sans se compliquer la vie</h2>
+  <p>Green Bowl est né en 2021 d'une frustration : pourquoi est-ce si difficile de trouver un déjeuner sain, savoureux et rapide en ville ?</p>
+  <p>Nos recettes sont élaborées avec une nutritionniste. Nos produits viennent de producteurs locaux en Île-de-France. Notre cuisine est ouverte, vous voyez tout ce qu'on fait.</p>
+  <div class="story-values">
+    <div class="story-value"><div class="icon">🌱</div><span>100% frais</span></div>
+    <div class="story-value"><div class="icon">📍</div><span>Produits locaux</span></div>
+    <div class="story-value"><div class="icon">♻️</div><span>Zéro plastique</span></div>
+    <div class="story-value"><div class="icon">💚</div><span>Veggie friendly</span></div>
+  </div>
+</div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta-section" id="insta">
+<div class="insta-grid">
+  <div class="section-header">
+    <div class="section-tag">@greenbowl.paris</div>
+    <div class="section-title">Suivez-nous sur Instagram</div>
+  </div>
+  <div class="insta-photos">
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')"></div>
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')"></div>
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400')"></div>
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1502741224143-90386d7f8c82?w=400')"></div>
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400')"></div>
+    <div class="insta-photo" style="background-image:url('https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400')"></div>
+  </div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="avis">
+<div class="section-header">
+  <div class="section-tag">Avis clients</div>
+  <div class="section-title">Ils en parlent mieux que nous</div>
+</div>
+<div class="reviews-grid">
+  <div class="review-card reveal">
+    <div class="review-top"><div class="review-avatar">SM</div><div class="review-meta"><div class="name">Sophie M.</div><div class="date">Il y à 2 semaines</div></div></div>
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">Les meilleurs poké bowls de la ville ! Frais, copieux, et le personnel est adorable. J'y vais au moins deux fois par semaine.</p>
+  </div>
+  <div class="review-card reveal">
+    <div class="review-top"><div class="review-avatar">KL</div><div class="review-meta"><div class="name">Karim L.</div><div class="date">Il y à 1 mois</div></div></div>
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">Enfin un endroit où manger healthy sans avoir l'impression de manger de l'herbe. Les smoothies sont incroyables et le Green Classic est une tuerie.</p>
+  </div>
+  <div class="review-card reveal">
+    <div class="review-top"><div class="review-avatar">JR</div><div class="review-meta"><div class="name">Julie R.</div><div class="date">Il y à 3 semaines</div></div></div>
+    <div class="review-stars">★★★★★</div>
+    <p class="review-text">Livraison rapide, bowls toujours bien garnis. Mon midi préféré quand je suis au bureau. Le Tropical avec poulet, c'est mon go-to.</p>
+  </div>
+</div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar" id="contact">
+<div class="info-inner">
+  <div class="info-item"><div class="icon">📍</div><h3>Adresse</h3><p>12 rue du Commerce, 75015</p></div>
+  <div class="info-item"><div class="icon">🕐</div><h3>Horaires</h3><p>Lun-Dim, 11h30-21h</p></div>
+  <div class="info-item"><div class="icon">📞</div><h3>Téléphone</h3><p>01 45 67 89 10</p></div>
+  <div class="info-item"><div class="icon">🚴</div><h3>Livraison</h3><p>Deliveroo, Uber Eats</p></div>
+</div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+<h2>Envie de fraîcheur ?</h2>
+<p>Passez nous voir ou commandez en ligne. Votre bowl vous attend.</p>
+<a href="tel:0145678910" class="btn-primary">Commander maintenant</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-inner">
+  <div class="footer-brand"><span class="logo">Green Bowl</span><p>Poké bowls, salades et smoothies frais. Préparés chaque jour à Paris 15e avec des produits locaux.</p></div>
+  <div class="footer-col"><h4>Navigation</h4><a href="#menu">La carte</a><a href="#story">Notre histoire</a><a href="#avis">Avis</a><a href="#contact">Contact</a></div>
+  <div class="footer-col"><h4>Horaires</h4><a>Lundi - Dimanche</a><a>11h30 - 21h</a><a>Click & Collect</a><a>Livraison disponible</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Green Bowl. Tous droits réservés.</span><span>Site créé par Studio Elyo</span></div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function filterMenu(cat){
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.menu-item').forEach(item=>{
+    if(cat==='all'||item.dataset.cat===cat){item.style.display=''}
+    else{item.style.display='none'}
+  });
+}
+</script>
+</body>
+</html>

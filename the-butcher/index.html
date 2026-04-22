@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Butcher | Steakhouse</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--blood:#8B0000;--charcoal:#141414;--smoke:#1E1E1E;--bone:#F5F0EB;--steel:#999;}
+body{font-family:'Jost',sans-serif;background:var(--charcoal);color:var(--bone);overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+nav{position:fixed;top:0;width:100%;padding:20px 45px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(20,20,20,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(139,0,0,.2);}
+.logo{font-family:'Bodoni Moda',serif;font-size:26px;font-weight:700;letter-spacing:4px;text-transform:uppercase;}
+.logo span{color:var(--blood);}
+.nav-links{display:flex;gap:30px;}
+.nav-links a{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:300;opacity:.6;transition:all .3s;}
+.nav-links a:hover{opacity:1;color:var(--blood);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;}
+.hamburger span{width:22px;height:1.5px;background:var(--blood);}
+
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://plus.unsplash.com/premium_photo-1661883237884-263e8de8869b?w=1400&h=800&fit=crop') center/cover;opacity:.2;}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse,transparent 20%,var(--charcoal) 75%);}
+.hero-content{position:relative;z-index:3;}
+.hero-deco{width:60px;height:1px;background:var(--blood);margin:0 auto 25px;}
+.hero h1{font-family:'Bodoni Moda',serif;font-size:clamp(40px,8vw,100px);font-weight:400;letter-spacing:8px;text-transform:uppercase;line-height:1;}
+.hero h1 span{display:block;font-size:.35em;color:var(--blood);letter-spacing:10px;margin-top:15px;font-style:italic;}
+.hero p{font-size:16px;font-weight:200;margin:25px auto;max-width:400px;opacity:.4;line-height:1.7;}
+.hero-btn{display:inline-block;padding:14px 45px;border:1px solid var(--blood);color:var(--bone);font-size:12px;text-transform:uppercase;letter-spacing:3px;font-weight:300;transition:all .3s;}
+.hero-btn:hover{background:var(--blood);color:white;}
+
+section{padding:100px 45px;}
+.st{text-align:center;margin-bottom:55px;}
+.st h2{font-family:'Bodoni Moda',serif;font-size:clamp(28px,4vw,46px);font-weight:400;letter-spacing:3px;text-transform:uppercase;}
+.st h2 span{color:var(--blood);}
+.st .line{width:40px;height:1px;background:var(--blood);margin:15px auto 0;}
+
+/* MENU */
+.menu-nav{display:flex;justify-content:center;gap:8px;margin-bottom:40px;flex-wrap:wrap;}
+.stab{padding:10px 25px;background:transparent;border:1px solid rgba(139,0,0,.3);color:var(--bone);font-family:'Jost',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:2px;cursor:pointer;transition:all .3s;}
+.stab.active,.stab:hover{background:var(--blood);border-color:var(--blood);color:white;}
+
+.steak-sec{display:none;max-width:800px;margin:0 auto;}
+.steak-sec.active{display:block;}
+.si{display:flex;justify-content:space-between;align-items:start;padding:20px 0;border-bottom:1px solid rgba(139,0,0,.1);}
+.si:last-child{border:none;}
+.si-name{font-family:'Bodoni Moda',serif;font-size:19px;margin-bottom:5px;}
+.si-desc{font-size:13px;font-weight:200;opacity:.4;max-width:420px;line-height:1.5;}
+.si-price{font-family:'Bodoni Moda',serif;font-size:20px;color:var(--blood);white-space:nowrap;margin-left:20px;}
+.si-weight{font-size:11px;font-weight:200;opacity:.3;margin-top:3px;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;max-width:1000px;margin:0 auto;align-items:center;}
+.about-img img{width:100%;aspect-ratio:3/4;object-fit:cover;filter:brightness(.9);}
+.about-text h3{font-family:'Bodoni Moda',serif;font-size:32px;font-weight:400;margin-bottom:20px;letter-spacing:2px;}
+.about-text p{font-weight:200;line-height:1.9;opacity:.5;margin-bottom:15px;}
+
+/* RESERVE */
+.res-form{max-width:500px;margin:0 auto;border:1px solid rgba(139,0,0,.2);padding:50px 40px;}
+.fg{margin-bottom:20px;}
+.fg label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;opacity:.4;}
+.fg input,.fg select{width:100%;padding:13px;background:transparent;border:none;border-bottom:1px solid rgba(139,0,0,.2);color:var(--bone);font-family:'Jost',sans-serif;font-size:15px;font-weight:200;outline:none;transition:border .3s;}
+.fg input:focus,.fg select:focus{border-color:var(--blood);}
+.fg select option{background:var(--charcoal);color:var(--bone);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;}
+.sub{width:100%;padding:16px;background:var(--blood);color:white;border:none;font-family:'Bodoni Moda',serif;font-size:16px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.sub:hover{background:#A00000;}
+
+.infos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:800px;margin:0 auto;}
+.ibox{text-align:center;padding:35px 20px;border:1px solid rgba(139,0,0,.15);}
+.ibox .icon{font-size:26px;margin-bottom:10px;color:var(--blood);}
+.ibox h3{font-family:'Bodoni Moda',serif;font-size:18px;margin-bottom:8px;letter-spacing:1px;}
+.ibox p{font-size:14px;font-weight:200;opacity:.4;line-height:1.5;}
+
+footer{text-align:center;padding:40px;border-top:1px solid rgba(139,0,0,.1);}
+footer p{font-size:12px;opacity:.2;}
+
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:65px;left:0;width:100%;background:var(--charcoal);flex-direction:column;padding:25px;gap:18px;border-bottom:1px solid rgba(139,0,0,.15);}
+  .nav-links.active{display:flex;}
+  .hamburger{display:flex;}
+  .about-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  section{padding:70px 20px;}
+  .res-form{padding:35px 20px;}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-content{animation:fadeIn 1s ease-out;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">THE <span>BUTCHER</span></div>
+  <div class="nav-links" id="navLinks">
+    <a href="#menu">Carte</a>
+    <a href="#about">Philosophie</a>
+    <a href="#reserve">Réserver</a>
+    <a href="#infos">Infos</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')"><span></span><span></span><span></span></button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-deco"></div>
+    <h1>THE BUTCHER<span>Steakhouse d'Exception</span></h1>
+    <p>Viandes d'exception, maturation longue, cuisson au charbon. Une expérience carnivore ultime.</p>
+    <a href="#menu" class="hero-btn">La Carte</a>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="st"><h2>LA <span>CARTE</span></h2><div class="line"></div></div>
+  <div class="menu-nav">
+    <button class="stab active" onclick="showS('viandes')">Viandes</button>
+    <button class="stab" onclick="showS('entrees')">Entrees</button>
+    <button class="stab" onclick="showS('accomp')">Accompagnements</button>
+    <button class="stab" onclick="showS('desserts')">Desserts</button>
+  </div>
+
+  <div class="steak-sec active" id="ss-viandes">
+    <div class="si"><div><div class="si-name">Entrecote Black Angus</div><div class="si-desc">Maturation 45 jours, grillée au charbon de bois. Sauce au choix</div><div class="si-weight">350g</div></div><div class="si-price">34,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Cote de Boeuf (2 pers.)</div><div class="si-desc">Race Limousine, maturation 60 jours. Servie avec os, tranchée à table</div><div class="si-weight">800g</div></div><div class="si-price">75,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Faux-Filet Wagyu</div><div class="si-desc">Wagyu australien A5, persille exceptionnel, cuisson minute</div><div class="si-weight">200g</div></div><div class="si-price">55,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Filet de Boeuf</div><div class="si-desc">Tendre et delicat, sauce au poivre ou bearnaise maison</div><div class="si-weight">250g</div></div><div class="si-price">38,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Tomahawk</div><div class="si-desc">Piece spectaculaire sur l'os, maturation 50 jours. A partager</div><div class="si-weight">1kg</div></div><div class="si-price">90,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Burger du Butcher</div><div class="si-desc">Boeuf mature hache minute, cheddar afine, oignon confit, pain briche</div><div class="si-weight">200g</div></div><div class="si-price">22,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Onglet de Boeuf</div><div class="si-desc">Race Aubrac, grillé saignant, beurre maitre d'hotel, echalotes</div><div class="si-weight">300g</div></div><div class="si-price">28,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Bavette d'Aloyau</div><div class="si-desc">Maturation 40 jours, sauce echalote au vin rouge, pommes grenaille</div><div class="si-weight">350g</div></div><div class="si-price">30,00 &#8364;</div></div>
+  </div>
+  <div class="steak-sec" id="ss-entrees">
+    <div class="si"><div><div class="si-name">Tartare de Boeuf</div><div class="si-desc">Coupe au couteau, cappres, echalote, moutarde, jaune d'oeuf bio</div></div><div class="si-price">16,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Carpaccio</div><div class="si-desc">Boeuf mature tranché fin, roquette, parmesan, huile de truffe</div></div><div class="si-price">18,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Os à Moelle</div><div class="si-desc">Grille au four, fleur de sel, pain de campagne toaste</div></div><div class="si-price">14,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Salade Caesar</div><div class="si-desc">Romaine, crotons, parmesan, anchois, sauce caesar maison</div></div><div class="si-price">12,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Tataki de Boeuf</div><div class="si-desc">Boeuf saisi, marinade soja-sesame, gingembre, ciboulette</div></div><div class="si-price">17,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Foie Gras Poele</div><div class="si-desc">Foie gras de canard, chutney de figues, pain d'épicés toaste</div></div><div class="si-price">22,00 &#8364;</div></div>
+  </div>
+  <div class="steak-sec" id="ss-accomp">
+    <div class="si"><div><div class="si-name">Frites Maison</div><div class="si-desc">Coupe fraiche, cuisson double, fleur de sel</div></div><div class="si-price">6,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Puree Truffee</div><div class="si-desc">Pommes de terre Ratte, beurre, truffe noire</div></div><div class="si-price">9,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Épinards à la Crème</div><div class="si-desc">Pousses d'epinards frais, crème et muscade</div></div><div class="si-price">7,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Gratin Dauphinois</div><div class="si-desc">Pommes de terre, crème, ail, gratine au four</div></div><div class="si-price">8,00 &#8364;</div></div>
+  </div>
+  <div class="steak-sec" id="ss-desserts">
+    <div class="si"><div><div class="si-name">Fondant au Chocolat</div><div class="si-desc">Chocolat noir 70%, coeur coulant, glace vanille bourbon</div></div><div class="si-price">12,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Crème Brulee</div><div class="si-desc">Vanille de Madagascar, caramel craquant</div></div><div class="si-price">10,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Assiette de Fromages</div><div class="si-desc">Selection affinee, confiture de figues, noix</div></div><div class="si-price">14,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Tarte Tatin</div><div class="si-desc">Pommes caramélisées, pâte feuilletée, crème fraiche epaisse</div></div><div class="si-price">11,00 &#8364;</div></div>
+    <div class="si"><div><div class="si-name">Café Gourmand</div><div class="si-desc">Espresso, mini fondant, crème brulee, glace du jour</div></div><div class="si-price">13,00 &#8364;</div></div>
+  </div>
+</section>
+
+<section style="padding:70px 45px;background:var(--charcoal);text-align:center;">
+<div style="max-width:800px;margin:0 auto;">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:3px;color:var(--blood);margin-bottom:12px;">Notre philosophie</div>
+  <h2 style="font-family:'Bodoni Moda',serif;font-size:clamp(22px,3vw,32px);font-weight:400;letter-spacing:2px;margin-bottom:25px;">L'art de la viande d'exception</h2>
+  <p style="font-weight:200;line-height:2.2;opacity:.4;font-size:.95rem;"><strong style="color:var(--blood);opacity:1;">The Butcher</strong> est un <strong style="color:var(--blood);opacity:1;">steakhouse haut de gamme à Paris 8e</strong>. Nos <strong style="color:var(--blood);opacity:1;">viandes d'exception</strong> sont sélectionnées aupres d'eleveurs français et internationaux, <strong style="color:var(--blood);opacity:1;">maturees de 30 à 80 jours</strong> en chambre froide et <strong style="color:var(--blood);opacity:1;">grillées au charbon de bois</strong>. Du <strong style="color:var(--blood);opacity:1;">Wagyu</strong> au <strong style="color:var(--blood);opacity:1;">Black Angus</strong>, en passant par la <strong style="color:var(--blood);opacity:1;">cote de boeuf Limousine</strong>, chaque piece est traitee avec le respect qu'elle merite. <strong style="color:var(--blood);opacity:1;">Réservation recommandée</strong>.</p>
+</div>
+</section>
+
+<section id="about" style="background:var(--smoke);">
+  <div class="about-grid">
+    <div class="about-img"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=500&h=670&fit=crop" alt=""></div>
+    <div class="about-text">
+      <h3>La viande, autrement</h3>
+      <p>The Butcher est ne d'une conviction : la viande merite du respect. Du choix de l'eleveur à la maturation en chambre froide, chaque etape est maitrisee.</p>
+      <p>Nos viandes sont sélectionnées aupres d'eleveurs français et internationaux. La maturation, de 30 à 80 jours, developpe des saveurs et une tendrete incomparables. La cuisson au charbon de bois fait le reste.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSTAGRAM -->
+<section style="padding:70px 45px;text-align:center;background:var(--charcoal);">
+  <div class="st"><h2>@THE.<span>BUTCHER</span></h2><div class="line"></div></div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:800px;margin:0 auto;">
+    <img src="https://plus.unsplash.com/premium_photo-1723672929404-36ba6ed8ab50?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1628543108325-1c27cd7246b3?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1723478557023-1f739ec06671?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1669261882830-1e504a9abf1d?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1668616816953-a02cd1a44027?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1690983325563-fe4412c4c347?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://plus.unsplash.com/premium_photo-1669261882102-8f51c8b113c9?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+    <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=300&h=300&fit=crop" style="width:100%;aspect-ratio:1;object-fit:cover;" alt="">
+  </div>
+</section>
+<section id="reserve">
+  <div class="st"><h2>RESERVER <span>UNE TABLE</span></h2><div class="line"></div></div>
+  <div class="res-form">
+    <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:35px 0;\'><div style=\'font-family:Bodoni Moda,serif;font-size:30px;color:var(--blood);\'>Réservation confirmee</div><p style=\'margin-top:10px;opacity:.4;font-weight:200;\'>Confirmation envoyee par email.</p></div>';">
+      <div class="form-row">
+        <div class="fg"><label>Nom</label><input type="text" required></div>
+        <div class="fg"><label>Telephone</label><input type="tel" required></div>
+      </div>
+      <div class="fg"><label>Email</label><input type="email" required></div>
+      <div class="form-row">
+        <div class="fg"><label>Date</label><input type="date" required></div>
+        <div class="fg"><label>Heure</label>
+          <select required><option value="">Choisir</option><option>12h00</option><option>12h30</option><option>13h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option><option>21h30</option></select>
+        </div>
+      </div>
+      <div class="fg"><label>Nombre de convives</label>
+        <select required><option value="">Choisir</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7-10</option><option>10+</option></select>
+      </div>
+      <button type="submit" class="sub">Réserver</button>
+    </form>
+  </div>
+</section>
+
+<section id="infos" style="background:var(--smoke);">
+  <div class="st"><h2>INFOS <span>PRATIQUES</span></h2><div class="line"></div></div>
+  <div class="infos">
+    <div class="ibox"><div class="icon">&#128205;</div><h3>Adresse</h3><p>5 rue de Ponthieu<br>75008 Paris</p></div>
+    <div class="ibox"><div class="icon">&#128337;</div><h3>Horaires</h3><p>Lun-Sam : 12h-14h30 / 19h-23h<br>Dimanche : ferme</p></div>
+    <div class="ibox"><div class="icon">&#128222;</div><h3>Contact</h3><p>01 42 25 12 34<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c3f3332283d3f281c2834393e29283f34392e723a2e">[email&#160;protected]</a></p></div>
+  </div>
+</section>
+
+<footer><p>&copy; 2025 The Butcher Paris. Steakhouse d'exception.</p></footer>
+
+
+<script>
+function showS(id){
+  document.querySelectorAll('.steak-sec').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('ss-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>

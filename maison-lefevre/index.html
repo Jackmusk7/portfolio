@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Lefèvre</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Lato',sans-serif;background:#faf6f0;color:#3e2a14;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:all .3s}
+nav.scrolled{background:rgba(250,246,240,.96);backdrop-filter:blur(20px);padding:12px 0;box-shadow:0 2px 20px rgba(0,0,0,.05)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#6B4423}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-size:.85rem;color:#999;transition:color .2s}
+.nav-links a:hover{color:#6B4423}
+.nav-cta{background:#6B4423;color:#fff !important;padding:10px 24px;border-radius:8px;font-weight:700}
+
+/* HERO CENTERED */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600') center/cover}
+.hero-bg::after{content:'';position:absolute;inset:0;background:rgba(250,246,240,.5)}
+.hero-content{position:relative;z-index:2;padding:0 28px}
+.hero-content .tag{font-family:'Cormorant Garamond',serif;font-style:italic;color:#6B4423;font-size:1rem;margin-bottom:16px}
+.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,8vw,6rem);font-weight:700;line-height:1;color:#3e2a14;margin-bottom:20px}
+.hero-content .sub{color:#8B7355;font-size:1.05rem;margin-bottom:36px;letter-spacing:.5px}
+.hero-content .hours-badge{display:inline-flex;gap:32px;background:rgba(255,255,255,.9);padding:16px 32px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.hours-badge .item{text-align:center}
+.hours-badge .item strong{display:block;font-size:.85rem;color:#6B4423;font-weight:700}
+.hours-badge .item span{font-size:.75rem;color:#999}
+
+/* PRODUCTS SHOWCASE */
+.products{padding:100px 28px;max-width:1100px;margin:0 auto}
+.products-header{text-align:center;margin-bottom:56px}
+.stag{font-family:'Cormorant Garamond',serif;font-style:italic;color:#8B6914;font-size:.95rem;margin-bottom:8px}
+.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.product-card{border-radius:16px;overflow:hidden;background:#fff;border:1px solid #ece5d8;transition:all .4s;cursor:pointer}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(107,68,35,.1)}
+.product-img{height:240px;background-size:cover;background-position:center;position:relative}
+.product-img .label{position:absolute;bottom:12px;left:12px;background:#6B4423;color:#fff;padding:4px 14px;border-radius:20px;font-size:.7rem;font-weight:700}
+.product-info{padding:20px}
+.product-info h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:4px}
+.product-info p{font-size:.8rem;color:#999;line-height:1.5}
+.product-info .price{color:#6B4423;font-weight:700;font-size:1rem;margin-top:8px;display:block}
+
+/* PROCESS */
+.process{padding:80px 28px;background:#f0ebe3}
+.process-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.process-img{border-radius:20px;width:100%;aspect-ratio:1;object-fit:cover}
+.process-steps{display:flex;flex-direction:column;gap:28px}
+.process-step{display:flex;gap:20px;align-items:flex-start}
+.process-step .num{width:44px;height:44px;border-radius:50%;background:#6B4423;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;flex-shrink:0}
+.process-step h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:4px}
+.process-step p{font-size:.85rem;color:#8B7355;line-height:1.6}
+
+/* DAILY SPECIALS */
+.daily{padding:80px 28px;text-align:center}
+.daily-inner{max-width:800px;margin:0 auto;background:#fff;border-radius:20px;padding:48px;border:1px solid #ece5d8;position:relative;overflow:hidden}
+.daily-inner::before{content:'🌾';position:absolute;font-size:6rem;opacity:.08;right:20px;bottom:20px}
+.daily-inner h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:8px}
+.daily-inner .day{color:#6B4423;font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:20px}
+.daily-item{padding:12px 0;border-bottom:1px solid #f0ebe3;display:flex;justify-content:space-between;align-items:center}
+.daily-item:last-child{border:none}
+.daily-item .name{font-weight:700}
+.daily-item .desc{font-size:.82rem;color:#999}
+.daily-item .price{color:#6B4423;font-weight:700;font-family:'Cormorant Garamond',serif;font-size:1.2rem}
+
+/* INSTAGRAM */
+.insta{padding:80px 28px;max-width:1100px;margin:0 auto}
+.insta-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:40px}
+.insta-img{aspect-ratio:1;border-radius:10px;background-size:cover;background-position:center;transition:all .3s;cursor:pointer}
+.insta-img:hover{transform:scale(1.04);opacity:.9}
+
+/* REVIEWS */
+.reviews{padding:80px 28px;background:#f0ebe3}
+.reviews-inner{max-width:1100px;margin:0 auto}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.review{background:#fff;border-radius:14px;padding:28px;border:1px solid #ece5d8}
+.review .stars{color:#d4a843;margin-bottom:12px}
+.review p{color:#666;font-size:.88rem;line-height:1.7;font-style:italic;margin-bottom:14px}
+.review .author{font-weight:700;font-size:.85rem;color:#6B4423}
+
+/* CONTACT */
+.contact{padding:80px 28px;text-align:center}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;margin-bottom:16px}
+.contact p{color:#8B7355;margin-bottom:32px}
+.contact-cards{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.contact-card{background:#fff;border:1px solid #ece5d8;border-radius:14px;padding:28px 36px;text-align:center}
+.contact-card .icon{font-size:1.5rem;margin-bottom:8px}
+.contact-card h3{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:4px}
+.contact-card span{font-size:.85rem;color:#999}
+
+footer{background:#3e2a14;color:#fff;padding:36px 28px;text-align:center}
+footer .logo{color:#d4a843;margin-bottom:8px;display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem}
+footer p{color:rgba(255,255,255,.4);font-size:.75rem}
+
+.reveal{opacity:0;transform:translateY(24px);transition:all .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .products-grid{grid-template-columns:1fr 1fr}
+  .process-inner{grid-template-columns:1fr}
+  .insta-row{grid-template-columns:repeat(3,1fr)}
+  .reviews-grid{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+}
+@media(max-width:500px){
+  .products-grid{grid-template-columns:1fr}
+  .hours-badge{flex-direction:column;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nav-inner">
+<div class="logo">Maison Lefèvre</div>
+<div class="nav-links">
+<a href="#produits">Nos pains</a>
+<a href="#fabrication">Fabrication</a>
+<a href="#avis">Avis</a>
+<a href="#contact" class="nav-cta">Nous trouver</a>
+</div>
+</div></nav>
+
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+  <div class="tag">Boulangerie artisanale depuis 1987</div>
+  <h1>Maison Lefèvre</h1>
+  <p class="sub">Pain au levain naturel, viennoiseries pur beurre, pâtisseries de saison</p>
+  <div class="hours-badge">
+    <div class="item"><strong>Ouvert</strong><span>6h30 - 20h</span></div>
+    <div class="item"><strong>Jours</strong><span>Mar - Dim</span></div>
+    <div class="item"><strong>Adresse</strong><span>3 rue des Martyrs</span></div>
+  </div>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="produits">
+<div class="products-header">
+  <div class="stag">Nos créations</div>
+  <div class="stitle">Cuits chaque matin avec passion</div>
+</div>
+<div class="products-grid">
+  <div class="product-card reveal">
+    <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1566698629409-787a68fc5724?w=500')"><span class="label">SIGNATURE</span></div>
+    <div class="product-info"><h3>Pain au levain 48h</h3><p>Levain naturel de 15 ans, farine bio T80, fermentation lente 48h. Notre fierté.</p><span class="price">5,80€</span></div>
+  </div>
+  <div class="product-card reveal">
+    <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=500')"></div>
+    <div class="product-info"><h3>Croissant pur beurre</h3><p>Beurre AOP Charentes-Poitou, feuilletage 72 plis, cuisson dorée du matin.</p><span class="price">1,60€</span></div>
+  </div>
+  <div class="product-card reveal">
+    <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500')"></div>
+    <div class="product-info"><h3>Campagne aux noix</h3><p>Farine de meule, noix du Périgord torréfiées, croûte épaisse et mie moelleuse.</p><span class="price">6,20€</span></div>
+  </div>
+  <div class="product-card reveal">
+    <div class="product-img" style="background-image:url('https://images.unsplash.com/photo-1585478259715-876a6a81fc08?w=500')"></div>
+    <div class="product-info"><h3>Boule de Campagne</h3><p>Grosse boule rustique, farine de meule, croûte épaisse et craquante, mie généreuse. Idéale pour les grandes tablées.</p><span class="price">5,90€</span></div>
+  </div>
+</div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="fabrication">
+<div class="process-inner">
+  <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=800" alt="Notre fournil" class="process-img reveal">
+  <div>
+    <div class="stag">Notre savoir-faire</div>
+    <div class="stitle" style="margin-bottom:32px">Du fournil à votre table</div>
+    <div class="process-steps">
+      <div class="process-step reveal"><div class="num">1</div><div><h4>Sélection des farines</h4><p>Farines bio françaises, moulues sur pierre au Moulin de Brasseuil. Traçabilité totale du champ au fournil.</p></div></div>
+      <div class="process-step reveal"><div class="num">2</div><div><h4>Pétrissage et façonnage</h4><p>Pétrissage lent pour préserver les arômes. Chaque pièce est façonnée à la main par nos boulangers.</p></div></div>
+      <div class="process-step reveal"><div class="num">3</div><div><h4>Fermentation lente</h4><p>Notre levain naturel de 15 ans travaille pendant 24 à 48h. C'est lui qui donne ce goût unique.</p></div></div>
+      <div class="process-step reveal"><div class="num">4</div><div><h4>Cuisson au four à sole</h4><p>Four à sole en pierre, cuisson maîtrisée pour une croûte croustillante et une mie aérée parfaite.</p></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DAILY SPECIAL -->
+<section class="daily">
+<div class="daily-inner reveal">
+  <div class="stag">Le coin gourmand</div>
+  <h2>Formule déjeuner</h2>
+  <div class="day">Disponible du mardi au samedi, 11h30 - 14h30</div>
+  <div class="daily-item"><div><div class="name">Sandwich du jour + boisson</div><div class="desc">Pain maison, garniture de saison, boisson au choix</div></div><div class="price">8,90€</div></div>
+  <div class="daily-item"><div><div class="name">Quiche + salade + boisson</div><div class="desc">Quiche maison du jour, mesclun vinaigrette, boisson</div></div><div class="price">11,50€</div></div>
+  <div class="daily-item"><div><div class="name">Formule complète</div><div class="desc">Sandwich ou quiche + dessert du jour + boisson</div></div><div class="price">14,90€</div></div>
+</div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta">
+<div class="products-header">
+  <div class="stag">@maison.lefevre</div>
+  <div class="stitle">Notre Instagram</div>
+</div>
+<div class="insta-row">
+  <div class="insta-img" style="background-image:url('https://images.unsplash.com/photo-1566698629409-787a68fc5724?w=400')"></div>
+  <div class="insta-img" style="background-image:url('https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400')"></div>
+  <div class="insta-img" style="background-image:url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=400')"></div>
+  <div class="insta-img" style="background-image:url('https://images.unsplash.com/photo-1585478259715-876a6a81fc08?w=400')"></div>
+  <div class="insta-img" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400')"></div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="avis">
+<div class="reviews-inner">
+  <div class="products-header"><div class="stag">Témoignages</div><div class="stitle">L'avis de nos habitués</div></div>
+  <div class="reviews-grid">
+    <div class="review reveal"><div class="stars">★★★★★</div><p>"Le meilleur pain au levain de l'arrondissement. La croûte craque, la mie est parfaite, l'odeur quand on pousse la porte... un bonheur."</p><div class="author">Nathalie C.</div></div>
+    <div class="review reveal"><div class="stars">★★★★★</div><p>"Leurs croissants sont une tuerie. Feuilletés, beurrés, dorés à souhait. Le dimanche matin c'est devenu un rituel familial."</p><div class="author">Pierre G.</div></div>
+    <div class="review reveal"><div class="stars">★★★★★</div><p>"Petit commerce de quartier comme on les aime. L'accueil est chaleureux, tout est fait maison, et le Boule de Campagne est à tomber."</p><div class="author">Camille S.</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="stag">Nous trouver</div>
+<h2>Poussez la porte</h2>
+<p>On vous accueille avec le sourire et l'odeur du pain chaud</p>
+<div class="contact-cards">
+  <div class="contact-card"><div class="icon">📍</div><h3>Adresse</h3><span>3 rue des Martyrs, 75009 Paris</span></div>
+  <div class="contact-card"><div class="icon">🕐</div><h3>Horaires</h3><span>Mar-Dim, 6h30 - 20h</span></div>
+  <div class="contact-card"><div class="icon">📞</div><h3>Téléphone</h3><span>01 48 78 55 20</span></div>
+</div>
+</section>
+
+<footer>
+<div class="logo">Maison Lefèvre</div>
+<p>© 2026 Maison Lefèvre, Boulangerie artisanale. Site créé par Studio Elyo.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
